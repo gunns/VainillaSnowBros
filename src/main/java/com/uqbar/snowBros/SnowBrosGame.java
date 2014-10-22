@@ -21,7 +21,7 @@ public class SnowBrosGame extends Game {
 
 	@Override
 	protected void setUpScenes() {
-		this.scene = new SnowBrosScene(dimension,300);
+		this.scene = new SnowBrosScene(dimension,200);
 		this.setCurrentScene(scene);
 	}
 	
