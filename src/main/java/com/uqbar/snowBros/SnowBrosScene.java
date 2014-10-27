@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import componentes.Bros;
+import componentes.Piso;
+
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Rectangle;
+
+import componentes.Suelo;
 
 public class SnowBrosScene extends GameScene{
 	private Dimension gameDimension;
@@ -14,10 +18,17 @@ public class SnowBrosScene extends GameScene{
 	private GameComponent<GameScene> backGround;
 	private boolean playState = false;
 	private boolean systemPause = false;
+	
 	private Bros bros;
+	private Suelo suelo;
+	
 	
 	public boolean getPlayState(){
 		return this.playState;
+	}
+	
+	protected void setPlayState(boolean playState){
+		this.playState = playState;
 	}
 	
 	public boolean getSystemPause() {
@@ -38,6 +49,8 @@ public class SnowBrosScene extends GameScene{
 		this.buildBackground(Color.blue);
 		this.bros=new Bros(dim,this.playState);
 		this.addComponent(this.bros);
+		this.suelo= new Suelo(this.gameDimension);
+		this.addComponents(suelo.getSuelos());
 	}
 	
 	private void buildBackground(Color color) {
@@ -51,5 +64,23 @@ public class SnowBrosScene extends GameScene{
 
 	public Bros getBros(){
 		return this.bros;
+	}
+	
+	public boolean hayColisionConUnPiso(){
+		boolean b = false;
+		Piso piso;
+		//boolean encontre = false;
+		for(int n = 0;n < this.suelo.getSuelos().size(); n++)
+			{
+			piso = this.suelo.getSuelos().get(n);
+			if(piso.getX()<=this.bros.getX()){
+//			if(this.ladrilloSeRompe(this.ladrillos.getLadrillos().get(n)))
+//				{
+				//encontre = true;
+//				this.ladrilloEnColision = this.ladrillos.getLadrillos().get(n);
+				b = true;
+				}
+			}
+		return b;
 	}
 }
