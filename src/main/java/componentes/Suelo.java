@@ -43,7 +43,7 @@ public class Suelo {
 		  for (i=0;i<anchura;i++){
 		   for (j=0;j<altura;j++){
 			   if(density[i][j]==1){
-				   Piso piso = new Piso(gameDimension,gameDimension.getHeight()-j*proporcionAlto,
+				   Piso piso = new Piso(gameDimension.getHeight()-j*proporcionAlto,
 						   i*proporcionAncho, Color.black, proporcionAncho, proporcionAlto);
 				   this.suelos.add(piso);
 			   }
@@ -52,57 +52,57 @@ public class Suelo {
 	}
 
 
-//	private void Fill(){
-//		Ground();
-//		int j;
-//		for (j=7;j<13;j++){
-//			  density[j][7] = 1;
-//			}
-//		for (j=13;j<20;j++){
-//			  density[j][14] = 1;
-//			}
-//		for (j=0;j<9;j++){
-//			  density[j][14] = 1;
-//			}
-//		for (j=5;j<15;j++){
-//			  density[j][28] = 1;
-//			}
-//		for (j=0;j<4;j++){
-//			  density[j][21] = 1;
-//			}
-//		for (j=9;j<14;j++){
-//			  density[j][21] = 1;
-//			}
-//		for (j=17;j<20;j++){
-//			  density[j][21] = 1;
-//			}
-//	}
-
 	private void Fill(){
 		Ground();
 		int j;
-		for (j=0;j<7;j++){
+		for (j=7;j<13;j++){
 			  density[j][7] = 1;
 			}
 		for (j=13;j<20;j++){
-			  density[j][7] = 1;
+			  density[j][14] = 1;
 			}
-		for (j=7;j<13;j++){
+		for (j=0;j<9;j++){
 			  density[j][14] = 1;
 			}
 		for (j=5;j<15;j++){
-			  density[j][21] = 1;
+			  density[j][28] = 1;
 			}
 		for (j=0;j<4;j++){
-			  density[j][28] = 1;
+			  density[j][21] = 1;
 			}
 		for (j=9;j<14;j++){
-			  density[j][28] = 1;
+			  density[j][21] = 1;
 			}
 		for (j=17;j<20;j++){
-			  density[j][28] = 1;
+			  density[j][21] = 1;
 			}
 	}
+
+//	private void Fill(){
+//		Ground();
+//		int j;
+//		for (j=0;j<7;j++){
+//			  density[j][7] = 1;
+//			}
+//		for (j=13;j<20;j++){
+//			  density[j][7] = 1;
+//			}
+//		for (j=7;j<13;j++){
+//			  density[j][14] = 1;
+//			}
+//		for (j=5;j<15;j++){
+//			  density[j][21] = 1;
+//			}
+//		for (j=0;j<4;j++){
+//			  density[j][28] = 1;
+//			}
+//		for (j=9;j<14;j++){
+//			  density[j][28] = 1;
+//			}
+//		for (j=17;j<20;j++){
+//			  density[j][28] = 1;
+//			}
+//	}
 
 	private void Ground(){
 		int j;

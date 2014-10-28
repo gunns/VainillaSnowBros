@@ -1,8 +1,6 @@
 package componentes;
 
 import java.awt.Color;
-import java.awt.Dimension;
-
 
 import com.uqbar.snowBros.SnowBrosScene;
 
@@ -11,18 +9,25 @@ import com.uqbar.vainilla.appearances.Rectangle;
 
 public class Piso extends GameComponent<SnowBrosScene>{
 	
-	private Dimension gameDimension;
+	private int ancho;
+	private int alto;
 	
 	
-		public Piso( Dimension dim, double coordY, double coordX, Color col, int ancho, int alto){
+		public Piso(double coordY, double coordX, Color col, int ancho, int alto){
+			this.ancho = ancho;
+			this.alto = alto;
 			this.setAppearance(new Rectangle(Color.black,ancho,alto));
-//			this.setAppearance(new Rectangle(col,50,25));
-			this.gameDimension= dim;
-			this.setX(coordX);// -this.getAppearance().getWidth());
-			this.setY(coordY);// - this.getAppearance().getHeight());
+			this.setX(coordX);
+			this.setY(coordY);
 		}
 		
+		public int getAncho(){
+			return ancho;
+		}
 		
+		public int getAlto(){
+			return alto;
+		}
 
 		
 		

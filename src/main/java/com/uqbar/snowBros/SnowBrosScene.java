@@ -9,6 +9,7 @@ import componentes.Piso;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.colissions.CollisionDetector;
 
 import componentes.Suelo;
 
@@ -18,6 +19,7 @@ public class SnowBrosScene extends GameScene{
 	private GameComponent<GameScene> backGround;
 	private boolean playState = false;
 	private boolean systemPause = false;
+	
 	
 	private Bros bros;
 	private Suelo suelo;
@@ -44,6 +46,7 @@ public class SnowBrosScene extends GameScene{
 	public SnowBrosScene(Dimension dim, double velocity){
 		super();
 		
+		//this.collisionDetector = new CollisionDetector;
 		this.gameDimension= dim;
 		this.velocity=velocity;
 		this.buildBackground(Color.blue);
@@ -66,21 +69,40 @@ public class SnowBrosScene extends GameScene{
 		return this.bros;
 	}
 	
+//	public boolean hayColisionConUnPiso(){
+//		boolean b = false;
+//		boolean pb = false;
+//		Piso piso;
+//		//boolean encontre = false;
+//		for(int n = 0;n < this.suelo.getSuelos().size(); n++){
+//			piso = this.suelo.getSuelos().get(n);
+////			if(piso.getY())
+//			if(piso.getY()>=this.bros.getY()+this.bros.getAlto()&&
+//					piso.getY()+piso.getAppearance().getHeight()<=this.bros.getY()+this.bros.getAlto()&&
+//					piso.getX()<=this.bros.getX()&&piso.getX()+piso.getAncho()>=this.bros.getX()){
+////			if(this.ladrilloSeRompe(this.ladrillos.getLadrillos().get(n)))
+////				{
+//				//encontre = true;
+////				this.ladrilloEnColision = this.ladrillos.getLadrillos().get(n);
+//				b = true;
+//				}
+//			}
+//		return b;
+//	}
+	
 	public boolean hayColisionConUnPiso(){
 		boolean b = false;
 		Piso piso;
-		//boolean encontre = false;
-		for(int n = 0;n < this.suelo.getSuelos().size(); n++)
-			{
+		for(int n = 0;n < this.suelo.getSuelos().size(); n++){
 			piso = this.suelo.getSuelos().get(n);
-			if(piso.getX()<=this.bros.getX()){
-//			if(this.ladrilloSeRompe(this.ladrillos.getLadrillos().get(n)))
-//				{
-				//encontre = true;
-//				this.ladrilloEnColision = this.ladrillos.getLadrillos().get(n);
+			//utilizar detector de coliciones entre rectangulos
+			
+			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(this.bros.getX(), this.bros.getY(),
+					(int) (this.bros.getAppearance().getWidth()), (int) (this.bros.getAppearance().getHeight()),
+					piso.getX(), piso.getY(),(int) (piso.getAppearance().getWidth()),(int) (piso.getAppearance().getHeight()))){
 				b = true;
-				}
 			}
+		}
 		return b;
 	}
 }

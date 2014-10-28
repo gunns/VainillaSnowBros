@@ -21,6 +21,9 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public boolean realizandoSalto= false;
 	public Dimension gameDimension;
 	public boolean playState = true;
+	private int ancho = 10;
+	private int alto = 25;
+	
 	
 	//DISPARO
 	public Direccion dir;
@@ -30,7 +33,7 @@ public Bros(Dimension dim, boolean playState){
 		
 		
 		
-		this.setAppearance(new Rectangle(Color.white,10,25));
+		this.setAppearance(new Rectangle(Color.white,ancho,alto));
 		//TODO
 		this.dir =  new Derecha();
 		
@@ -48,6 +51,14 @@ public Bros(Dimension dim, boolean playState){
 	}
 	protected void setPlayState(boolean playState){
 		this.playState = playState;
+	}
+	
+	public int getAncho(){
+		return ancho;
+	}
+	
+	public int getAlto(){
+		return alto;
 	}
 	
 	public void update(DeltaState deltaState) {
@@ -102,7 +113,7 @@ public Bros(Dimension dim, boolean playState){
 		}
 	}	
 	private void caer(DeltaState deltaState){
-			if(this.cayendo&&this.getY()<=this.ySalto-0.25){
+			if(this.cayendo&&this.getY()<=this.ySalto-0.25&&!this.getScene().hayColisionConUnPiso()){
 				this.setY(this.getY()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
 			}
 			else{
@@ -126,7 +137,6 @@ public Bros(Dimension dim, boolean playState){
 	}
 	private void moverALaIzquierda(DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
-			//TODO
 			this.dir = new Izquierda();
 			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlComienzo()){
