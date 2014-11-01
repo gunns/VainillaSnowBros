@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
+import others.EstadoBros;
+import others.Quieto;
 
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
@@ -16,8 +18,7 @@ import com.uqbar.vainilla.events.constants.Key;
 public class Bros extends GameComponent<SnowBrosScene>{
 
 	//MOVIMIENTO
-	public boolean cayendo = true;
-	public double ySalto;
+	public EstadoBros estado;
 	public boolean realizandoSalto= false;
 	public Dimension gameDimension;
 	public boolean playState = true;
@@ -39,12 +40,19 @@ public Bros(Dimension dim, boolean playState){
 		
 		this.gameDimension= dim;
 		this.playState = playState;
-		this.ySalto=this.getY();
-		this.realizandoSalto=false;
+		this.setEstado(new Quieto(this.getY(),this));
 		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
 		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-12);
 		this.setZ(1);
 	}
+
+	public EstadoBros getEstado() {
+	return estado;
+}
+
+public void setEstado(EstadoBros estado) {
+	this.estado = estado;
+}
 
 	protected boolean getPlayState() {
 		return this.playState;
@@ -63,7 +71,12 @@ public Bros(Dimension dim, boolean playState){
 	
 	public void update(DeltaState deltaState) {
 		
+		//COMANDO SALTAR
 		
+		if(deltaState.isKeyPressed(Key.A)){
+			this.saltar();
+		}
+		this.getEstado().update(deltaState);
 		//COMANDO MOVER
 		if (deltaState.isKeyBeingHold(Key.RIGHT)){
 			this.moverALaDerecha(deltaState);
@@ -71,20 +84,6 @@ public Bros(Dimension dim, boolean playState){
 		else if(deltaState.isKeyBeingHold(Key.LEFT)){
 			this.moverALaIzquierda(deltaState);
 		}
-		
-		//COMANDO SALTAR
-		if (!this.realizandoSalto && deltaState.isKeyPressed(Key.A)){
-			this.ySalto=this.getY();
-			this.cayendo=false;
-			this.realizandoSalto=true;
-		}
-		if(this.cayendo){
-			this.caer(deltaState);
-		}
-		else{
-			this.saltando(deltaState);
-		}
-		
 		//COMANDO:DISPARAR
 		
 		if(deltaState.isKeyPressed(Key.S)){
@@ -105,21 +104,9 @@ public Bros(Dimension dim, boolean playState){
 		
 	}
 
-	private void saltando(DeltaState deltaState){
-		if(!this.cayendo&&this.getY()>=this.ySalto-100){
-		this.setY(this.getY()-(this.getScene().getVelocity()+ (this.getScene().getVelocity()*2))* deltaState.getDelta());
-		}else if(this.getY()<=this.ySalto-50){
-			this.cayendo=true;
-		}
+	private void saltar(){
+		this.getEstado().saltar();
 	}	
-	private void caer(DeltaState deltaState){
-			if(this.cayendo&&this.getY()<=this.ySalto-0.25&&!this.getScene().hayColisionConUnPiso()){
-				this.setY(this.getY()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
-			}
-			else{
-				this.realizandoSalto=false;
-			}
-	}
 	private void moverALaDerecha(DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
 			//TODO
