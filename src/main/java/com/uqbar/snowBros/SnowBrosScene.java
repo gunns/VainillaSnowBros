@@ -90,16 +90,16 @@ public class SnowBrosScene extends GameScene{
 //		return b;
 //	}
 	
-	public boolean hayColisionConUnPiso(){
+	public boolean hayColisionConUnPiso(GameComponent<SnowBrosScene> c){
 		boolean b = false;
 		Piso piso;
 		for(int n = 0;n < this.suelo.getSuelos().size(); n++){
 			piso = this.suelo.getSuelos().get(n);
 			//utilizar detector de coliciones entre rectangulos
 			
-			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(this.bros.getX(), this.bros.getY(),
-					(int) (this.bros.getAppearance().getWidth()), (int) (this.bros.getAppearance().getHeight()),
-					piso.getX(), piso.getY(),(int) (piso.getAppearance().getWidth()),(int) (piso.getAppearance().getHeight()))){
+			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(c.getX(), (c.getY()+c.getAppearance().getHeight()-1),
+					(int) (c.getAppearance().getWidth()), (int) (1),
+					piso.getX(), piso.getY(),(int) (piso.getAppearance().getWidth()),(int) (1))){
 				b = true;
 			}
 		}
