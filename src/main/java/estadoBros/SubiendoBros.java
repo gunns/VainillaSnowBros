@@ -1,14 +1,15 @@
-package others;
+package estadoBros;
 
 import com.uqbar.vainilla.DeltaState;
 
 import componentes.Bros;
 
-public class Subiendo extends EstadoBros {
+public class SubiendoBros extends EstadoBros {
 
-	public Subiendo(double yInicial,Bros bros){
-		this.setyInicial(yInicial);
+	public SubiendoBros(double yInicial,Bros bros){
+
 		this.setBros(bros);
+		this.setyInicial(yInicial);
 	}
 	
 	public boolean realizandoSalto(){
@@ -19,7 +20,7 @@ public class Subiendo extends EstadoBros {
 		if(this.getBros().getY()>=this.getyInicial()-100){
 			this.getBros().setY(this.getBros().getY()-(this.getBros().getScene().getVelocity()+ (this.getBros().getScene().getVelocity()*2))* deltaState.getDelta());
 			}else if(this.getBros().getY()<=this.getyInicial()-50){
-				this.getBros().setEstado(new Cayendo(this.getyInicial(),this.getBros()));
+				this.getBros().setEstado(new CayendoBros(this.getyInicial(),this.getBros()));
 			}
 	}
 }

@@ -1,13 +1,18 @@
-package others;
+package estadoMob;
 
 import com.uqbar.vainilla.DeltaState;
 
-import componentes.Bros;
+import componentes.Mob;
 
-public class EstadoBros {
+public class EstadoMob {
 	
 	private double yInicial;
-	private Bros bros;
+	private Mob mob;
+
+	
+	public boolean realizandoSalto(){
+		return false;
+	}
 
 	public double getyInicial() {
 		return yInicial;
@@ -16,19 +21,13 @@ public class EstadoBros {
 	public void setyInicial(double yInicial) {
 		this.yInicial = yInicial;
 	}
-	
-	public boolean realizandoSalto(){
-		return false;
-	}
-	public void saltar(){
+
+	public Mob getMob() {
+		return mob;
 	}
 
-	public Bros getBros() {
-		return bros;
-	}
-
-	public void setBros(Bros bros) {
-		this.bros = bros;
+	public void setMob(Mob mob) {
+		this.mob = mob;
 	}
 	
 	public void update(DeltaState deltaState){

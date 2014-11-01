@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import componentes.Bros;
+import componentes.Enemigos;
+import componentes.Mob;
 import componentes.Piso;
 
 import com.uqbar.vainilla.GameComponent;
@@ -22,8 +24,9 @@ public class SnowBrosScene extends GameScene{
 	
 	
 	private Bros bros;
+	private Enemigos enemigos;
 	private Suelo suelo;
-	
+	//private Mob mob;
 	
 	public boolean getPlayState(){
 		return this.playState;
@@ -52,6 +55,10 @@ public class SnowBrosScene extends GameScene{
 		this.buildBackground(Color.blue);
 		this.bros=new Bros(dim,this.playState);
 		this.addComponent(this.bros);
+		this.enemigos=new Enemigos(this.gameDimension,this.playState);
+		this.addComponents(this.enemigos.getEnemigos());;
+		//this.mob=new Mob(dim,this.playState);
+		//this.addComponent(this.mob);
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
 	}

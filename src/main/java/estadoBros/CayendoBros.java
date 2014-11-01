@@ -1,13 +1,13 @@
-package others;
+package estadoBros;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.events.constants.Key;
 
 import componentes.Bros;
 
-public class Cayendo extends EstadoBros {
+public class CayendoBros extends EstadoBros {
 
-	public Cayendo(double yInicial,Bros bros){
+	public CayendoBros(double yInicial,Bros bros){
 		this.setyInicial(yInicial);
 		this.setBros(bros);
 	}
@@ -17,7 +17,7 @@ public class Cayendo extends EstadoBros {
 		}
 		else{
 			if(deltaState.isKeyPressed(Key.A)){
-				this.getBros().setEstado(new Subiendo(this.getBros().getY(),this.getBros()));
+				this.getBros().setEstado(new SubiendoBros(this.getBros().getY(),this.getBros()));
 			}
 		}
 	}

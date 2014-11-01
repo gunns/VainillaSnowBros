@@ -6,14 +6,15 @@ import java.awt.Dimension;
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
-import others.EstadoBros;
-import others.Quieto;
 
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.events.constants.Key;
+
+import estadoBros.CayendoBros;
+import estadoBros.EstadoBros;
 
 public class Bros extends GameComponent<SnowBrosScene>{
 
@@ -40,7 +41,7 @@ public Bros(Dimension dim, boolean playState){
 		
 		this.gameDimension= dim;
 		this.playState = playState;
-		this.setEstado(new Quieto(this.getY(),this));
+		this.setEstado(new CayendoBros(this.getY(),this));
 		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
 		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-12);
 		this.setZ(1);
