@@ -32,6 +32,44 @@ public class Izquierda extends Direccion {
 		
 		*/
 		
+		if(snow.getDistance() > 1)
+		{
+			if(snow.getFalling() > 0)
+			{
+				if(snow.getInitialX()-10<snow.getX()){
+					snow.setY(snow.getY() - 0.10);
+				}
+				else if(snow.getInitialX()-30>snow.getX()&&snow.getInitialX()-50<snow.getX()){
+					snow.setY(snow.getY() + 0.20);
+				}
+				else if(snow.getInitialX()-50>snow.getX())
+					snow.setY(snow.getY()+0.50);
+				
+				
+				snow.setFalling(snow.getFalling() - 0.30);
+				snow.setX(snow.getX() - 0.80);
+				}
+				
+			
+				//snow.setX(snow.getX() - 0.80);
+			else
+			snow.destroy();
+				
+				//TODO ojo
+				//snow.setFalling(snow.getFalling() - 0.20);
+				//snow.setEnd(snow.getEnd() - 0.20);
+			}
+			//else
+				//if(snow.getEnd() < 0.0){
+					//snow.setY(snow.getY() + 0.20);
+					//snow.setEnd(snow.getEnd() - 0.1); 
+					//}
+					//else
+					//snow.destroy();
+		}
+		
+		
+		/*
 		if(snow.getDistance() > 0)
 		{
 			snow.setX(snow.getX() - 1);
@@ -44,17 +82,17 @@ public class Izquierda extends Direccion {
 			snow.setX(snow.getX() - 0.20);
 			snow.setY(snow.getY() + 0.20);
 			snow.setFalling(snow.getFalling() - 0.20);
-			snow.setEnd(snow.getEnd() - 0.20);
+			//snow.setEnd(snow.getEnd() - 0.20);
 			}
 			else
 				if(snow.getEnd() > 0.0){
 				snow.setY(snow.getY() + 0.20);
-				snow.setEnd(snow.getEnd() - 0.03); 
+				snow.setEnd(snow.getEnd() - 0.1); 
 				}
 				else
 				snow.destroy();
 		}
-	}
+		*/
 	
 	
 

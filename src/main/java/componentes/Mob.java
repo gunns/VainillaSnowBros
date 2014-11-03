@@ -13,6 +13,8 @@ import com.uqbar.vainilla.appearances.Rectangle;
 
 import estadoMob.CayendoMob;
 import estadoMob.EstadoMob;
+import mobConNieve.EstadoNieve;
+import mobConNieve.SinNieve;
 
 public class Mob extends GameComponent<SnowBrosScene> {
 	
@@ -46,6 +48,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			public boolean playState = true;
 			private int ancho = 10;
 			private int alto = 25;
+			public EstadoNieve estadoNieve;
 			
 			
 			//DISPARO
@@ -62,9 +65,27 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			this.setX(12);
 			this.setY(10);
 			this.setZ(0);
+			this.setEstadoNieve(new SinNieve(this, 0));
 		}
 	
 	public void update(DeltaState deltaState){
 		this.getEstado().update(deltaState);
+		this.getEstadoNieve().update(deltaState);
+	}
+	
+	
+	
+	
+	public EstadoNieve getEstadoNieve() {
+		return estadoNieve;
+	}
+
+	public void setEstadoNieve(EstadoNieve estadoNieve) {
+		this.estadoNieve = estadoNieve;
+	}
+
+	public boolean colisionConNieve() {
+		this.getScene().colisionConNieve(this);
+		return false;
 	}
 }

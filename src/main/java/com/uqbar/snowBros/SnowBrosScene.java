@@ -2,12 +2,14 @@ package com.uqbar.snowBros;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.List;
 
 import componentes.Bros;
 import componentes.Enemigos;
 import componentes.Mob;
 import componentes.Piso;
 import componentes.Cartel;
+import componentes.Snow;
 
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
@@ -118,4 +120,57 @@ public class SnowBrosScene extends GameScene{
 		this.setPlayState(false);
 		this.stop();
 	}
+	
+	public void colisionConNieve(Mob mob) {
+		// TODO Auto-generated method stub
+		List <GameComponent<?>> c = this.getComponents();
+		for(GameComponent<?> each : c)
+			{
+			if(each.getClass().equals(Snow.class))
+				{
+				if(this.colisionNieveConMob(each, mob))
+					{
+					mob.getEstadoNieve().agregandoNieve();
+					}
+				}
+			}
+		
+	}
+	
+	
+	
+	
+
+	private boolean colisionNieveConMob(GameComponent<?> each, Mob mob2) {
+		// TODO Auto-generated method stub
+		
+		/*
+		boolean b = false;
+		Piso piso;
+		for(int n = 0;n < this.suelo.getSuelos().size(); n++){
+			piso = this.suelo.getSuelos().get(n);
+			//utilizar detector de coliciones entre rectangulos
+			
+			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(c.getX(), (c.getY()+c.getAppearance().getHeight()-1),
+					(int) (c.getAppearance().getWidth()), (int) (1),
+					piso.getX(), piso.getY(),(int) (piso.getAppearance().getWidth()),(int) (1))){
+				b = true;
+			}
+		}
+		return b;*/
+		boolean b = false;
+		GameComponent<?> nieve = each;
+		//for(int n = 0; n < )
+		if(CollisionDetector.INSTANCE.collidesCircleAgainstRect(
+				nieve.getX(), nieve.getY(),
+				nieve.getAppearance().getWidth()/2,
+				mob2.getX(), mob2.getY(), mob2.getAppearance().getWidth(), mob2.getAppearance().getHeight())){
+			b = true;
+			each.destroy();
+			
+	}
+		return b;
+}
+	
+	
 }
