@@ -43,7 +43,7 @@ public Bros(Dimension dim, boolean playState){
 		this.playState = playState;
 		this.setEstado(new CayendoBros(this.getY(),this));
 		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
-		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-12);
+		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-15);
 		this.setZ(1);
 	}
 

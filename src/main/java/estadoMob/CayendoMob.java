@@ -1,10 +1,7 @@
 package estadoMob;
 
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.events.constants.Key;
 import componentes.Mob;
-
-import estadoBros.SubiendoBros;
 
 public class CayendoMob extends EstadoMob{
 

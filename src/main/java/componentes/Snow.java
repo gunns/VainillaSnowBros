@@ -9,27 +9,24 @@ import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
-import com.uqbar.vainilla.appearances.Rectangle;
-import com.uqbar.vainilla.events.constants.Key;
 
 public class Snow extends GameComponent<SnowBrosScene> {
 	
-	private boolean playState = true;
+
 	private Dimension gameDimension;
-	private double velocity;
+	
 	private Double distance;
 	private Double falling;
 	private Double end;
 	private Direccion dir;
 	private Bros bros;
 	//String sprite
+
 	
 	public Snow(Dimension dim, Integer velocity, double x, double y , Bros bros) {
 		this.bros = bros;
 		this.setAppearance(new Circle(Color.white, 10));
-		this.playState = true;
 		this.gameDimension = dim;
-		this.velocity = velocity;
 		this.distance = 70.0;
 		this.falling = 20.0;
 		this.end = 30.0;
