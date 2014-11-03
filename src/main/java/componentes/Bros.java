@@ -72,23 +72,28 @@ public void setEstado(EstadoBros estado) {
 	
 	public void update(DeltaState deltaState) {
 		
-		//COMANDO SALTAR
+		if (!this.getScene().enemigoColisionaConBros(this)){
+			
 		
-		if(deltaState.isKeyPressed(Key.A)){
-			this.saltar();
-		}
-		this.getEstado().update(deltaState);
-		//COMANDO MOVER
-		if (deltaState.isKeyBeingHold(Key.RIGHT)){
-			this.moverALaDerecha(deltaState);
-		}
-		else if(deltaState.isKeyBeingHold(Key.LEFT)){
-			this.moverALaIzquierda(deltaState);
-		}
-		//COMANDO:DISPARAR
-		
-		if(deltaState.isKeyPressed(Key.S)){
-			this.Disparar();
+			//COMANDO SALTAR
+			
+			if(deltaState.isKeyPressed(Key.A)){
+				this.saltar();
+			}
+			this.getEstado().update(deltaState);
+			
+			//COMANDO MOVER
+			if (deltaState.isKeyBeingHold(Key.RIGHT)){
+				this.moverALaDerecha(deltaState);
+			}
+			else if(deltaState.isKeyBeingHold(Key.LEFT)){
+				this.moverALaIzquierda(deltaState);
+			}
+			//COMANDO:DISPARAR
+			
+			if(deltaState.isKeyPressed(Key.S)){
+				this.Disparar();
+			}
 		}
 		
 		

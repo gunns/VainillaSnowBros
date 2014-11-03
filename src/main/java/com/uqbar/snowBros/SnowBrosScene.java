@@ -74,26 +74,6 @@ public class SnowBrosScene extends GameScene{
 		return this.bros;
 	}
 	
-//	public boolean hayColisionConUnPiso(){
-//		boolean b = false;
-//		boolean pb = false;
-//		Piso piso;
-//		//boolean encontre = false;
-//		for(int n = 0;n < this.suelo.getSuelos().size(); n++){
-//			piso = this.suelo.getSuelos().get(n);
-////			if(piso.getY())
-//			if(piso.getY()>=this.bros.getY()+this.bros.getAlto()&&
-//					piso.getY()+piso.getAppearance().getHeight()<=this.bros.getY()+this.bros.getAlto()&&
-//					piso.getX()<=this.bros.getX()&&piso.getX()+piso.getAncho()>=this.bros.getX()){
-////			if(this.ladrilloSeRompe(this.ladrillos.getLadrillos().get(n)))
-////				{
-//				//encontre = true;
-////				this.ladrilloEnColision = this.ladrillos.getLadrillos().get(n);
-//				b = true;
-//				}
-//			}
-//		return b;
-//	}
 	
 	public boolean hayColisionConUnPiso(GameComponent<SnowBrosScene> c){
 		boolean b = false;
@@ -110,17 +90,23 @@ public class SnowBrosScene extends GameScene{
 		}
 		return b;
 	}
-	public void enemigoColisionaConBros(){
+	public boolean enemigoColisionaConBros(GameComponent<SnowBrosScene> c){
 		Mob mob;
+		boolean b = false;
 		for(int n = 0;n < this.enemigos.getEnemigos().size(); n++){
-			mob= this.enemigos.getEnemigos().get(n);
-			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(this.bros.getX(), this.bros.getY(),(int) this.bros.getAppearance().getWidth(),(int) this.bros.getAppearance().getHeight(), mob.getX(), mob.getY(),(int) mob.getAppearance().getWidth(), (int)mob.getAppearance().getHeight())){
+			mob = this.enemigos.getEnemigos().get(n);
+			
+			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(c.getX(), c.getY(),
+					(int) (c.getAppearance().getWidth()),(int) (c.getAppearance().getHeight()),
+					mob.getX(), mob.getY(),(int) (mob.getAppearance().getWidth()), (int) (mob.getAppearance().getHeight()))){
+				b = true;
 				this.cartelLose();
-				this.stop();
-				this.setPlayState(false);
+				
 			}
 		}
+		return b;
 	}
+	
 	public void stop() {
 		this.velocity= 0d;
 		this.playState=false;
@@ -128,7 +114,8 @@ public class SnowBrosScene extends GameScene{
 	}
 	public void cartelLose(){
 		this.buildBackground(Color.white);
-		this.addComponent(new Cartel(this.gameDimension));
+		this.addComponent(new Cartel(this.gameDimension,0));
 		this.setPlayState(false);
+		this.stop();
 	}
 }

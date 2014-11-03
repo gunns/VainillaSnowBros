@@ -51,20 +51,17 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			//DISPARO
 			public Direccion dir;
 			
+			
 	public Mob(Dimension dim, boolean playState){
 			
-			
-			
 			this.setAppearance(new Rectangle(Color.red,ancho,alto));
-			//TODO
 			this.dir =  new Derecha();
-			
 			this.gameDimension= dim;
 			this.playState = playState;
 			this.setEstado(new CayendoMob(this.getY(),this));
 			this.setX(12);
 			this.setY(10);
-			this.setZ(1);
+			this.setZ(0);
 		}
 	
 	public void update(DeltaState deltaState){

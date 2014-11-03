@@ -12,7 +12,7 @@ public class CayendoBros extends EstadoBros {
 		this.setBros(bros);
 	}
 	public void update(DeltaState deltaState){
-		if(!this.getBros().getScene().hayColisionConUnPiso(this.getBros())){
+		if(!this.getBros().getScene().hayColisionConUnPiso(this.getBros()) ){
 		this.getBros().setY(this.getBros().getY()+(this.getBros().getScene().getVelocity()+ (this.getBros().getScene().getVelocity()/4))* deltaState.getDelta());
 		}
 		else{

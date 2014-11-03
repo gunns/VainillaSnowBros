@@ -16,7 +16,7 @@ public class Enemigos{
 			mobs.add(mob1);
 			Mob mob2=new Mob(this.dim,playState);
 			mob2.setY(40);
-			mob2.setX(80);
+			mob2.setX(240);
 			mobs.add(mob2);
 	}
 	public ArrayList<Mob> getEnemigos(){
