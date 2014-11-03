@@ -7,6 +7,7 @@ import componentes.Bros;
 import componentes.Enemigos;
 import componentes.Mob;
 import componentes.Piso;
+import componentes.Cartel;
 
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
@@ -32,7 +33,7 @@ public class SnowBrosScene extends GameScene{
 		return this.playState;
 	}
 	
-	protected void setPlayState(boolean playState){
+	public void setPlayState(boolean playState){
 		this.playState = playState;
 	}
 	
@@ -49,7 +50,6 @@ public class SnowBrosScene extends GameScene{
 	public SnowBrosScene(Dimension dim, double velocity){
 		super();
 		
-		//this.collisionDetector = new CollisionDetector;
 		this.gameDimension= dim;
 		this.velocity=velocity;
 		this.buildBackground(Color.blue);
@@ -57,8 +57,6 @@ public class SnowBrosScene extends GameScene{
 		this.addComponent(this.bros);
 		this.enemigos=new Enemigos(this.gameDimension,this.playState);
 		this.addComponents(this.enemigos.getEnemigos());;
-		//this.mob=new Mob(dim,this.playState);
-		//this.addComponent(this.mob);
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
 	}
@@ -106,10 +104,31 @@ public class SnowBrosScene extends GameScene{
 			
 			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(c.getX(), (c.getY()+c.getAppearance().getHeight()-1),
 					(int) (c.getAppearance().getWidth()), (int) (1),
-					piso.getX(), piso.getY(),(int) (piso.getAppearance().getWidth()),(int) (1))){
+					piso.getX(), piso.getY(),(int) (piso.getAppearance().getWidth()),(int) (2))){
 				b = true;
 			}
 		}
 		return b;
+	}
+	public void enemigoColisionaConBros(){
+		Mob mob;
+		for(int n = 0;n < this.enemigos.getEnemigos().size(); n++){
+			mob= this.enemigos.getEnemigos().get(n);
+			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(this.bros.getX(), this.bros.getY(),(int) this.bros.getAppearance().getWidth(),(int) this.bros.getAppearance().getHeight(), mob.getX(), mob.getY(),(int) mob.getAppearance().getWidth(), (int)mob.getAppearance().getHeight())){
+				this.cartelLose();
+				this.stop();
+				this.setPlayState(false);
+			}
+		}
+	}
+	public void stop() {
+		this.velocity= 0d;
+		this.playState=false;
+		
+	}
+	public void cartelLose(){
+		this.buildBackground(Color.white);
+		this.addComponent(new Cartel(this.gameDimension));
+		this.setPlayState(false);
 	}
 }
