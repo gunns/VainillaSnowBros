@@ -18,9 +18,9 @@ Dimension gameDimension;
 	public Cartel(Dimension dim){
 		this.gameDimension = dim;
 		
-		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-		Label label =new Label(font ,Color.green ,"      GANASTE!\n Presione P para Juego Nuevo");
-		this.setAppearance(label);
+		//Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
+		//Label label =new Label(font ,Color.green ,"      GANASTE!\n Presione P para Juego Nuevo");
+		//this.setAppearance(label);
 		
 		this.setX(dim.getHeight()/2);
 		this.setY(dim.getWidth()/2);
@@ -31,13 +31,13 @@ Dimension gameDimension;
 		this.gameDimension = dim;
 
 		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-		String cadena = new String("              Game Over\n       ");
+		String cadena = new String("           Game   Over\n");
 		Label label =new Label(font ,Color.magenta ,cadena); 
 
 		this.setAppearance(label);
 		
-		this.setX(dim.getHeight()/2);
-		this.setY(dim.getWidth()/2);
+		this.setX(dim.getWidth()/3);
+		this.setY(dim.getHeight()/3);
 		
 	}
 	

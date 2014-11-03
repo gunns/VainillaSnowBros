@@ -113,7 +113,7 @@ public class SnowBrosScene extends GameScene{
 		
 	}
 	public void cartelLose(){
-		this.buildBackground(Color.white);
+		this.buildBackground(Color.black);
 		this.addComponent(new Cartel(this.gameDimension,0));
 		this.setPlayState(false);
 		this.stop();
