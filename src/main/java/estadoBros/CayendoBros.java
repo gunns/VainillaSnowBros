@@ -11,9 +11,14 @@ public class CayendoBros extends EstadoBros {
 		this.setyInicial(yInicial);
 		this.setBros(bros);
 	}
+	
 	public void update(DeltaState deltaState){
-		if(!this.getBros().getScene().hayColisionConUnPiso(this.getBros()) ){
-		this.getBros().setY(this.getBros().getY()+(this.getBros().getScene().getVelocity()+ (this.getBros().getScene().getVelocity()/4))* deltaState.getDelta());
+		if(!this.getBros().getScene().hayColisionConUnPiso(this.getBros())){
+			double incrementoVelocidad = this.getBros().getScene().getVelocity()/4;
+			double velocidadIncremento = this.getBros().getScene().getVelocity() + incrementoVelocidad;
+			double velocidadIncrementadaPorDelta = velocidadIncremento * deltaState.getDelta();
+			double incrementoY = this.getBros().getY() + velocidadIncrementadaPorDelta;
+			this.getBros().setY(incrementoY);
 		}
 		else{
 			if(deltaState.isKeyPressed(Key.A)){

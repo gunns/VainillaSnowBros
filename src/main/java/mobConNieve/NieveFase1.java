@@ -2,9 +2,7 @@ package mobConNieve;
 
 import java.awt.Color;
 
-import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
-import com.uqbar.vainilla.appearances.Rectangle;
 
 import componentes.Mob;
 
@@ -17,28 +15,16 @@ public class NieveFase1 extends EstadoNieve {
 
 	@Override
 	public void derritiendoNieve() {
-	if(this.getDuracionNieve() < 1){
-		this.getMob().setY(this.getMob().getY()-10);
-		this.getMob().setEstadoNieve(new SinNieve(this.getMob(), 0));
-		
-	}
-	else
-	{
-		this.setDuracionNieve(this.getDuracionNieve() - 1);
-	}
-		
+		if(this.getDuracionNieve() < 1){
+			this.getMob().setY(this.getMob().getY()-10);
+			this.getMob().setEstadoNieve(new SinNieve(this.getMob(), 0));
+		}
+		else { this.setDuracionNieve(this.getDuracionNieve() - 1);}
 	}
 
 	@Override
-	public void agregandoNieve() {
-		// TODO Auto-generated method stub
-		double tiempoActual = this.getDuracionNieve();
-		
+	public void agregandoNieve() {		
 		//TODO modificar al agregar los demas estados
-		this.getMob().setEstadoNieve(new NieveFase2(this.getMob(), ((double)500) ));
-		//this.getMob().setAppearance(new Circle(Color.white, ((int) this.getMob().getAppearance().getHeight() * 2)));
-		
+		this.getMob().setEstadoNieve(new NieveFase2(this.getMob(), ((double)500) ));		
 	}
-	
-
 }

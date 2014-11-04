@@ -8,11 +8,5 @@ public abstract class Direccion {
 	
 	public abstract void avanzaDisparo(Snow snow);
 	
-	
 	public abstract boolean puedeRecorrer(Dimension dim, Snow snow);
-	
-	
-	
-	
-
 }

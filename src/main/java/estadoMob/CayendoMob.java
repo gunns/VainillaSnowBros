@@ -9,14 +9,14 @@ public class CayendoMob extends EstadoMob{
 		this.setMob(mob);
 		this.setyInicial(yInicial);
 	}
+	
 	public void update(DeltaState deltaState){
 		if(!this.getMob().getScene().hayColisionConUnPiso(this.getMob())){
-		this.getMob().setY(this.getMob().getY()+(this.getMob().getScene().getVelocity()+ (this.getMob().getScene().getVelocity()/4))* deltaState.getDelta());
+			double incrementoVelocidad = this.getMob().getScene().getVelocity()/4;
+			double velocidadIncremento = this.getMob().getScene().getVelocity() + incrementoVelocidad;
+			double velocidadIncrementadaPorDelta = velocidadIncremento * deltaState.getDelta();
+			double incrementoY = this.getMob().getY() + velocidadIncrementadaPorDelta;
+			this.getMob().setY(incrementoY);
 		}
-		/*else{
-			if(deltaState.isKeyPressed(Key.A)){
-				this.getMob().setEstado(new SubiendoMob());
-			}
-		}*/
 	}
 }

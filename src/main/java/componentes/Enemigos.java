@@ -3,7 +3,6 @@ package componentes;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
-
 public class Enemigos{
 	
 	public ArrayList<Mob> mobs;
@@ -19,8 +18,6 @@ public class Enemigos{
 			mob2.setX(240);
 			mobs.add(mob2);
 	}
-	public ArrayList<Mob> getEnemigos(){
-		return mobs;
-	}
-
+	
+	public ArrayList<Mob> getEnemigos(){return mobs;}
 }

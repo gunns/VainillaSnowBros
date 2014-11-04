@@ -17,26 +17,21 @@ public class SnowBrosGame extends Game {
 		dimension = new Dimension(800 , 600);
 	}	
 
-	
-
 	@Override
 	protected void setUpScenes() {
 		this.scene = new SnowBrosScene(dimension,200);
 		this.setCurrentScene(scene);
 	}
 	
-
 	@Override
 	public Dimension getDisplaySize() {
 		return dimension;
 	}
 
-	
 	@Override
 	public String getTitle() {
 		return "SnowBros";
 	}
-	
 	
 	public static void main(String[] args) {
 		new DesktopGameLauncher(new SnowBrosGame()).launch();

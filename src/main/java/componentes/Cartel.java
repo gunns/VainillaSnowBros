@@ -8,11 +8,10 @@ import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Label;
-import com.uqbar.vainilla.events.constants.Key;
 
 public class Cartel extends GameComponent<SnowBrosScene>{
 	
-Dimension gameDimension;
+	Dimension gameDimension;
 	
 	
 	public Cartel(Dimension dim){
@@ -41,7 +40,5 @@ Dimension gameDimension;
 		
 	}
 	
-	
-	public void update(DeltaState deltaState) {
-		}
+	public void update(DeltaState deltaState) {	}
 }
