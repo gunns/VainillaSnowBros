@@ -37,7 +37,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.playState = playState;
 		this.setEstado(new CayendoBros(this.getY(),this));
 		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
-		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-20);
+		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25);
 		this.setZ(1);
 	}
 
