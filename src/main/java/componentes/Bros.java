@@ -54,6 +54,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public int getAlto(){return alto;}
 	
 	public void update(DeltaState deltaState) {
+		if(this.getScene().getPlayState())
+		{
 		//Colision con enemigos (rectangulos)
 		if (!this.getScene().enemigoColisionaConBros(this)){
 					
@@ -66,18 +68,44 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			else if(deltaState.isKeyBeingHold(Key.LEFT)) {this.moverALaIzquierda(deltaState);}
 			
 			//COMANDO:DISPARAR			
-			if(deltaState.isKeyPressed(Key.S)){this.Disparar();}
+			if(deltaState.isKeyPressed(Key.S)){
+			this.CongelaOEmpuja(deltaState);
+			}
 		}
 		else {this.getScene().cartelLose();}		
+		}
+	}
+	
+	//COMPROBAR CASO SI EMPUJA BOLA DE NIEVE O SOLO DISPARA NIEVE
+	public void CongelaOEmpuja(DeltaState deltaState){
+		if(this.getScene().puedeEmpujarBolaDeNieve(this,deltaState))
+		{
+		this.getScene().empujar(this, deltaState);
+		}
+		else
+			this.disparar();
 	}
 	
 	
 	//DISPARAR NIEVE
-	private void Disparar() {
+	private void disparar() {
+		
+		
+		
 		Double alturaDeDisparo = this.getY() - ( (this.getAppearance().getHeight())/10 );
 		Snow snow = new Snow(gameDimension, (this.getX()), alturaDeDisparo, this);
 		this.getScene().addComponent(snow);	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	private void saltar() {this.getEstado().saltar();}
 	
@@ -126,5 +154,11 @@ public class Bros extends GameComponent<SnowBrosScene>{
 
 	public Direccion getDir() {return dir;}
 
-	public void setDir(Direccion dir) {this.dir = dir;}	
+	public void setDir(Direccion dir) {this.dir = dir;}
+
+	//public void empujar(GameComponent<?> bolaDeNieve, DeltaState deltaState) {
+		//Mob mobTransformado = (Mob) bolaDeNieve;
+		//mobTransformado.empujar(this.dir, deltaState);
+		
+	//}	
 }

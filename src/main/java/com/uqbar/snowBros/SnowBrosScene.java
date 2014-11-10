@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
+import mobConNieve.Empujado;
 import componentes.Bros;
 import componentes.Enemigos;
 import componentes.Mob;
@@ -12,6 +13,7 @@ import componentes.Cartel;
 import componentes.Snow;
 import componentes.Suelo;
 
+import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Rectangle;
@@ -22,7 +24,7 @@ public class SnowBrosScene extends GameScene{
 	private Dimension gameDimension;
 	private double velocity;
 	private GameComponent<GameScene> backGround;
-	private boolean playState = false;
+	private boolean playState = true;
 	private boolean systemPause = false;
 	
 	private Bros bros;
@@ -31,13 +33,12 @@ public class SnowBrosScene extends GameScene{
 	
 	public SnowBrosScene(Dimension dim, double velocity){
 		super();
-		
-		this.gameDimension= dim;
 		this.velocity=velocity;
+		this.gameDimension= dim;
 		this.buildBackground(Color.blue);
 		this.bros=new Bros(dim,this.playState);
 		this.addComponent(this.bros);
-		this.enemigos=new Enemigos(this.gameDimension,this.playState);
+		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
 		this.addComponents(this.enemigos.getEnemigos());;
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
@@ -87,8 +88,11 @@ public class SnowBrosScene extends GameScene{
 					componenteRectangular.getY(),(int) componenteRectangular.getAppearance().getWidth(),
 					(int) componenteRectangular.getAppearance().getHeight(),
 					mob.getX(), mob.getY(),(int) mob.getAppearance().getWidth(), (int) mob.getAppearance().getHeight())){
+				
+				if(mob.getEstadoNieve().esPeligroso()){
 				hayColision = true;
 			}
+		}
 		}
 		return hayColision;
 	}
@@ -125,6 +129,55 @@ public class SnowBrosScene extends GameScene{
 				mob2.getAppearance().getWidth(), mob2.getAppearance().getHeight())){
 			hayColision = true;
 			each.destroy();
+		}
+		return hayColision;
+	}	
+	
+	public boolean puedeEmpujarBolaDeNieve(Bros bros, DeltaState deltaState){
+		
+		
+		boolean puedeEmpujar = false;
+		List <GameComponent<?>> c = this.getComponents();
+		for(GameComponent<?> each : c)
+			{
+			if(each.getClass().equals(Mob.class)){
+				Mob mob = (Mob) each;
+				if(this.colisionBolaNieveConBros(each, bros) && mob.getEstadoNieve().PuedoEmpujar())
+						{
+					puedeEmpujar = true;
+					//bros.empujar(each, deltaState);
+					}
+				}
+			}
+		return puedeEmpujar;
+	}
+	
+	public void empujar(Bros bros, DeltaState deltaState)
+	{
+		List <GameComponent<?>> c = this.getComponents();
+		for(GameComponent<?> each : c)
+			{
+			if(each.getClass().equals(Mob.class)){
+				Mob mob = (Mob) each;
+				if(this.colisionBolaNieveConBros(each, bros) && mob.getEstadoNieve().PuedoEmpujar())
+						{
+					    mob.setEstadoNieve(new Empujado(mob, 0, bros.getDir()));
+					}
+				}
+			}	
+	}
+	
+	
+	public boolean colisionBolaNieveConBros(GameComponent<?> each, Bros bros){
+		boolean hayColision = false;
+		GameComponent<?> mob = each;
+		if(CollisionDetector.INSTANCE.collidesCircleAgainstRect(mob.getX(), mob.getY(),
+				mob.getAppearance().getWidth()/2,bros.getX(), bros.getY(),
+				bros.getAppearance().getWidth(), bros.getAppearance().getHeight())){
+			hayColision = true;
+			
+			
+			//each.destroy();
 		}
 		return hayColision;
 	}	

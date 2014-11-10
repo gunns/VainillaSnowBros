@@ -1,5 +1,7 @@
 package mobConNieve;
 
+import others.Direccion;
+
 import com.uqbar.vainilla.DeltaState;
 
 import componentes.Mob;
@@ -28,8 +30,30 @@ public abstract class EstadoNieve {
 	
 	public boolean esPeligroso() { return false;}
 	
-	public void update(DeltaState deltaState) {
-		if(this.getMob().colisionConNieve()) { agregandoNieve();}
-		else { this.derritiendoNieve();}
+	public void update(DeltaState deltaState) 
+{
+		if(this.getMob().colisionConNieve())
+			{ 
+			agregandoNieve();
+			}
+			else {
+				this.derritiendoNieve();
+				 }
+}
+	public int getRebotes() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+	public void setRebotes(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	public Direccion getDir() {
+		return null;
+	}
+
+	public void setDir(Direccion dir) {
+	}
+
+
 }

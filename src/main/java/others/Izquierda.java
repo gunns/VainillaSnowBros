@@ -1,7 +1,14 @@
 package others;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
+import mobConNieve.Empujado;
+
+import com.uqbar.vainilla.DeltaState;
+import com.uqbar.vainilla.appearances.Circle;
+
+import componentes.Mob;
 import componentes.Snow;
 
 public class Izquierda extends Direccion {
@@ -30,4 +37,29 @@ public class Izquierda extends Direccion {
 	public boolean puedeRecorrer(Dimension dim, Snow snow) {
 		return ((snow.getX() > 0) && (dim.getHeight() > (snow.getY() + (snow.getAppearance().getHeight()))));
 	}
+
+	
+	public void rodar(Mob mob, DeltaState deltaState)
+	{
+		Empujado estado = (Empujado) mob.getEstadoNieve();
+	if(estado.getRebotes() > 0)
+	{
+		if(mob.noLlegoAlComienzo())
+		{
+			mob.moverALaIzquierda(deltaState);
+		}
+		else
+			{
+			mob.getEstadoNieve().setRebotes(mob.getEstadoNieve().getRebotes() - 1);
+			mob.getEstadoNieve().setDir(new Derecha());
+			}
+		
+		}
+	else
+	{
+	mob.destroy();
+	}
+	}
 }
+
+

@@ -5,12 +5,13 @@ import java.awt.Dimension;
 
 import others.Derecha;
 import others.Direccion;
+import others.Izquierda;
 import estadoMob.CayendoMob;
 import estadoMob.EstadoMob;
 import mobConNieve.EstadoNieve;
 import mobConNieve.SinNieve;
-import com.uqbar.snowBros.SnowBrosScene;
 
+import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
@@ -23,11 +24,12 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	private int alto = 25;
 	public EstadoNieve estadoNieve;
 	public EstadoMob estado;
+	public double velocity;
 
 	//MOVIMIENTO
 	public Direccion dir;
 	
-	public Mob(Dimension dim, boolean playState){
+	public Mob(Dimension dim, boolean playState, double velocity){
 		this.setAppearance(new Rectangle(Color.red,ancho,alto));
 		this.dir =  new Derecha();
 		this.gameDimension= dim;
@@ -37,6 +39,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.setY(10);
 		this.setZ(0);
 		this.setEstadoNieve(new SinNieve(this, 0));
+		this.velocity = velocity;
 	}
 	
 	public EstadoMob getEstado() {return estado;}
@@ -56,12 +59,81 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public void setEstadoNieve(EstadoNieve estadoNieve) {this.estadoNieve = estadoNieve;}
 	
 	public void update(DeltaState deltaState){
+		if(this.getScene().getPlayState()){
 		this.getEstado().update(deltaState);
 		this.getEstadoNieve().update(deltaState);
+		}
 	}
 	
 	public boolean colisionConNieve() {
 		this.getScene().colisionConNieve(this);
 		return false;
 	}
+
+	//public void empujar(Direccion dir, DeltaState deltaState) {
+		// TODO Auto-generated method stub
+		//mover esfera hacia esa direccion
+		//dir.empujar(this, deltaState);
+		
+	//}
+	
+	
+	public void moverALaDerecha(DeltaState deltaState) {
+		if(!this.getScene().getSystemPause()){
+			this.dir = new Derecha();
+			if(!playState && !this.getScene().getPlayState()){
+				if (this.noLlegoAlFinal()){
+					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());
+				}
+			}else{
+				if (this.noLlegoAlFinal()){
+					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());
+				}
+			}
+		}
+	}
+	
+	public void moverALaIzquierda(DeltaState deltaState) {
+		if(!this.getScene().getSystemPause()){
+			this.dir = new Izquierda();
+			if(!playState && !this.getScene().getPlayState()){
+				if (this.noLlegoAlComienzo()){
+					this.setX(this.getX()- (this.getScene().getVelocity() + (this.getVelocity()/4))* deltaState.getDelta());
+				}
+			}else{
+				if (this.noLlegoAlComienzo()){
+					this.setX(this.getX()-(this.getScene().getVelocity() + (this.getVelocity()/4))* deltaState.getDelta());
+				}
+			}
+		}
+	}
+	
+	
+public boolean noLlegoAlFinal() {return this.getX()+this.getAppearance().getWidth()<= gameDimension.getWidth();}
+	
+	public boolean noLlegoAlComienzo() {return this.getX()>=0;}
+
+	public double getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(double velocity) {
+		this.velocity = velocity;
+	}
+
+	
+	
+	
+	public Direccion getDir() {
+		return dir;
+	}
+
+	public void setDir(Direccion dir) {
+		this.dir = dir;
+	}
+	
+	
+	
+	
+	
 }
