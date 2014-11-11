@@ -2,6 +2,7 @@ package componentes;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Random;
 
 import others.Derecha;
 import others.Direccion;
@@ -25,6 +26,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public EstadoNieve estadoNieve;
 	public EstadoMob estado;
 	public double velocity;
+	Random r = new Random();
 
 	//MOVIMIENTO
 	public Direccion dir;
@@ -35,8 +37,8 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.gameDimension= dim;
 		this.playState = playState;
 		this.setEstado(new CayendoMob(this.getY(),this));
-		this.setX(12);
-		this.setY(10);
+		this.setX(r.nextInt(gameDimension.width-ancho));
+		this.setY(r.nextInt(gameDimension.height));
 		this.setZ(0);
 		this.setEstadoNieve(new SinNieve(this, 0));
 		this.velocity = velocity;

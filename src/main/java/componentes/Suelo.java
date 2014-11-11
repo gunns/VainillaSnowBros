@@ -42,17 +42,15 @@ public class Suelo {
 
 	private void unaLinea(int nSuelos, int k){
 		int j; 
-		int valor = anchura/nSuelos;
 		Random r = new Random();
-		int inicio = anchura - (nSuelos*valor);
-		inicio =  r.nextInt(8);
+		int inicio =  r.nextInt(2);
 		for (int val=nSuelos;val>0;val--){
-			for (j=inicio;j<inicio+2;j++){
+			for (j=inicio;j<inicio+r.nextInt(5)+2;j++){
 				if (j<anchura){
 					density[j][k] = 1;
 				}
 			}
-			inicio = inicio+r.nextInt(5);
+			inicio = inicio+r.nextInt(10);
 		}
 		
 	}
@@ -64,7 +62,7 @@ public class Suelo {
 		int valorDado = r.nextInt(5)+2;
 		for (j=7;j<=28;j+=7){
 			unaLinea(valorDado+1,j);
-			valorDado = r.nextInt(9)+2;
+			valorDado = r.nextInt(4)+2;
 		}
 	}
 
