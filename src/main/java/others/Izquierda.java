@@ -60,6 +60,12 @@ public class Izquierda extends Direccion {
 	mob.destroy();
 	}
 	}
+
+	@Override
+	public void moverEsfera(Mob mob, DeltaState deltaState) {
+		mob.moverALaIzquierda(deltaState);
+		
+	}
 }
 
 

@@ -36,10 +36,10 @@ public class SnowBrosScene extends GameScene{
 		this.velocity=velocity;
 		this.gameDimension= dim;
 		this.buildBackground(Color.blue);
-		this.bros=new Bros(dim,this.playState);
+		this.bros=new Bros(dim,this.playState, velocity);
 		this.addComponent(this.bros);
 		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
-		this.addComponents(this.enemigos.getEnemigos());;
+		this.addComponents(this.enemigos.getEnemigos());
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
 	}
@@ -177,8 +177,43 @@ public class SnowBrosScene extends GameScene{
 			hayColision = true;
 			
 			
-			//each.destroy();
+			
 		}
 		return hayColision;
+	}
+
+	public void moverEsfera(Bros bros, DeltaState deltaState) {
+		List <GameComponent<?>> c = this.getComponents();
+		for(GameComponent<?> each : c)
+		{
+		if(each.getClass().equals(Mob.class)){
+			Mob mob = (Mob) each;
+			if(this.colisionBolaNieveConBros(mob, bros) && mob.getEstadoNieve().PuedoEmpujar() && this.hayColisionConUnPiso(bros))
+					{
+				    bros.getDir().moverEsfera(mob, deltaState);
+					}
+			}
+		}	
+		
 	}	
+
+	public boolean hayColisionConUnaEsfera(Bros bros){
+		boolean hayColision = false;
+		Mob mob;
+		List<GameComponent<?>> c = this.getComponents();
+		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
+		for(GameComponent<?> each : c ){
+			if(each.getClass().equals(Mob.class))
+			{
+				mob = (Mob) each;
+			if(this.colisionBolaNieveConBros(mob, bros) && mob.getEstadoNieve().PuedoEmpujar())
+			{
+				hayColision = true;
+			}
+		}
+		
+		}
+		return hayColision;
+	}
+	
 }
