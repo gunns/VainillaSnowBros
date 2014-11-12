@@ -25,12 +25,13 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public boolean playState = true;
 	private int ancho = 10;
 	private int alto = 25;
+	private double velocity;
 	
 	//DISPARO
 	public Direccion dir;
 	
 	
-	public Bros(Dimension dim, boolean playState){
+	public Bros(Dimension dim, boolean playState, double velocity){
 		this.setAppearance(new Rectangle(Color.white,ancho,alto));
 		this.dir =  new Derecha();
 		this.gameDimension= dim;
@@ -39,6 +40,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
 		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25);
 		this.setZ(1);
+		this.velocity = velocity;
 	}
 
 	protected boolean getPlayState() {return this.playState;}
@@ -64,8 +66,15 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			this.getEstado().update(deltaState);
 			
 			//COMANDO MOVER
-			if (deltaState.isKeyBeingHold(Key.RIGHT)) {this.moverALaDerecha(deltaState);}
-			else if(deltaState.isKeyBeingHold(Key.LEFT)) {this.moverALaIzquierda(deltaState);}
+			if (deltaState.isKeyBeingHold(Key.RIGHT)) {
+				this.moverALaDerecha(deltaState);
+				
+				}
+			else
+				if(deltaState.isKeyBeingHold(Key.LEFT)) 
+					{
+					this.moverALaIzquierda(deltaState);
+					}
 			
 			//COMANDO:DISPARAR			
 			if(deltaState.isKeyPressed(Key.S)){
@@ -89,12 +98,9 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	//DISPARAR NIEVE
 	private void disparar() {
-		
-		
-		
-		Double alturaDeDisparo = this.getY() - ( (this.getAppearance().getHeight())/10 );
+		Double alturaDeDisparo = this.getY() - ( (this.getAppearance().getHeight())/10);
 		Snow snow = new Snow(gameDimension, (this.getX()), alturaDeDisparo, this);
-		this.getScene().addComponent(snow);	
+		this.getScene().addComponent(snow);
 	}
 	
 	
@@ -119,6 +125,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			}else{
 				if (this.noLlegoAlFinal()){
 					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					this.getScene().moverEsfera(this, deltaState);
 				}
 			}
 		}
@@ -129,11 +136,12 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			this.dir = new Izquierda();
 			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlComienzo()){
-					this.setX(this.getX()- (this.getScene().getVelocity() + (this.getScene().getVelocity()/4) )* deltaState.getDelta());
+					this.setX(this.getX()- (this.getScene().getVelocity() + (this.getScene().getVelocity()/4))* deltaState.getDelta());
 				}
 			}else{
 				if (this.noLlegoAlComienzo()){
 					this.setX(this.getX()-(this.getScene().getVelocity() + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					this.getScene().moverEsfera(this, deltaState);
 				}
 			}
 		}
@@ -146,19 +154,11 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	//MOVIMIENTO NIEVE
 	public boolean puedeRecorrer(Dimension dim, Snow snow) {return this.dir.puedeRecorrer(dim, snow);}
-	
-	//public void avanzaDisparo(Snow snow)
-	//{
-	//this.dir.avanzaDisparo(snow);	
-	//}
 
 	public Direccion getDir() {return dir;}
 
 	public void setDir(Direccion dir) {this.dir = dir;}
-
-	//public void empujar(GameComponent<?> bolaDeNieve, DeltaState deltaState) {
-		//Mob mobTransformado = (Mob) bolaDeNieve;
-		//mobTransformado.empujar(this.dir, deltaState);
-		
-	//}	
+	
+	
+	
 }

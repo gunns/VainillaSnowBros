@@ -62,5 +62,11 @@ public class Derecha extends Direccion{
 	mob.destroy();
 	}
 	}
+
+	@Override
+	public void moverEsfera(Mob mob, DeltaState deltaState) {
+		mob.moverALaDerecha(deltaState);
+		
+	}
 	
 }

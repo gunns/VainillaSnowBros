@@ -24,4 +24,6 @@ public abstract class Direccion {
 
 	public void setDir(Direccion dir) {
 	}
+
+	public abstract void moverEsfera(Mob mob, DeltaState deltaState);
 }
