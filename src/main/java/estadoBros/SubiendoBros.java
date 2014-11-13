@@ -20,9 +20,16 @@ public class SubiendoBros extends EstadoBros {
 			this.getBros().setY(incrementoY);
 			}
 		else if(this.getBros().getY()<=this.getyInicial()-50){
-				this.getBros().setEstado(new CayendoBros(this.getyInicial(),this.getBros()));
+				this.getBros().getEstado().cambiarMovimiento(this.getBros());
+				//this.getBros().setEstado(new CayendoBros(this.getyInicial(),this.getBros()));
 		}
 	}
 	
 	public boolean realizandoSalto() {return true;}
+
+	@Override
+	public void cambiarMovimiento(Bros bros) {
+		this.getBros().setEstado(new CayendoBros(this.getyInicial(),this.getBros()));
+		
+	}
 }

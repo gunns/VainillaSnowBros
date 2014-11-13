@@ -4,7 +4,7 @@ import com.uqbar.vainilla.DeltaState;
 
 import componentes.Bros;
 
-public class EstadoBros {
+public abstract class EstadoBros {
 	
 	private double yInicial;
 	private Bros bros;
@@ -22,4 +22,11 @@ public class EstadoBros {
 	public void setBros(Bros bros) {this.bros = bros;}
 	
 	public void update(DeltaState deltaState){}
+
+	public abstract void cambiarMovimiento(Bros bros);
+
+	public boolean siendoArrastrado() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

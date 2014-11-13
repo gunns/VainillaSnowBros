@@ -4,6 +4,7 @@ import others.Direccion;
 
 import com.uqbar.vainilla.DeltaState;
 
+import componentes.Bros;
 import componentes.Mob;
 
 public abstract class EstadoNieve {
@@ -55,5 +56,11 @@ public abstract class EstadoNieve {
 	public void setDir(Direccion dir) {
 	}
 
-
+public boolean puedeRebotar(){
+	return false;
+}
+public void arrastrarBros(Bros bros) {
+	// TODO Auto-generated method stub
+	
+}
 }

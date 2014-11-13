@@ -8,10 +8,12 @@ import others.Direccion;
 import others.Izquierda;
 import estadoBros.CayendoBros;
 import estadoBros.EstadoBros;
-import com.uqbar.snowBros.SnowBrosScene;
+import estadoBros.SiendoArrastrado;
 
+import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
+import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.events.constants.Key;
 
@@ -19,6 +21,8 @@ import com.uqbar.vainilla.events.constants.Key;
 public class Bros extends GameComponent<SnowBrosScene>{
 
 	//MOVIMIENTO
+	public boolean invencible = true;
+	public int tiempoInvencible = 1000;
 	public EstadoBros estado;
 	public boolean realizandoSalto= false;
 	public Dimension gameDimension;
@@ -56,10 +60,27 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public int getAlto(){return alto;}
 	
 	public void update(DeltaState deltaState) {
+		
 		if(this.getScene().getPlayState())
 		{
 		//Colision con enemigos (rectangulos)
-		if (!this.getScene().enemigoColisionaConBros(this)){
+			//restar el tiempo de invencibilidad
+			if(this.invencible && !this.getEstado().siendoArrastrado()){
+				this.tiempoInvencible--;
+				if(this.tiempoInvencible < 1)
+					{
+					this.invencible = false;
+					}
+			}
+			
+		if (!this.getScene().enemigoColisionaConBros(this) || (this.getScene().enemigoColisionaConBros(this) && this.invencible)){
+			if((this.getScene().esferaRodanteColisionaConBros(this)))
+				{
+				this.setEstado(new SiendoArrastrado());
+				this.getEstado().setBros(this);
+				this.getEstado().update(deltaState);
+				}
+			else{
 					
 			//COMANDO SALTAR
 			if(deltaState.isKeyPressed(Key.A)) {this.saltar();}
@@ -77,11 +98,15 @@ public class Bros extends GameComponent<SnowBrosScene>{
 					}
 			
 			//COMANDO:DISPARAR			
-			if(deltaState.isKeyPressed(Key.S)){
+			if(deltaState.isKeyPressed(Key.S))
+						{
 			this.CongelaOEmpuja(deltaState);
+						}
+					}
 			}
-		}
-		else {this.getScene().cartelLose();}		
+		else
+				{this.getScene().cartelLose();
+				}
 		}
 	}
 	
@@ -113,7 +138,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	
 
-	private void saltar() {this.getEstado().saltar();}
+	public void saltar() {this.getEstado().saltar();}
 	
 	private void moverALaDerecha(DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
@@ -158,6 +183,22 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public Direccion getDir() {return dir;}
 
 	public void setDir(Direccion dir) {this.dir = dir;}
+
+	public boolean isInvencible() {
+		return invencible;
+	}
+
+	public void setInvencible(boolean invencible) {
+		this.invencible = invencible;
+	}
+
+	public int getTiempoInvencible() {
+		return tiempoInvencible;
+	}
+
+	public void setTiempoInvencible(int tiempoInvencible) {
+		this.tiempoInvencible = tiempoInvencible;
+	}
 	
 	
 	

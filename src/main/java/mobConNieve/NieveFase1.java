@@ -27,4 +27,6 @@ public class NieveFase1 extends EstadoNieve {
 		//TODO modificar al agregar los demas estados
 		this.getMob().setEstadoNieve(new NieveFase2(this.getMob(), ((double)500) ));		
 	}
+
+
 }

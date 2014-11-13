@@ -59,6 +59,7 @@ public class Derecha extends Direccion{
 		}
 	else
 	{
+	mob.getScene().esferaExploto(mob);
 	mob.destroy();
 	}
 	}

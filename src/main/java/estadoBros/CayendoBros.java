@@ -24,8 +24,14 @@ public class CayendoBros extends EstadoBros {
 			{
 				if(deltaState.isKeyPressed(Key.A))
 					{
-					this.getBros().setEstado(new SubiendoBros(this.getBros().getY(),this.getBros()));
+					this.cambiarMovimiento(this.getBros());
+					//this.getBros().setEstado(new SubiendoBros(this.getBros().getY(),this.getBros()));
 					}
 			}
 		}
+
+	@Override
+	public void cambiarMovimiento(Bros bros) {
+		this.getBros().setEstado(new SubiendoBros(this.getBros().getY(),this.getBros()));	
+	}
 }

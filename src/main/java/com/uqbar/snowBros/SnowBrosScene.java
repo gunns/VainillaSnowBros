@@ -193,9 +193,11 @@ public class SnowBrosScene extends GameScene{
 				    bros.getDir().moverEsfera(mob, deltaState);
 					}
 			}
-		}	
+		}
+	}
 		
-	}	
+	
+		
 
 	public boolean hayColisionConUnaEsfera(Bros bros){
 		boolean hayColision = false;
@@ -203,7 +205,7 @@ public class SnowBrosScene extends GameScene{
 		List<GameComponent<?>> c = this.getComponents();
 		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
 		for(GameComponent<?> each : c ){
-			if(each.getClass().equals(Mob.class))
+			if(each.getClass() ==(Mob.class))
 			{
 				mob = (Mob) each;
 			if(this.colisionBolaNieveConBros(mob, bros) && mob.getEstadoNieve().PuedoEmpujar())
@@ -216,4 +218,68 @@ public class SnowBrosScene extends GameScene{
 		return hayColision;
 	}
 	
+	public boolean esferaRodanteColisionaConBros(Bros bros)
+	{
+	boolean colisiona= false;
+	List<GameComponent<?>> esferas = this.getComponents();
+	for(GameComponent each : esferas)
+		{
+		if(each.getClass() == Mob.class)
+			{
+			Mob mob = (Mob) each;
+			
+			if(this.colisionBolaNieveConBros(each, bros) && mob.getEstadoNieve().puedeRebotar())
+				{
+				colisiona = true;
+				//mob.getEstadoNieve().arrastrarBros(bros);
+				}
+			}
+		}
+	
+	return colisiona;
+	}
+
+	public void esferaExploto(Mob mob) {
+		// TODO Auto-generated method stub
+		for(GameComponent c : this.getComponents())
+			{
+			if(c.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) c;
+				if(bros.getEstado().siendoArrastrado())
+				bros.getEstado().cambiarMovimiento(bros);
+				//bros.saltar();
+				bros.setTiempoInvencible(1000);
+				}
+			}
+	}
+
+	public boolean colisionaEstaEsferaConBros(Mob mob) {
+		boolean hayColision = false;
+		for(GameComponent c : this.getComponents())
+		{
+		if(c.getClass() == Bros.class)
+			{
+			Bros bros = (Bros) c;
+			if(this.colisionBolaNieveConBros(mob, bros))
+				{
+				hayColision = true;
+				}
+			}
+		}
+		return hayColision;
+	}
+
+	public void arrastrarBros(Mob mob) {
+		//for(GameComponent c : this.getComponents())
+		//{
+		//if(c.getClass() == Bros.class)
+			//{
+			if(colisionaEstaEsferaConBros(mob))
+				{
+				mob.getEstadoNieve().arrastrarBros(bros);
+				}
+			//}
+		//}
+	}
 }

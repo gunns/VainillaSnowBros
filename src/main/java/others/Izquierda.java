@@ -56,9 +56,10 @@ public class Izquierda extends Direccion {
 		
 		}
 	else
-	{
-	mob.destroy();
-	}
+		{
+		mob.getScene().esferaExploto(mob);
+		mob.destroy();
+		}
 	}
 
 	@Override

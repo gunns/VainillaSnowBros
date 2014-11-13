@@ -1,10 +1,15 @@
 package mobConNieve;
 
+import java.util.List;
+
 import others.Direccion;
 
 import com.uqbar.vainilla.DeltaState;
 
+import componentes.Bros;
 import componentes.Mob;
+
+import com.uqbar.vainilla.GameComponent;
 
 public class Empujado extends EstadoNieve{
 
@@ -41,8 +46,18 @@ public class Empujado extends EstadoNieve{
 	
 	public void update(DeltaState deltaState) 
 	{
-		this.dir.rodar(this.getMob(), deltaState);
+		this.dir.rodar(this.getMob(), deltaState); 
+		//if(this.getMob().getScene().colisionaEstaEsferaConBros(this.getMob()))
+			this.getMob().getScene().arrastrarBros(this.getMob());
+			
 	}
+	
+	public void arrastrarBros(Bros bros)
+	{
+		bros.setInvencible(true);
+		bros.setX(this.getMob().getX() + this.getMob().getAppearance().getWidth()/2);
+	}
+	
 
 	public Direccion getDir() {
 		return dir;
@@ -52,7 +67,11 @@ public class Empujado extends EstadoNieve{
 		this.dir = dir;
 	}
 	
+	public boolean puedeRebotar(){
+		return true;
+	}
 	
+		
 	
 	
 }
