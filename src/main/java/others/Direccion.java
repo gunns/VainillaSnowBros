@@ -26,4 +26,8 @@ public abstract class Direccion {
 	}
 
 	public abstract void moverEsfera(Mob mob, DeltaState deltaState);
+
+
+
+	public abstract Direccion direccionContraria();
 }

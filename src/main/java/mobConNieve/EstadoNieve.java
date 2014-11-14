@@ -1,8 +1,11 @@
 package mobConNieve;
 
+import java.awt.Color;
+
 import others.Direccion;
 
 import com.uqbar.vainilla.DeltaState;
+import com.uqbar.vainilla.appearances.Circle;
 
 import componentes.Bros;
 import componentes.Mob;
@@ -63,4 +66,16 @@ public void arrastrarBros(Bros bros) {
 	// TODO Auto-generated method stub
 	
 }
+public  void arrolla(Mob mob)
+	{
+	if(mob.getScene().colisionaEsferaConEsfera(mob, this.getMob()))
+	this.morir();
+	}
+
+public void morir() {
+	// TODO Auto-generated method stub
+	//this.getMob().setAppearance(new Circle(Color.MAGENTA, 15));
+	this.getMob().setEstadoNieve(new Muerto(this.getMob(), 500));
+}
+
 }

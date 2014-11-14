@@ -69,5 +69,11 @@ public class Derecha extends Direccion{
 		mob.moverALaDerecha(deltaState);
 		
 	}
+
+	@Override
+	public Direccion direccionContraria() {
+		
+		return new Izquierda();
+	}
 	
 }

@@ -282,4 +282,42 @@ public class SnowBrosScene extends GameScene{
 			//}
 		//}
 	}
+
+	public void matarMobsEnElCamino(Mob mob) 
+	{
+		for(GameComponent each : this.getComponents())
+			{
+			if(each.getClass()== Mob.class)
+				{
+				Mob mobColisionado = (Mob) each;
+				mobColisionado.arrolla(mob);
+				}
+			}
+	}
+
+	public boolean colisionaEsferaConMob(Mob mob, Mob mobColisionado) 
+	{
+		// TODO Auto-generated method stub
+		boolean hayColision = false;
+		if(CollisionDetector.INSTANCE.collidesCircleAgainstRect(mob.getX(), mob.getY(),
+				mob.getAppearance().getWidth()/2,mobColisionado.getX(), mobColisionado.getY(),
+				mobColisionado.getAppearance().getWidth(), mobColisionado.getAppearance().getHeight())){
+			hayColision = true;
+			
+			
+			
+		}
+		return hayColision;
+	}
+
+	public boolean colisionaEsferaConEsfera(Mob mob, Mob mob2) {
+		// TODO Auto-generated method stub
+		boolean hayColision = false;
+		if(CollisionDetector.INSTANCE.collidesCircleAgainstCircle(mob.getX(), mob.getY(), (int)mob.getAppearance().getWidth()/2,
+				mob2.getX(), mob2.getY(), (int)mob2.getAppearance().getWidth()/2)){
+			return true;
+		}
+		else
+		return false;
+	}
 }

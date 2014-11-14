@@ -27,4 +27,11 @@ public class SinNieve extends EstadoNieve {
 	}
 	
 	public boolean esPeligroso() { return true;}
+	
+	public  void arrolla(Mob mob)
+	{
+	if(mob.getScene().colisionaEsferaConMob(mob, this.getMob()))
+	this.morir();
+	}
+
 }

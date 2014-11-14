@@ -30,4 +30,13 @@ public class NieveFaseF extends EstadoNieve{
 	}
 
 	public boolean PuedoEmpujar() { return true;}
+
+	@Override
+	public void arrolla(Mob mob) {
+		if(mob.getScene().colisionaEsferaConEsfera(this.getMob(),mob ) )
+			{
+			this.getMob().setEstadoNieve(new Empujado(this.getMob(), 0, this.getMob().getDir().direccionContraria()));
+			mob.getEstadoNieve().setDir(mob.getDir().direccionContraria());
+			}
+	}
 }

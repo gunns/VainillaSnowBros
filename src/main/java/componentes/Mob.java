@@ -133,6 +133,12 @@ public boolean noLlegoAlFinal() {return this.getX()+this.getAppearance().getWidt
 	public void setDir(Direccion dir) {
 		this.dir = dir;
 	}
+
+	public void arrolla(Mob mob) {
+		// TODO Auto-generated method stub
+		this.getEstadoNieve().arrolla(mob);
+	}
+
 	
 	
 	
