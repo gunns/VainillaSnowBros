@@ -8,6 +8,7 @@ import com.uqbar.vainilla.DeltaState;
 
 import componentes.Bros;
 import componentes.Mob;
+import componentes.Snow;
 
 import com.uqbar.vainilla.GameComponent;
 
@@ -31,7 +32,7 @@ public class Empujado extends EstadoNieve{
 	}
 
 	@Override
-	public void agregandoNieve() {
+	public void agregandoNieve(Snow snow) {
 		// TODO Auto-generated method stub
 		
 	}

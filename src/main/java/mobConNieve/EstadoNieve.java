@@ -9,13 +9,14 @@ import com.uqbar.vainilla.appearances.Circle;
 
 import componentes.Bros;
 import componentes.Mob;
+import componentes.Snow;
 
 public abstract class EstadoNieve {
 	
 	private Mob mob;
 	private double duracionNieve;
 	public abstract void derritiendoNieve();
-	public abstract void agregandoNieve();
+	public abstract void agregandoNieve(Snow snow);
 	
 	public EstadoNieve(Mob mob, double duracionNieve){
 		this.mob = mob;
@@ -38,7 +39,7 @@ public abstract class EstadoNieve {
 {
 		if(this.getMob().colisionConNieve())
 			{ 
-			agregandoNieve();
+			this.getMob().colisionConNieve();
 			}
 			else {
 				this.derritiendoNieve();

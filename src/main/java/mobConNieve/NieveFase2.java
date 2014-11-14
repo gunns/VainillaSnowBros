@@ -5,6 +5,7 @@ import java.awt.Color;
 import com.uqbar.vainilla.appearances.Circle;
 
 import componentes.Mob;
+import componentes.Snow;
 
 public class NieveFase2 extends EstadoNieve{
 	
@@ -24,10 +25,14 @@ public class NieveFase2 extends EstadoNieve{
 	}
 
 	@Override
-	public void agregandoNieve() {
-				double tiempoActual = this.getDuracionNieve();
+	public void agregandoNieve(Snow snow) {
 				
+					
+				double tiempoActual = this.getDuracionNieve();
+				if(snow.isPotencia())
+					this.getMob().setEstadoNieve(new NieveFaseF(this.getMob(), ((double)800 + tiempoActual ) ));	
 				//TODO modificar al agregar los demas estados
+				else
 				this.getMob().setEstadoNieve(new NieveFase3(this.getMob(), ((double)500 +  tiempoActual) ));
 	}
 }

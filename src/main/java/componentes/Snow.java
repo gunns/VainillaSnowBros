@@ -19,18 +19,37 @@ public class Snow extends GameComponent<SnowBrosScene> {
 	private Direccion dir;
 	private Bros bros;
 	private Double initialX;
+	private boolean isPotencia;
+	private boolean isRango;
 	
-	public Snow(Dimension dim, double x, double y , Bros bros) {
+	public Snow(Dimension dim, double x, double y , Bros bros, boolean isPotencia, boolean isRango) {
 		this.bros = bros;
-		this.setAppearance(new Circle(Color.white, 10));
+		if(isPotencia)
+			{
+			this.setAppearance(new Circle(Color.white, 20));
+			}
+			else
+			{
+				this.setAppearance(new Circle(Color.white, 10));	
+			}
+			
 		this.gameDimension = dim;
-		this.distance = 60.0;
+		if(isRango)
+			{
+			this.distance = 0.80;
+			}
+			else
+			{
+			this.distance = 1.60;
+			}
 		this.falling = 50.0;
 		this.end = 3.0;
 		this.setX(x);
 		this.setY(y);
 		this.initialX=x;
 		this.dir = bros.getDir();
+		this.isPotencia = isPotencia;
+		this.isRango = isRango;
 	}
 	
 	public Double getInitialX() {return initialX;}
@@ -64,6 +83,23 @@ public class Snow extends GameComponent<SnowBrosScene> {
 				else {this.destroy();}
 		}
 	}
+
+	public boolean isPotencia() {
+		return isPotencia;
+	}
+
+	public void setPotencia(boolean isPotencia) {
+		this.isPotencia = isPotencia;
+	}
+
+	public boolean isRango() {
+		return isRango;
+	}
+
+	public void setRango(boolean isRango) {
+		this.isRango = isRango;
+	}
+	
 	
 
 	//RECORRIDO HACIA LA DERECHA -- MODIFICAR -- HARDCODE
@@ -79,5 +115,6 @@ public class Snow extends GameComponent<SnowBrosScene> {
 	//RECORRIDO HACIA LA IZQUIERDA -- MODIFICAR -- HARDCODE
 	//public boolean puedeRecorrerIzquierda(){
 		//return ((this.getX() > 0) || (this.gameDimension.getHeight() > this.getY()))
+	
 	
 }

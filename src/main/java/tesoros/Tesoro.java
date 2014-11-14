@@ -51,4 +51,9 @@ public class Tesoro extends GameComponent<SnowBrosScene>{
 			{
 			return(clase == Tesoro.class);
 			}
+
+		public void sumarPuntaje(Bros bros) {
+			//TODO agregar solo puntaje para los dulces, las capsulas se redefinen
+			
+		}
 }

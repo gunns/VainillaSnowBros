@@ -10,6 +10,7 @@ import tesoros.Tesoro;
 import estadoBros.CayendoBros;
 import estadoBros.EstadoBros;
 import estadoBros.SiendoArrastrado;
+import estadosCapsula.EstadoCapsula;
 
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
@@ -36,6 +37,9 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public Direccion dir;
 	
 	
+	//ESTADOS LUEGO DE TOMAR LAS CAPSULAS
+	EstadoCapsula estadoCapsula;
+	
 	public Bros(Dimension dim, boolean playState, double velocity){
 		this.setAppearance(new Rectangle(Color.white,ancho,alto));
 		this.dir =  new Derecha();
@@ -46,6 +50,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25);
 		this.setZ(1);
 		this.velocity = velocity;
+		this.estadoCapsula  = new EstadoCapsula();
 	}
 
 	protected boolean getPlayState() {return this.playState;}
@@ -134,7 +139,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	//DISPARAR NIEVE
 	private void disparar() {
 		Double alturaDeDisparo = this.getY() - ( (this.getAppearance().getHeight())/10);
-		Snow snow = new Snow(gameDimension, (this.getX()), alturaDeDisparo, this);
+		Snow snow = new Snow(gameDimension, (this.getX()), alturaDeDisparo, this, this.getEstadoCapsula().isPotencia(), this.getEstadoCapsula().isRango());
 		this.getScene().addComponent(snow);
 	}
 	
@@ -210,8 +215,20 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.tiempoInvencible = tiempoInvencible;
 	}
 
+	
+	
+	
+	public EstadoCapsula getEstadoCapsula() {
+		return estadoCapsula;
+	}
+
+	public void setEstadoCapsula(EstadoCapsula estadoCapsula) {
+		this.estadoCapsula = estadoCapsula;
+	}
+
 	public void sumarPuntaje(Tesoro drop) {
 		//TODO Modificar
+		drop.sumarPuntaje(this);
 		drop.destroy();
 		
 	}

@@ -9,6 +9,7 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
 
 import componentes.Mob;
+import componentes.Snow;
 import dulces.Caramelo;
 import dulces.Dulce;
 
@@ -27,7 +28,7 @@ public class Muerto extends EstadoNieve{
 	}
 
 	@Override
-	public void agregandoNieve() {
+	public void agregandoNieve(Snow snow) {
 		// TODO Auto-generated method stub
 		
 	}

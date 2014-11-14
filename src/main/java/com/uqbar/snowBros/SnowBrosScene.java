@@ -50,6 +50,12 @@ public class SnowBrosScene extends GameScene{
 		this.addComponents(this.enemigos.getEnemigos());
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
+		
+		CapsulaRango c1 = new CapsulaRango(200);
+		c1.setX(100);
+		c1.setY(300);
+		this.addComponent(c1);
+		
 	}
 	
 	private void buildBackground(Color color) {
@@ -122,8 +128,9 @@ public class SnowBrosScene extends GameScene{
 		for(GameComponent<?> each : c)
 			{
 			if(each.getClass().equals(Snow.class)){
+				Snow snow = (Snow) each;
 				if(this.colisionNieveConMob(each, mob)){
-					mob.getEstadoNieve().agregandoNieve();
+					mob.getEstadoNieve().agregandoNieve(snow);
 					}
 				}
 			}
