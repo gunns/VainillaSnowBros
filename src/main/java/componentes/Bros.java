@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
+import tesoros.Tesoro;
 import estadoBros.CayendoBros;
 import estadoBros.EstadoBros;
 import estadoBros.SiendoArrastrado;
@@ -59,11 +60,15 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	public int getAlto(){return alto;}
 	
+	
+	
 	public void update(DeltaState deltaState) {
+		
 		
 		if(this.getScene().getPlayState())
 		{
-		//Colision con enemigos (rectangulos)
+				this.getScene().tomarTesoro(this);
+			//Colision con enemigos (rectangulos)
 			//restar el tiempo de invencibilidad
 			if(this.invencible && !this.getEstado().siendoArrastrado()){
 				this.tiempoInvencible--;
@@ -74,6 +79,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			}
 			
 		if (!this.getScene().enemigoColisionaConBros(this) || (this.getScene().enemigoColisionaConBros(this) && this.invencible)){
+			//TODO Agarrar tesoro
+			
 			if((this.getScene().esferaRodanteColisionaConBros(this)))
 				{
 				this.setEstado(new SiendoArrastrado());
@@ -100,12 +107,15 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			//COMANDO:DISPARAR			
 			if(deltaState.isKeyPressed(Key.S))
 						{
-			this.CongelaOEmpuja(deltaState);
+						this.CongelaOEmpuja(deltaState);
 						}
-					}
+			//
+			
 			}
-		else
-				{this.getScene().cartelLose();
+				}
+			else
+				{
+				this.getScene().cartelLose();
 				}
 		}
 	}
@@ -198,6 +208,12 @@ public class Bros extends GameComponent<SnowBrosScene>{
 
 	public void setTiempoInvencible(int tiempoInvencible) {
 		this.tiempoInvencible = tiempoInvencible;
+	}
+
+	public void sumarPuntaje(Tesoro drop) {
+		//TODO Modificar
+		drop.destroy();
+		
 	}
 	
 	

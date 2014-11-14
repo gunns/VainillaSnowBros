@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
+import tesoros.Tesoro;
 import mobConNieve.Empujado;
+import capsulas.CapsulaPotencia;
+import capsulas.CapsulaPrisa;
+import capsulas.CapsulaRango;
 import componentes.Bros;
 import componentes.Enemigos;
 import componentes.Mob;
@@ -18,6 +22,10 @@ import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.colissions.CollisionDetector;
+
+import dulces.Caramelo;
+import dulces.Paleta;
+import dulces.Pastel;
 
 
 public class SnowBrosScene extends GameScene{
@@ -319,5 +327,32 @@ public class SnowBrosScene extends GameScene{
 		}
 		else
 		return false;
+	}
+	
+	public void tomarTesoro(Bros bros) {
+		// TODO Auto-generated method stub
+		for(GameComponent each : this.getComponents())
+			{
+			if(this.esUnTesoro(each))
+				{
+				Tesoro drop = (Tesoro) each;
+				if(drop.colisionaConBros(bros))
+					{
+					bros.sumarPuntaje(drop);
+					}
+				}
+			}
+	}
+
+	//TODO Hardcode
+	private boolean esUnTesoro(GameComponent each) {
+		
+	return(each.getClass() == Caramelo.class
+			|| each.getClass() == Paleta.class
+			|| each.getClass() == Pastel.class
+			|| each.getClass() == CapsulaPrisa.class
+			|| each.getClass() == CapsulaPotencia.class
+			|| each.getClass() == CapsulaRango.class
+			|| each.getClass() == Caramelo.class);
 	}
 }
