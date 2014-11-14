@@ -145,13 +145,6 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
 
 	public void saltar() {this.getEstado().saltar();}
 	
@@ -160,10 +153,16 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			this.dir = new Derecha();
 			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlFinal()){
+						if(this.getEstadoCapsula().isPrisa())
+					this.setX(this.getX()+(this.getScene().getVelocity()*1.5+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					else
 					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
 				}
 			}else{
 				if (this.noLlegoAlFinal()){
+					if(this.getEstadoCapsula().isPrisa())
+					this.setX(this.getX()+(this.getScene().getVelocity()*1.5+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					else
 					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
 					this.getScene().moverEsfera(this, deltaState);
 				}
@@ -176,10 +175,16 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			this.dir = new Izquierda();
 			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlComienzo()){
+					if(this.getEstadoCapsula().isPrisa())
+					this.setX(this.getX()- (this.getScene().getVelocity()*1.5 + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					else
 					this.setX(this.getX()- (this.getScene().getVelocity() + (this.getScene().getVelocity()/4))* deltaState.getDelta());
 				}
 			}else{
 				if (this.noLlegoAlComienzo()){
+					if(this.getEstadoCapsula().isPrisa())
+					this.setX(this.getX()-(this.getScene().getVelocity()*1.5 + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					else
 					this.setX(this.getX()-(this.getScene().getVelocity() + (this.getScene().getVelocity()/4))* deltaState.getDelta());
 					this.getScene().moverEsfera(this, deltaState);
 				}
