@@ -17,7 +17,13 @@ public abstract class Direccion {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	protected double disparoExtendido(Snow snow){
+		double i = 0;
+		if (snow.isRango()){
+			i= i + 0.40;
+		}
+		return i;
+	}
 	public Direccion getDir() {
 		return null;
 	}
