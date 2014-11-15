@@ -11,6 +11,8 @@ import estadoMob.CayendoMob;
 import estadoMob.EstadoMob;
 import mobConNieve.EstadoNieve;
 import mobConNieve.SinNieve;
+import agresividad.EstadoAgresividad;
+import agresividad.Pasivo;
 
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
@@ -27,6 +29,15 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public EstadoMob estado;
 	public double velocity;
 	Random r = new Random();
+	public EstadoAgresividad estadoAgresividad;
+
+	public EstadoAgresividad getEstadoAgresividad() {
+		return estadoAgresividad;
+	}
+
+	public void setEstadoAgresividad(EstadoAgresividad estadoAgresividad) {
+		this.estadoAgresividad = estadoAgresividad;
+	}
 
 	//MOVIMIENTO
 	public Direccion dir;
@@ -36,6 +47,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.dir =  new Derecha();
 		this.gameDimension= dim;
 		this.playState = playState;
+		this.setEstadoAgresividad(new Pasivo(this));
 		this.setEstado(new CayendoMob(this.getY(),this));
 		this.setX(r.nextInt(gameDimension.width-ancho));
 		this.setY(r.nextInt(gameDimension.height));
@@ -64,6 +76,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		if(this.getScene().getPlayState()){
 		this.getEstado().update(deltaState);
 		this.getEstadoNieve().update(deltaState);
+		this.getEstadoAgresividad().update();
 		}
 	}
 	

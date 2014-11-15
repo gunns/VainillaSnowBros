@@ -1,5 +1,5 @@
 package agresividad;
 
-public class Tranquilo {
+public class Agresivo {
 
 }

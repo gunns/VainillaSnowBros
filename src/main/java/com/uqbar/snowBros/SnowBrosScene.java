@@ -362,4 +362,40 @@ public class SnowBrosScene extends GameScene{
 			|| each.getClass() == CapsulaRango.class
 			|| each.getClass() == Caramelo.class);
 	}
+	
+	public double distanciaABros(int x, int y){
+		double ret=0;
+		if(x>this.getBros().getX()){
+			ret=ret +(x-this.getBros().getX());
+		}
+		else {
+			ret= ret + (this.getBros().getX()-x);
+		}
+		if(y>this.getBros().getX()){
+			ret=ret + (y-this.getBros().getX());
+		}
+		else{
+			ret=ret + (this.getBros().getX());
+		}
+		return ret;
+	}
+	
+	public boolean tieneUnPisoJustoArriba(double x,double y, int height,int width){
+		GameComponent<SnowBrosScene> rectanguloPrueba = null;
+		rectanguloPrueba.setX(x);
+		rectanguloPrueba.setY(y);
+		rectanguloPrueba.setAppearance(new Rectangle(Color.blue, width, height));
+		
+		return this.hayColisionConUnPiso(rectanguloPrueba);
+		
+	}
+	public boolean terminaElPiso(double x,double y){
+		
+		GameComponent<SnowBrosScene> rectanguloPrueba=null;
+		rectanguloPrueba.setX(x);
+		rectanguloPrueba.setY(y);
+		rectanguloPrueba.setAppearance(new Rectangle(Color.blue, 1, 1));
+		return this.hayColisionConUnPiso(rectanguloPrueba);
+		
+	}
 }
