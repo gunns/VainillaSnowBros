@@ -76,7 +76,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		if(this.getScene().getPlayState()){
 		this.getEstado().update(deltaState);
 		this.getEstadoNieve().update(deltaState);
-		this.getEstadoAgresividad().update(deltaState);
+//		this.getEstadoAgresividad().update(deltaState);
 		}
 	}
 	
