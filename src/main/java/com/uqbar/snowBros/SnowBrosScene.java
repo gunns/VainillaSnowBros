@@ -196,6 +196,20 @@ public class SnowBrosScene extends GameScene{
 		}
 		return hayColision;
 	}
+	
+	public boolean colisionBolaRodanteConBros(GameComponent<?> each, Bros bros){
+		boolean hayColision = false;
+		GameComponent<?> mob = each;
+		if(CollisionDetector.INSTANCE.collidesCircleAgainstRect(mob.getX(), mob.getY(),
+				mob.getAppearance().getWidth()/3,bros.getX(), bros.getY(),
+				bros.getAppearance().getWidth(), bros.getAppearance().getHeight())){
+			hayColision = true;
+			
+			
+			
+		}
+		return hayColision;
+	}
 
 	public void moverEsfera(Bros bros, DeltaState deltaState) {
 		List <GameComponent<?>> c = this.getComponents();
@@ -243,7 +257,7 @@ public class SnowBrosScene extends GameScene{
 			{
 			Mob mob = (Mob) each;
 			
-			if(this.colisionBolaNieveConBros(each, bros) && mob.getEstadoNieve().puedeRebotar())
+			if(this.colisionBolaRodanteConBros(each, bros) && mob.getEstadoNieve().puedeRebotar())
 				{
 				colisiona = true;
 				//mob.getEstadoNieve().arrastrarBros(bros);
@@ -286,16 +300,17 @@ public class SnowBrosScene extends GameScene{
 	}
 
 	public void arrastrarBros(Mob mob) {
-		//for(GameComponent c : this.getComponents())
-		//{
-		//if(c.getClass() == Bros.class)
-			//{
-			if(colisionaEstaEsferaConBros(mob))
+		for(GameComponent each : this.getComponents())
+		{
+		if(each.getClass() == Bros.class)
+			{
+			Bros unBros = (Bros) each;
+			if(esferaRodanteColisionaConBros(unBros))
 				{
-				mob.getEstadoNieve().arrastrarBros(bros);
+				mob.getEstadoNieve().arrastrarBros(unBros);
 				}
-			//}
-		//}
+			}
+		}
 	}
 
 	public void matarMobsEnElCamino(Mob mob) 
@@ -399,4 +414,6 @@ public class SnowBrosScene extends GameScene{
 		rectanguloPrueba.destroy();
 		return ret;
 		}
+	
+
 }

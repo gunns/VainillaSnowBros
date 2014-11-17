@@ -65,16 +65,17 @@ public class Derecha extends Direccion{
 	}
 	}
 
-	@Override
-	public void moverEsfera(Mob mob, DeltaState deltaState) {
-		mob.moverALaDerecha(deltaState);
-		
-	}
-
+	
 	@Override
 	public Direccion direccionContraria() {
 		
 		return new Izquierda();
+	}
+
+	@Override
+	public void moverEsfera(Mob mob, DeltaState deltaState) {
+		// TODO Auto-generated method stub
+		mob.moverEsferaALaDerecha(deltaState);
 	}
 	
 }

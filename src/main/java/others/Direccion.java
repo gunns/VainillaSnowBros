@@ -36,4 +36,9 @@ public abstract class Direccion {
 
 
 	public abstract Direccion direccionContraria();
+
+	public void primerMovimiento(Mob mob, DeltaState deltaState) {
+		// TODO Auto-generated method stub
+		
+	}
 }

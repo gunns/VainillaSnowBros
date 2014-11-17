@@ -21,7 +21,7 @@ public class Empujado extends EstadoNieve{
 		super(mob, duracionNieve);
 		this.rebotes = 4;
 		this.dir = dir;
-		mob.setVelocity(mob.getVelocity() * 5);
+		mob.setVelocity(mob.getVelocity() * 2);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -47,6 +47,7 @@ public class Empujado extends EstadoNieve{
 	
 	public void update(DeltaState deltaState) 
 	{
+		this.dir.primerMovimiento(this.getMob(), deltaState);
 		this.dir.rodar(this.getMob(), deltaState); 
 		//if(this.getMob().getScene().colisionaEstaEsferaConBros(this.getMob()))
 			this.getMob().getScene().arrastrarBros(this.getMob());
