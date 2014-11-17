@@ -381,21 +381,22 @@ public class SnowBrosScene extends GameScene{
 	}
 	
 	public boolean tieneUnPisoJustoArriba(double x,double y, int height,int width){
-		GameComponent<SnowBrosScene> rectanguloPrueba = null;
+		GameComponent<SnowBrosScene> rectanguloPrueba = new GameComponent<SnowBrosScene>();
 		rectanguloPrueba.setX(x);
 		rectanguloPrueba.setY(y);
 		rectanguloPrueba.setAppearance(new Rectangle(Color.blue, width, height));
-		
-		return this.hayColisionConUnPiso(rectanguloPrueba);
-		
+		boolean ret= this.hayColisionConUnPiso(rectanguloPrueba);
+		rectanguloPrueba.destroy();
+		return ret;
 	}
 	public boolean terminaElPiso(double x,double y){
 		
-		GameComponent<SnowBrosScene> rectanguloPrueba=null;
+		GameComponent<SnowBrosScene> rectanguloPrueba=new GameComponent<SnowBrosScene>();
 		rectanguloPrueba.setX(x);
 		rectanguloPrueba.setY(y);
 		rectanguloPrueba.setAppearance(new Rectangle(Color.blue, 1, 1));
-		return this.hayColisionConUnPiso(rectanguloPrueba);
-		
-	}
+		boolean ret = this.hayColisionConUnPiso(rectanguloPrueba);
+		rectanguloPrueba.destroy();
+		return ret;
+		}
 }
