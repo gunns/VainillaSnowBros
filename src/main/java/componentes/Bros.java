@@ -328,9 +328,4 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public void setVidas(Vidas vidas) {
 		this.vidas = vidas;
 	}
-	
-	
-	
-	
-	
 }
