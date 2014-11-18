@@ -49,7 +49,7 @@ public class Izquierda extends Direccion {
 	{
 		if(mob.noLlegoAlComienzo())
 		{
-			mob.moverALaIzquierda(deltaState);
+			mob.moverEsferaALaIzquierda(deltaState);
 		}
 		else
 			{
