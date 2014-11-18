@@ -112,6 +112,19 @@ public class Bros extends GameComponent<SnowBrosScene>{
 						this.saltar();
 						}
 					}
+				
+				if(deltaState.isKeyBeingHold(Key.DOWN)&&deltaState.isKeyPressed(Key.A)){
+					if(this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
+						Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
+						this.setAppearance(sprite.crop(ancho+7, alto));
+						this.setY(this.getY()+5);
+					}
+					if(!this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
+						Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
+						this.setAppearance(sprite.crop(ancho+7, alto));
+						this.setY(this.getY()+5);
+					}
+				}
 				this.getEstado().update(deltaState);
 				
 				//COMANDO MOVER
