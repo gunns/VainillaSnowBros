@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import com.uqbar.snowBros.SnowBrosScene;
+import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Label;
 
@@ -18,7 +19,7 @@ public class Vidas extends GameComponent<SnowBrosScene>{
 		cantidadVidas = 2;
 		
 		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-		Label label =new Label(font ,Color.green ,"bros:" +(this.cantidadVidas).toString());
+		Label label = new Label(font ,Color.green ,"bros:" +(this.cantidadVidas).toString());
 
 		this.setAppearance(label);
 		
@@ -27,6 +28,15 @@ public class Vidas extends GameComponent<SnowBrosScene>{
 				//Font.ITALIC, Color.red, ((Integer)this.puntos).toString()));
 
 	}
+	
+	@Override
+	public void update(DeltaState deltaState) {
+		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
+		this.setAppearance(new Label(font ,Color.green ,"bros:" +(this.cantidadVidas).toString()));
+
+	}
+	
+	
 
 	public Integer getCantidadVidas() {
 		return cantidadVidas;
