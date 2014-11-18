@@ -12,7 +12,7 @@ import componentes.Bros;
 
 public class Tesoro extends GameComponent<SnowBrosScene>{
 	
-	int valor;
+	Integer valor;
 	int duracion;
 	
 	public Tesoro(int valor)
@@ -53,7 +53,18 @@ public class Tesoro extends GameComponent<SnowBrosScene>{
 			}
 
 		public void sumarPuntaje(Bros bros) {
-			//TODO agregar solo puntaje para los dulces, las capsulas se redefinen
+			bros.sumarPuntaje(this.getValor());
+			this.destroy();
 			
 		}
+
+		public int getValor() {
+			return valor;
+		}
+
+		public void setValor(int valor) {
+			this.valor = valor;
+		}
+		
+		
 }

@@ -8,16 +8,20 @@ import tesoros.Tesoros;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
 
+import componentes.Bros;
 import componentes.Mob;
 import componentes.Snow;
 import dulces.Caramelo;
 import dulces.Dulce;
 
 public class Muerto extends EstadoNieve{
+
 	
-	public Muerto(Mob mob, double duracionMuerto) {
+	Bros bros;
+	public Muerto(Mob mob, Bros bros, double duracionMuerto) {
 		super(mob, duracionMuerto);
 		mob.setAppearance(new Circle(Color.MAGENTA, 10));
+		this.bros = bros;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -43,6 +47,8 @@ public class Muerto extends EstadoNieve{
 			premio.setX(this.getMob().getX());
 			premio.setY(this.getMob().getY() - this.getMob().getAppearance().getHeight());
 			this.getMob().getScene().addComponent(premio);
+			
+			this.getBros().sumarPuntaje(300);
 			this.getMob().destroy();
 			}
 		else
@@ -51,4 +57,14 @@ public class Muerto extends EstadoNieve{
 			}
 	}
 
+	public Bros getBros() {
+		return bros;
+	}
+
+	public void setBros(Bros bros) {
+		this.bros = bros;
+	}
+
+	
+	
 }

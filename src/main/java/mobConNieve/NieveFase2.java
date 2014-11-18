@@ -34,5 +34,7 @@ public class NieveFase2 extends EstadoNieve{
 				//TODO modificar al agregar los demas estados
 				else
 				this.getMob().setEstadoNieve(new NieveFase3(this.getMob(), ((double)500 +  tiempoActual) ));
+				
+				snow.getBros().sumarPuntaje(5);
 	}
 }

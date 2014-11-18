@@ -27,6 +27,8 @@ public class SinNieve extends EstadoNieve {
 		else
 		//TODO modificar al agregar los demas estados
 		this.getMob().setEstadoNieve(new NieveFase1(this.getMob(), (((double)500) + tiempoActual ) ));
+		
+		snow.getBros().sumarPuntaje(5);
 	}
 	
 	public boolean esPeligroso() { return true;}
@@ -34,7 +36,7 @@ public class SinNieve extends EstadoNieve {
 	public  void arrolla(Mob mob)
 	{
 	if(mob.getScene().colisionaEsferaConMob(mob, this.getMob()))
-	this.morir();
+	this.morir(mob.getEstadoNieve().getBros());
 	}
 
 }

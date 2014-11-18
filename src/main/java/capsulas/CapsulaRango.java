@@ -18,5 +18,6 @@ public class CapsulaRango extends Capsula{
 		public void sumarPuntaje(Bros bros) {
 			//TODO agregar solo puntaje para los dulces, las capsulas se redefinen
 			bros.getEstadoCapsula().setRango(true);
+			this.destroy();
 		}
 }

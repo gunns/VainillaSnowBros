@@ -6,6 +6,7 @@ import java.util.List;
 
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
+import capsulas.Capsula;
 import capsulas.CapsulaPotencia;
 import capsulas.CapsulaPrisa;
 import capsulas.CapsulaRango;
@@ -14,6 +15,7 @@ import componentes.Enemigos;
 import componentes.Mob;
 import componentes.Piso;
 import componentes.Cartel;
+import componentes.Puntaje;
 import componentes.Snow;
 import componentes.Suelo;
 
@@ -41,6 +43,9 @@ public class SnowBrosScene extends GameScene{
 	
 	public SnowBrosScene(Dimension dim, double velocity){
 		super();
+		
+		
+		
 		this.velocity=velocity;
 		this.gameDimension= dim;
 		this.buildBackground(Color.blue);
@@ -56,6 +61,9 @@ public class SnowBrosScene extends GameScene{
 		c1.setY(300);
 		this.addComponent(c1);
 		
+		Puntaje puntaje = new Puntaje(bros, 20, 20);
+		bros.setPuntaje(puntaje);
+		this.addComponent(puntaje);
 	}
 	
 	private void buildBackground(Color color) {
@@ -176,7 +184,7 @@ public class SnowBrosScene extends GameScene{
 				Mob mob = (Mob) each;
 				if(this.colisionBolaNieveConBros(each, bros) && mob.getEstadoNieve().PuedoEmpujar())
 						{
-					    mob.setEstadoNieve(new Empujado(mob, 0, bros.getDir()));
+					    mob.setEstadoNieve(new Empujado(mob, 0, bros.getDir(), bros));
 					}
 				}
 			}	
@@ -360,7 +368,7 @@ public class SnowBrosScene extends GameScene{
 				Tesoro drop = (Tesoro) each;
 				if(drop.colisionaConBros(bros))
 					{
-					bros.sumarPuntaje(drop);
+					drop.sumarPuntaje(bros);
 					}
 				}
 			}
@@ -375,7 +383,8 @@ public class SnowBrosScene extends GameScene{
 			|| each.getClass() == CapsulaPrisa.class
 			|| each.getClass() == CapsulaPotencia.class
 			|| each.getClass() == CapsulaRango.class
-			|| each.getClass() == Caramelo.class);
+			|| each.getClass() == Caramelo.class
+			|| each.getClass() == Capsula.class);
 	}
 	
 	public double distanciaABros(int x, int y){

@@ -99,6 +99,15 @@ public class Snow extends GameComponent<SnowBrosScene> {
 	public void setRango(boolean isRango) {
 		this.isRango = isRango;
 	}
+
+	public Bros getBros() {
+		return bros;
+	}
+
+	public void setBros(Bros bros) {
+		this.bros = bros;
+	}
+	
 	
 	
 

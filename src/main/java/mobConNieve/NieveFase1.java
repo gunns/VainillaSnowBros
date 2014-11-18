@@ -29,7 +29,9 @@ public class NieveFase1 extends EstadoNieve {
 			this.getMob().setEstadoNieve(new NieveFase3(this.getMob(), ((double)500) ));	
 		//TODO modificar al agregar los demas estados
 		else
-		this.getMob().setEstadoNieve(new NieveFase2(this.getMob(), ((double)500) ));		
+		this.getMob().setEstadoNieve(new NieveFase2(this.getMob(), ((double)500) ));
+		
+		snow.getBros().sumarPuntaje(5);
 	}
 
 

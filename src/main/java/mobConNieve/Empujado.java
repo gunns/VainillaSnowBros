@@ -16,12 +16,16 @@ public class Empujado extends EstadoNieve{
 
 	private int rebotes;
 	public Direccion dir;
+	Bros bros;
 	
-	public Empujado(Mob mob, double duracionNieve, Direccion dir) {
+	public Empujado(Mob mob, double duracionNieve, Direccion dir, Bros bros) {
 		super(mob, duracionNieve);
 		this.rebotes = 4;
 		this.dir = dir;
 		mob.setVelocity(mob.getVelocity() * 2);
+		this.bros = bros;
+		
+		bros.sumarPuntaje(500);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -80,6 +84,8 @@ public class Empujado extends EstadoNieve{
 		
 	}
 
-	
+	public Bros getBros(){
+		return this.bros;
+	}
 	
 }

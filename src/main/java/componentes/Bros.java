@@ -40,6 +40,10 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	//ESTADOS LUEGO DE TOMAR LAS CAPSULAS
 	EstadoCapsula estadoCapsula;
 	
+	//Puntos
+	Puntaje puntaje;
+	
+	
 	public Bros(Dimension dim, boolean playState, double velocity){
 		this.setAppearance(new Rectangle(Color.white,ancho,alto));
 		this.dir =  new Derecha();
@@ -231,11 +235,18 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.estadoCapsula = estadoCapsula;
 	}
 
-	public void sumarPuntaje(Tesoro drop) {
+	public void sumarPuntaje(Integer puntos) {
 		//TODO Modificar
-		drop.sumarPuntaje(this);
-		drop.destroy();
+		this.getPuntaje().sumarPuntaje(puntos);
 		
+	}
+
+	public Puntaje getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(Puntaje puntaje) {
+		this.puntaje = puntaje;
 	}
 	
 	

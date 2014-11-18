@@ -15,34 +15,25 @@ public class Izquierda extends Direccion {
 
 	@Override
 	public void avanzaDisparo(Snow snow) {
-		
-		// booleano que indica si el bros tomó la capsula de rango o no
-				//caso normal, sin capsula:
-				if(!snow.isRango())
-					
-				{
-				if(snow.getDistance() > 0) {
-				if(snow.getFalling() > 0) {
-					if(snow.getInitialX()- 10<snow.getX()){ //-10
-						snow.setY(snow.getY() - 0.10);
-					}
-					else if(snow.getInitialX()-30>snow.getX()&&snow.getInitialX()-50<snow.getX()){ //-30
-						snow.setY(snow.getY() + 0.20);
-					}
-					else if(snow.getInitialX()-50>snow.getX())//-50
-						snow.setY(snow.getY()+0.50);				
-						snow.setFalling(snow.getFalling() - 0.30);
-						snow.setX(snow.getX() - 0.80);
-				}		
-				else
+	
+			if(snow.getDistance() > 0) {
+			if(snow.getFalling() > 0) {
+				if(snow.getInitialX()- 10<snow.getX()){ //-10
+					snow.setY(snow.getY() - 0.10);
+				}
+				else if(snow.getInitialX()-30>snow.getX()&&snow.getInitialX()-50<snow.getX()){ //-30
+					snow.setY(snow.getY() + 0.20);
+				}
+				else if(snow.getInitialX()-50>snow.getX())//-50
+					snow.setY(snow.getY()+0.50);				
+					snow.setFalling(snow.getFalling() - 0.30);
+					snow.setX(snow.getX() - (0.80 + this.disparoExtendido(snow)));
+			}		
+			else{
 				snow.destroy();
 			}
-			else
-				//TODO Caso en que sí tomo la capsula
-			{
+		}
 			
-			}
-				}
 	}
 
 	@Override

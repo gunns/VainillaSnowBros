@@ -70,13 +70,19 @@ public void arrastrarBros(Bros bros) {
 public  void arrolla(Mob mob)
 	{
 	if(mob.getScene().colisionaEsferaConEsfera(mob, this.getMob()))
-	this.morir();
+	this.morir(mob.getEstadoNieve().getBros());
+	
+	
 	}
 
-public void morir() {
+public void morir(Bros bros) {
 	// TODO Auto-generated method stub
 	//this.getMob().setAppearance(new Circle(Color.MAGENTA, 15));
-	this.getMob().setEstadoNieve(new Muerto(this.getMob(), 500));
+	this.getMob().setEstadoNieve(new Muerto(this.getMob(), bros, 500));
+	
 }
 
+public Bros getBros(){
+	return null;
+}
 }
