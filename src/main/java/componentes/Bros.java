@@ -153,7 +153,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			//{
 			
 			//}
-			
+			this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
 		this.getScene().reanimarBros(this);
 			
 		
