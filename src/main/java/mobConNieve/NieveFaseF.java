@@ -3,6 +3,7 @@ package mobConNieve;
 import java.awt.Color;
 
 import com.uqbar.vainilla.appearances.Circle;
+import com.uqbar.vainilla.appearances.Sprite;
 
 import componentes.Mob;
 import componentes.Snow;
@@ -12,7 +13,8 @@ public class NieveFaseF extends EstadoNieve{
 	public NieveFaseF(Mob mob, double duracionNieve) {
 		super(mob, duracionNieve);
 		this.getMob().setY(this.getMob().getY()-10);
-		this.getMob().setAppearance(new Circle(Color.CYAN, ((int) this.getMob().getAlto() + 6)));
+		Sprite sprite = Sprite.fromImage("MobSnow4.png");
+		this.getMob().setAppearance(sprite);
 	}
 
 	@Override

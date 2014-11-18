@@ -1,6 +1,5 @@
 package componentes;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import others.Derecha;
@@ -15,8 +14,7 @@ import estadosCapsula.EstadoCapsula;
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-import com.uqbar.vainilla.appearances.Circle;
-import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.events.constants.Key;
 
 
@@ -32,6 +30,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	private int ancho = 10;
 	private int alto = 25;
 	private double velocity;
+	public boolean derecha = true;
 	
 	
 	//DISPARO
@@ -47,13 +46,14 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	Vidas vidas;
 	
 	public Bros(Dimension dim, boolean playState, double velocity){
-		this.setAppearance(new Rectangle(Color.white,ancho,alto));
+		Sprite sprite = Sprite.fromImage("BrosDrc.png");
+		this.setAppearance(sprite);
 		this.dir =  new Derecha();
 		this.gameDimension= dim;
 		this.playState = playState;
 		this.setEstado(new CayendoBros(this.getY(),this));
 		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
-		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25);
+		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-40);
 		this.setZ(1);
 		this.velocity = velocity;
 		this.estadoCapsula  = new EstadoCapsula();
@@ -100,36 +100,58 @@ public class Bros extends GameComponent<SnowBrosScene>{
 				}
 			else{
 					
-			//COMANDO SALTAR
-			if(deltaState.isKeyPressed(Key.A)) {this.saltar();}
-			this.getEstado().update(deltaState);
-			
-			//COMANDO MOVER
-			if (deltaState.isKeyBeingHold(Key.RIGHT)) {
-				this.moverALaDerecha(deltaState);
-				
-				}
-			else
-				if(deltaState.isKeyBeingHold(Key.LEFT)) 
-					{
-					this.moverALaIzquierda(deltaState);
-					}
-			
-			//COMANDO:DISPARAR			
-			if(deltaState.isKeyPressed(Key.S))
-						{
-						this.CongelaOEmpuja(deltaState);
+				//COMANDO SALTAR
+				if(deltaState.isKeyPressed(Key.A)) {
+					if(this.derecha){
+						Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
+						this.setAppearance(sprite.crop(ancho+7,alto));
+						this.saltar();
+					}else {
+						Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
+						this.setAppearance(sprite.crop(ancho+7,alto));
+						this.saltar();
 						}
-			//
-			
-			}
-				}
-			else
-				{
-				//TODO MORIR
-				this.perderVida();
+					}
+				this.getEstado().update(deltaState);
 				
+				//COMANDO MOVER
+				if (deltaState.isKeyBeingHold(Key.RIGHT)) {
+					this.derecha = true;
+					Sprite sprite = Sprite.fromImage("BrosDrc.png");
+					this.setAppearance(sprite);
+					this.moverALaDerecha(deltaState);
+					
+					}
+				else
+					if(deltaState.isKeyBeingHold(Key.LEFT)) 
+						{
+						this.derecha = false;
+						Sprite sprite = Sprite.fromImage("BrosIzq.png");
+						this.setAppearance(sprite);
+						this.moverALaIzquierda(deltaState);
+						}
+				
+				//COMANDO:DISPARAR			
+				if(deltaState.isKeyPressed(Key.S))
+							{
+							this.CongelaOEmpuja(deltaState);
+							}
+				
+				//RENDER SPRITE AL DEJAR DE DISPARAR
+				if(deltaState.isKeyReleased(Key.S)){
+					if(this.derecha){
+						Sprite sprite = Sprite.fromImage("BrosDrc.png");
+						this.setAppearance(sprite);
+					}else {
+						Sprite sprite = Sprite.fromImage("BrosIzq.png");
+						this.setAppearance(sprite);
+						}
 				}
+			}
+		} else{
+			//TODO MORIR
+			this.perderVida();
+			}
 		}
 	}
 	
@@ -153,7 +175,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			//{
 			
 			//}
-			
+			this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
 		this.getScene().reanimarBros(this);
 			
 		
@@ -163,10 +185,30 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public void CongelaOEmpuja(DeltaState deltaState){
 		if(this.getScene().puedeEmpujarBolaDeNieve(this,deltaState))
 		{
-		this.getScene().empujar(this, deltaState);
+			if(this.derecha){
+//				Sprite sprite = Sprite.fromImage("BrosEmpujaDrc.png");
+//				this.setAppearance(sprite.crop(ancho+7,alto));
+				this.getScene().empujar(this, deltaState);
+			}else {
+				this.saltar();
+//				Sprite sprite = Sprite.fromImage("BrosEmpujaIzq.png");
+//				this.setAppearance(sprite.crop(ancho+7,alto));
+				this.getScene().empujar(this, deltaState);
+				}
 		}
-		else
-			this.disparar();
+		else{
+			if(this.derecha){
+				Sprite sprite = Sprite.fromImage("BrosDisparaDrc.png");
+				this.setAppearance(sprite);
+				this.disparar();
+			}else {
+				this.saltar();
+				Sprite sprite = Sprite.fromImage("BrosDisparaIzq.png");
+				this.setAppearance(sprite);
+				this.disparar();
+				}
+			
+		}
 	}
 	
 	

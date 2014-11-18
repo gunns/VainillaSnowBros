@@ -1,6 +1,5 @@
 package componentes;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import others.Direccion;
@@ -8,7 +7,7 @@ import others.Direccion;
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-import com.uqbar.vainilla.appearances.Circle;
+import com.uqbar.vainilla.appearances.Sprite;
 
 public class Snow extends GameComponent<SnowBrosScene> {
 	
@@ -26,11 +25,23 @@ public class Snow extends GameComponent<SnowBrosScene> {
 		this.bros = bros;
 		if(isPotencia)
 			{
-			this.setAppearance(new Circle(Color.white, 20));
+			if(this.bros.derecha){
+				Sprite sprite = Sprite.fromImage("SnowPotDrc.png");
+				this.setAppearance(sprite);
+			}else {
+				Sprite sprite = Sprite.fromImage("SnowPotIzq.png");
+				this.setAppearance(sprite);
+				}
 			}
 			else
 			{
-				this.setAppearance(new Circle(Color.white, 10));	
+				if(this.bros.derecha){
+					Sprite sprite = Sprite.fromImage("SnowDrc.png");
+					this.setAppearance(sprite);
+				}else {
+					Sprite sprite = Sprite.fromImage("SnowIzq.png");
+					this.setAppearance(sprite);
+					}
 			}
 			
 		this.gameDimension = dim;

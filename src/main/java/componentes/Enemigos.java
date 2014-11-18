@@ -14,8 +14,6 @@ public class Enemigos{
 			Mob mob1=new Mob(dim,playState, velocity);
 			mobs.add(mob1);
 			Mob mob2=new Mob(this.dim,playState, velocity);
-			mob2.setY(40);
-			mob2.setX(240);
 			mobs.add(mob2);
 	}
 	

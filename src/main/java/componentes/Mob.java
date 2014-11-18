@@ -1,6 +1,5 @@
 package componentes;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Random;
 
@@ -17,7 +16,7 @@ import agresividad.Pasivo;
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.appearances.Sprite;
 
 public class Mob extends GameComponent<SnowBrosScene> {
 	
@@ -30,6 +29,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public double velocity;
 	Random r = new Random();
 	public EstadoAgresividad estadoAgresividad;
+	public boolean derecha = true;
 
 	public EstadoAgresividad getEstadoAgresividad() {
 		return estadoAgresividad;
@@ -43,14 +43,15 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public Direccion dir;
 	
 	public Mob(Dimension dim, boolean playState, double velocity){
-		this.setAppearance(new Rectangle(Color.red,ancho,alto));
+		Sprite sprite = Sprite.fromImage("MobIzq.png");
+		this.setAppearance(sprite);
 		this.dir =  new Derecha();
 		this.gameDimension= dim;
 		this.playState = playState;
 		this.setEstadoAgresividad(new Pasivo(this));
 		this.setEstado(new CayendoMob(this.getY(),this));
 		this.setX(r.nextInt(gameDimension.width-ancho));
-		this.setY(r.nextInt(gameDimension.height));
+		this.setY(r.nextInt(gameDimension.height)-40);
 		this.setZ(0);
 		this.setEstadoNieve(new SinNieve(this, 0));
 		this.velocity = velocity;

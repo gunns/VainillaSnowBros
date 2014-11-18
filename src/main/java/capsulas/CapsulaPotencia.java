@@ -2,6 +2,8 @@ package capsulas;
 import java.awt.Color;
 
 import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.appearances.Sprite;
+
 import componentes.Bros;
 		
 
@@ -11,8 +13,8 @@ public class CapsulaPotencia extends Capsula{
 	public CapsulaPotencia(int valor)
 			{
 				super(valor);
-				this.setAppearance(new Rectangle(Color.CYAN, 18, 18));
-				
+				Sprite sprite = Sprite.fromImage("CapsulaPotencia.png");
+				this.setAppearance(sprite);
 			}
 	
 	public void sumarPuntaje(Bros bros) {

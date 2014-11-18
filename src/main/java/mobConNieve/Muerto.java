@@ -7,6 +7,7 @@ import tesoros.Tesoros;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
+import com.uqbar.vainilla.appearances.Sprite;
 
 import componentes.Bros;
 import componentes.Mob;
@@ -20,7 +21,8 @@ public class Muerto extends EstadoNieve{
 	Bros bros;
 	public Muerto(Mob mob, Bros bros, double duracionMuerto) {
 		super(mob, duracionMuerto);
-		mob.setAppearance(new Circle(Color.MAGENTA, 10));
+		Sprite sprite = Sprite.fromImage("MobMuerto.png");
+		this.getMob().setAppearance(sprite);
 		this.bros = bros;
 		// TODO Auto-generated constructor stub
 	}

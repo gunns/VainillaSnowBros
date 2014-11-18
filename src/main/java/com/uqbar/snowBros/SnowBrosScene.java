@@ -24,6 +24,7 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.colissions.CollisionDetector;
 
 import dulces.Caramelo;
@@ -74,7 +75,8 @@ public class SnowBrosScene extends GameScene{
 	
 	private void buildBackground(Color color) {
 		if (backGround != null) {this.removeComponent(this.backGround);}
-		this.backGround = new GameComponent<GameScene>(new Rectangle(color,800,600),0, 0);
+		Sprite sprite = Sprite.fromImage("fondo.jpg");
+		this.backGround = new GameComponent<GameScene>(sprite.scale(1.4, 1.4),0, 0);
 		this.backGround.setZ(-1);
 		this.addComponent(this.backGround);
 	}

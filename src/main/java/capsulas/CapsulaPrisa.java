@@ -3,6 +3,8 @@ package capsulas;
 import java.awt.Color;
 
 import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.appearances.Sprite;
+
 import componentes.Bros;
 
 public class CapsulaPrisa extends Capsula {
@@ -10,7 +12,8 @@ public class CapsulaPrisa extends Capsula {
 	public CapsulaPrisa(int valor)
 	{
 		super(valor);
-		this.setAppearance(new Rectangle(Color.red, 18, 18));
+		Sprite sprite = Sprite.fromImage("CapsulaPrisa.png");
+		this.setAppearance(sprite);
 		
 	}
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Suelo {
-	private int anchura = 20;
+	private int anchura = 50;
 	private int altura = 50;
 	private int proporcionAlto;
 	private int proporcionAncho;
@@ -45,12 +45,12 @@ public class Suelo {
 		Random r = new Random();
 		int inicio =  r.nextInt(2);
 		for (int val=nSuelos;val>0;val--){
-			for (j=inicio;j<inicio+r.nextInt(5)+2;j++){
+			for (j=inicio;j<inicio+r.nextInt(8)+4;j++){
 				if (j<anchura){
 					density[j][k] = 1;
 				}
 			}
-			inicio = inicio+r.nextInt(10);
+			inicio = inicio+r.nextInt(8);
 		}
 		
 	}
@@ -59,10 +59,10 @@ public class Suelo {
 		Ground();
 		int j;
 		Random r = new Random();
-		int valorDado = r.nextInt(5)+2;
+		int valorDado = r.nextInt(8)+4;
 		for (j=7;j<=28;j+=7){
 			unaLinea(valorDado+1,j);
-			valorDado = r.nextInt(4)+2;
+			valorDado = r.nextInt(8)+4;
 		}
 	}
 

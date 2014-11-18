@@ -3,6 +3,7 @@ package mobConNieve;
 import java.awt.Color;
 
 import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.appearances.Sprite;
 
 import componentes.Mob;
 import componentes.Snow;
@@ -11,7 +12,8 @@ public class SinNieve extends EstadoNieve {
 	
 	public SinNieve( Mob mob, double duracion ){
 		super(mob, duracion);
-		this.getMob().setAppearance(new Rectangle(Color.red,this.getMob().getAncho(),this.getMob().getAlto()));
+		Sprite sprite = Sprite.fromImage("MobIzq.png");
+		this.getMob().setAppearance(sprite);
 	}
 	
 	@Override
