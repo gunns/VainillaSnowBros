@@ -18,6 +18,7 @@ import componentes.Cartel;
 import componentes.Puntaje;
 import componentes.Snow;
 import componentes.Suelo;
+import componentes.Vidas;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
@@ -64,6 +65,11 @@ public class SnowBrosScene extends GameScene{
 		Puntaje puntaje = new Puntaje(bros, 20, 20);
 		bros.setPuntaje(puntaje);
 		this.addComponent(puntaje);
+		
+		Vidas vida1 = new Vidas(bros);
+		bros.setVidas(vida1);
+		this.addComponent(vida1);
+		
 	}
 	
 	private void buildBackground(Color color) {
@@ -423,6 +429,14 @@ public class SnowBrosScene extends GameScene{
 		rectanguloPrueba.destroy();
 		return ret;
 		}
+
+	public void reanimarBros(Bros bros2) {
+		// TODO reaparece en el inicio del nivel
+		bros2.setX(this.gameDimension.getWidth()/2-bros2.getAppearance().getWidth()/2);
+		bros2.setY(this.gameDimension.getHeight()-(bros2.getAppearance().getHeight())-25);
+		bros2.setZ(1);
+		
+	}
 	
 
 }

@@ -33,6 +33,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	private int alto = 25;
 	private double velocity;
 	
+	
 	//DISPARO
 	public Direccion dir;
 	
@@ -42,7 +43,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	//Puntos
 	Puntaje puntaje;
-	
+	//Vidas
+	Vidas vidas;
 	
 	public Bros(Dimension dim, boolean playState, double velocity){
 		this.setAppearance(new Rectangle(Color.white,ancho,alto));
@@ -124,11 +126,39 @@ public class Bros extends GameComponent<SnowBrosScene>{
 				}
 			else
 				{
-				this.getScene().cartelLose();
+				//TODO MORIR
+				this.perderVida();
+				
 				}
 		}
 	}
 	
+	public void perderVida()
+	{
+	if(this.vidas.getCantidadVidas() < 1)
+		{
+		this.getScene().cartelLose();
+		}
+		else
+			{
+			this.morir();
+			}
+	}
+	
+	
+	private void morir() {
+		// TODO Hacer que muera y reaparezca en el origen del nivel;
+		//Integer tiempoMuriendo = 500;
+		//for(Integer i = 0; i< tiempoMuriendo; i++)
+			//{
+			
+			//}
+			
+		this.getScene().reanimarBros(this);
+			
+		
+	}
+
 	//COMPROBAR CASO SI EMPUJA BOLA DE NIEVE O SOLO DISPARA NIEVE
 	public void CongelaOEmpuja(DeltaState deltaState){
 		if(this.getScene().puedeEmpujarBolaDeNieve(this,deltaState))
@@ -248,6 +278,16 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public void setPuntaje(Puntaje puntaje) {
 		this.puntaje = puntaje;
 	}
+
+	public Vidas getVidas() {
+		return vidas;
+	}
+
+	public void setVidas(Vidas vidas) {
+		this.vidas = vidas;
+	}
+	
+	
 	
 	
 	
