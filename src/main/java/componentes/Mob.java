@@ -106,7 +106,9 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.velocity = velocity;
 	}
 
-	
+	public boolean esPeligroso(){
+		return this.getEstadoNieve().esPeligroso();
+	}
 	
 	
 	public Direccion getDir() {
