@@ -11,7 +11,10 @@ public class Pasivo extends EstadoAgresividad {
 		this.derecha=true;
 	}
 
-	// NO PUEDO HACER ANDAR EL MOVER, SI ALGUNO ME PUEDE AYUDAR LE AGRADESCO
+	public void volverseAgresivo(){
+		this.getMob().setEstadoAgresividad(new Agresivo(this.getMob()));
+	}
+	
 	public void mover(DeltaState deltaState){
 		if(this.getMob().getScene().getPlayState()){
 			if(this.getMob().esPeligroso()&&derecha&&this.getMob().noLlegoAlFinal() &&!this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1)){
@@ -27,6 +30,9 @@ public class Pasivo extends EstadoAgresividad {
 						{
 					this.derecha=true;
 				}
+			}
+			if(this.getMob().getScene().estaCercaBrosdeMob(this.getMob())){
+				this.volverseAgresivo();
 			}
 		}
 	}

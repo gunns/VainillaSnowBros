@@ -440,5 +440,15 @@ public class SnowBrosScene extends GameScene{
 		
 	}
 	
+	public boolean estaCercaBrosdeMob(Mob mob){
+		boolean ret=false;
+		if(this.getBros().getY()>mob.getY()){
+			ret= this.getBros().getY()-mob.getY()<70;
+		}
+		else{
+			ret= mob.getY()-this.getBros().getY()<70;
+		}
+		return ret;
+	}
 
 }
