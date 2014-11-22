@@ -26,6 +26,8 @@ import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.colissions.CollisionDetector;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import dulces.Caramelo;
 import dulces.Paleta;
@@ -42,6 +44,9 @@ public class SnowBrosScene extends GameScene{
 	private Bros bros;
 	private Enemigos enemigos;
 	private Suelo suelo;
+	
+	//sonido
+	private Sound gameSound; 
 	
 	public SnowBrosScene(Dimension dim, double velocity){
 		super();
@@ -70,7 +75,12 @@ public class SnowBrosScene extends GameScene{
 		Vidas vida1 = new Vidas(bros);
 		bros.setVidas(vida1);
 		this.addComponent(vida1);
-		
+		this.initSound();
+		this.gameSound.play();
+	}
+	
+	protected void initSound() {
+		this.gameSound= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("areaB.wav"));
 	}
 	
 	private void buildBackground(Color color) {
