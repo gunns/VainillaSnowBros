@@ -429,7 +429,7 @@ public class SnowBrosScene extends GameScene{
 		rectanguloPrueba.setAppearance(new Rectangle(Color.blue, 1, 1));
 		boolean ret = this.hayColisionConUnPiso(rectanguloPrueba);
 		rectanguloPrueba.destroy();
-		return ret;
+		return !ret;
 		}
 
 	public void reanimarBros(Bros bros2) {
