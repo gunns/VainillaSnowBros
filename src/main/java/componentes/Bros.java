@@ -16,6 +16,8 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.events.constants.Key;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 
 public class Bros extends GameComponent<SnowBrosScene>{
@@ -46,6 +48,10 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	//Vidas
 	Vidas vidas;
 	
+	//Sonidos
+	Sound sonidoSalto;
+	
+	
 	public Bros(Dimension dim, boolean playState, double velocity){
 		Sprite sprite = Sprite.fromImage("BrosDrc.png");
 		this.setAppearance(sprite);
@@ -60,6 +66,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.estadoCapsula  = new EstadoCapsula();
 		this.muriendo=false;
 		this.tiempoMuriendo=500;
+		
+		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
 	}
 
 	protected boolean getPlayState() {return this.playState;}
@@ -140,11 +148,16 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		      Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
 		      this.setAppearance(sprite.crop(ancho+7, alto));
 		      this.setY(this.getY()+5);
+		      //sonido salto abajo
+		      Sound sonidoSalto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump_11.wav"));
+		      sonidoSalto.play();
 		     }
 		     if(!this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
 		      Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
 		      this.setAppearance(sprite.crop(ancho+7, alto));
 		      this.setY(this.getY()+5);
+		      Sound sonidoSalto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump_11.wav"));
+		      sonidoSalto.play();
 		     }
 		    }
 		    this.getEstado().update(deltaState);
@@ -233,11 +246,17 @@ public class Bros extends GameComponent<SnowBrosScene>{
 				Sprite sprite = Sprite.fromImage("BrosDisparaDrc.png");
 				this.setAppearance(sprite);
 				this.disparar();
+				//sonido disparo
+				Sound sonidoDisparo = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("snowShot.wav"));
+				sonidoDisparo.play();
+				
 			}else {
 				this.saltar();
 				Sprite sprite = Sprite.fromImage("BrosDisparaIzq.png");
 				this.setAppearance(sprite);
 				this.disparar();
+				Sound sonidoDisparo = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("snowShot.wav"));
+				sonidoDisparo.play();
 				}
 			
 		}

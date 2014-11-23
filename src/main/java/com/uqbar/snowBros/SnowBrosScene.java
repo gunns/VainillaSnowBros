@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
+import sonidoContinuo.MusicaFondo;
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
 import capsulas.Capsula;
@@ -28,6 +29,8 @@ import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
+import com.uqbar.vainilla.sound.SoundPlay;
+import com.uqbar.vainilla.sound.SoundPlayer;
 
 import dulces.Caramelo;
 import dulces.Paleta;
@@ -46,7 +49,14 @@ public class SnowBrosScene extends GameScene{
 	private Suelo suelo;
 	
 	//sonido
-	private Sound gameSound; 
+	private Sound gameSound;
+	//musica fondo
+	
+	
+	private SoundPlay musica;
+	
+	
+	private MusicaFondo music;
 	
 	public SnowBrosScene(Dimension dim, double velocity){
 		super();
@@ -63,7 +73,7 @@ public class SnowBrosScene extends GameScene{
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
 		
-		CapsulaRango c1 = new CapsulaRango(200);
+		CapsulaPrisa c1 = new CapsulaPrisa(200);
 		c1.setX(100);
 		c1.setY(300);
 		this.addComponent(c1);
@@ -76,11 +86,28 @@ public class SnowBrosScene extends GameScene{
 		bros.setVidas(vida1);
 		this.addComponent(vida1);
 		this.initSound();
-		this.gameSound.play();
+		
+		music = new MusicaFondo(gameSound);
+		this.addComponent(music);
+		music.reproducir();
+		//this.playContinue();
+		
+		
+		//for(int i = 1; i > 0; i ++  )
+		//this.gameSound.play();
+		
+		
+		
+		
+		//musica = new SoundPlay();
+		
+		
 	}
 	
+	
+
 	protected void initSound() {
-		this.gameSound= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("areaB.wav"));
+		this.gameSound= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("stage1.wav"));
 	}
 	
 	private void buildBackground(Color color) {
@@ -305,9 +332,13 @@ public class SnowBrosScene extends GameScene{
 				bros.getEstado().cambiarMovimiento(bros);
 				//bros.saltar();
 				bros.setTiempoInvencible(1000);
+				//TODO musica?
+				//this.gameSound.play();
 				}
 			}
 	}
+
+	
 
 	public boolean colisionaEstaEsferaConBros(Mob mob) {
 		boolean hayColision = false;
@@ -461,4 +492,24 @@ public class SnowBrosScene extends GameScene{
 		return ret;
 	}
 
+	public Sound getGameSound() {
+		return gameSound;
+	}
+
+	public void setGameSound(Sound gameSound) {
+		this.gameSound = gameSound;
+	}
+	
+
+	
+	private void playContinue() {
+		this.gameSound.play();
+		
+	}
+	
+	
+	
+	
 }
+
+

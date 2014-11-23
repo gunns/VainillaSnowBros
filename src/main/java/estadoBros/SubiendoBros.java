@@ -1,12 +1,17 @@
 package estadoBros;
 
 import com.uqbar.vainilla.DeltaState;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import componentes.Bros;
 
 public class SubiendoBros extends EstadoBros {
+	
+	
 
 	public SubiendoBros(double yInicial, Bros bros){
+		
 		this.setBros(bros);
 		this.setyInicial(yInicial);
 	}
@@ -30,6 +35,7 @@ public class SubiendoBros extends EstadoBros {
 	@Override
 	public void cambiarMovimiento(Bros bros) {
 		this.getBros().setEstado(new CayendoBros(this.getyInicial(),this.getBros()));
+		
 		
 	}
 }
