@@ -12,6 +12,7 @@ import capsulas.CapsulaPotencia;
 import capsulas.CapsulaPrisa;
 import capsulas.CapsulaRango;
 import componentes.Bros;
+import componentes.CartelInicioNivel;
 import componentes.Enemigos;
 import componentes.Mob;
 import componentes.Piso;
@@ -61,11 +62,17 @@ public class SnowBrosScene extends GameScene{
 	public SnowBrosScene(Dimension dim, double velocity){
 		super();
 		
-		
-		
+		CartelInicioNivel cartelInicio = new CartelInicioNivel(dim, 1, velocity);
 		this.velocity=velocity;
 		this.gameDimension= dim;
 		this.buildBackground(Color.blue);
+		
+		this.addComponent(cartelInicio);
+		
+		/*
+		
+		
+		
 		this.bros=new Bros(dim,this.playState, velocity);
 		this.addComponent(this.bros);
 		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
@@ -85,11 +92,16 @@ public class SnowBrosScene extends GameScene{
 		Vidas vida1 = new Vidas(bros);
 		bros.setVidas(vida1);
 		this.addComponent(vida1);
+		
+		*/
 		this.initSound();
 		
 		music = new MusicaFondo(gameSound);
 		this.addComponent(music);
 		music.reproducir();
+		
+		this.suelo= new Suelo(this.gameDimension);
+		this.addComponents(suelo.getSuelos());
 		//this.playContinue();
 		
 		
@@ -504,6 +516,32 @@ public class SnowBrosScene extends GameScene{
 	
 	private void playContinue() {
 		this.gameSound.play();
+		
+	}
+
+
+
+	public void comenzarNivel(Dimension dim, double velocity) {
+		// TODO Auto-generated method stub
+		
+		this.bros= new Bros(dim,this.playState, velocity);
+		this.addComponent(this.bros);
+		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
+		this.addComponents(this.enemigos.getEnemigos());
+		
+		CapsulaPrisa c1 = new CapsulaPrisa(200);
+		c1.setX(100);
+		c1.setY(300);
+		this.addComponent(c1);
+		
+		Puntaje puntaje = new Puntaje(bros, 20, 20);
+		bros.setPuntaje(puntaje);
+		this.addComponent(puntaje);
+		
+		Vidas vida1 = new Vidas(bros);
+		bros.setVidas(vida1);
+		this.addComponent(vida1);
+
 		
 	}
 	
