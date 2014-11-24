@@ -24,7 +24,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 
 	//MOVIMIENTO
 	public boolean invencible = true;
-	public int tiempoInvencible = 1000;
+	public int tiempoInvencible = 500;
 	public EstadoBros estado;
 	public boolean realizandoSalto= false;
 	public Dimension gameDimension;
@@ -236,31 +236,12 @@ public class Bros extends GameComponent<SnowBrosScene>{
 						 else
 							 this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
 						 	 this.getScene().reanimarBros(this);
+						 	 this.invencible = true;
+						 	 this.tiempoInvencible = 500;
+						 	 //correccion de error de reposicionamiento del bros al morir
+						 	 this.setEstado(new CayendoBros((this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25),this));
 						}
 	}
-	
-	
-	public void perderVida()
-	{
-	if(this.vidas.getCantidadVidas() < 1)
-		{
-		this.getScene().cartelLose();
-		}
-		else
-			{
-			this.morir();
-			}
-	}
-	
-	
-	private void morir() {
-		  // TODO Hacer que muera y reaparezca en el origen del nivel;
-		 
-		   this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
-		   
-		   this.muriendo =true;
-		   this.tiempoMuriendo = 500;
-		 }
 
 	//COMPROBAR CASO SI EMPUJA BOLA DE NIEVE O SOLO DISPARA NIEVE
 	public void CongelaOEmpuja(DeltaState deltaState){
