@@ -226,7 +226,9 @@ public class Bros extends GameComponent<SnowBrosScene>{
 							this.getScene().gameOverMusic();
 							}
 						 else
-							 this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
+							this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
+						 	this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
+						 	this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() ) - 60)) ;
 						}
 	}
 	
