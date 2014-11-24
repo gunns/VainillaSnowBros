@@ -67,6 +67,7 @@ public class Empujado extends EstadoNieve{
 	public void arrastrarBros(Bros bros)
 	{
 		bros.setInvencible(true);
+		bros.setTiempoInvencible(500);
 		bros.setX(this.getMob().getX() + this.getMob().getAppearance().getWidth()/2);
 	}
 	
