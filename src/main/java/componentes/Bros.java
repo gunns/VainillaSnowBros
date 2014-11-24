@@ -36,7 +36,9 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	public boolean muriendo;
 	public Integer tiempoMuriendo;
-	public Integer muriendoYSubiendo; 	
+	public Integer muriendoYSubiendo;
+	public boolean invisible;
+	public Integer tiempoInvisible;
 	//DISPARO
 	public Direccion dir;
 	
@@ -70,6 +72,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.muriendoYSubiendo=500;
 		
 		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
+		invisible = false;
+		tiempoInvisible = 200;
 	}
 
 	protected boolean getPlayState() {return this.playState;}
@@ -94,6 +98,10 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		   
 		    this.getScene().tomarTesoro(this);
 		    
+		    if(this.invisible)
+		    	{
+		    	
+		    	}
 		    
 		    //si está muriendo...
 		    if(this.muriendo)
@@ -206,8 +214,6 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 		
 	 private void brosMuere() {
-		// TODO Auto-generated method stub
-		 
 				if(this.muriendoYSubiendo > 1)
 				{
 				this.muriendoYSubiendo = this.muriendoYSubiendo - 1;
@@ -229,13 +235,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 							this.getScene().gameOverMusic();
 							}
 						 else
-							this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
-						 this.realizandoSalto=false;
-						 	this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
-						 	this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() ) - 50)) ;
-						    Sprite spriteVive = Sprite.fromImage("BrosDrc.png");
-							this.setAppearance(spriteVive);
-						 	
+							 this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
+						 	 this.getScene().reanimarBros(this);
 						}
 	}
 	
