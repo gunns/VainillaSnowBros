@@ -195,6 +195,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			  this.muriendo = true;
 			  Sound sonidoMuerte = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("Player Death.wav"));
 		      sonidoMuerte.play();
+		      Sprite sprite = Sprite.fromImage("BrosMuere.png");
+		      this.setAppearance(sprite);
 			  
 		   //this.perderVida();
 		   }
@@ -205,6 +207,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		
 	 private void brosMuere() {
 		// TODO Auto-generated method stub
+		 
 				if(this.muriendoYSubiendo > 1)
 				{
 				this.muriendoYSubiendo = this.muriendoYSubiendo - 1;
@@ -227,8 +230,12 @@ public class Bros extends GameComponent<SnowBrosScene>{
 							}
 						 else
 							this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
+						 this.realizandoSalto=false;
 						 	this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
-						 	this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() ) - 60)) ;
+						 	this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() ) - 50)) ;
+						    Sprite spriteVive = Sprite.fromImage("BrosDrc.png");
+							this.setAppearance(spriteVive);
+						 	
 						}
 	}
 	
