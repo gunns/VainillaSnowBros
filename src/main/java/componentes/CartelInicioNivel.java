@@ -13,7 +13,7 @@ import com.uqbar.vainilla.sound.SoundBuilder;
 
 public class CartelInicioNivel extends GameComponent<SnowBrosScene>{
 	
-	Integer tiempoDeCartel = 600;
+	Integer tiempoDeCartel;
 	Dimension gameDimension;
 	Integer numeroNivel;
 	double velocity;
@@ -39,7 +39,7 @@ public class CartelInicioNivel extends GameComponent<SnowBrosScene>{
 		this.velocity = velocity;
 
 		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-		String cadena = new String("           Stage " + numeroNivel.toString() + "\n         Prepárate" );
+		String cadena = new String("           Floor " + numeroNivel.toString() + "\n         Prepárate" );
 		Label label =new Label(font ,Color.red ,cadena); 
 
 		this.setAppearance(label);

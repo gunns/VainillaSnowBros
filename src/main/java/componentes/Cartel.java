@@ -24,6 +24,7 @@ public class Cartel extends GameComponent<SnowBrosScene>{
 		this.setX(dim.getHeight()/2);
 		this.setY(dim.getWidth()/2);
 		
+		
 	}
 	
 	public Cartel(Dimension dim, Integer puntaje){
@@ -37,7 +38,6 @@ public class Cartel extends GameComponent<SnowBrosScene>{
 		
 		this.setX(dim.getWidth()/3);
 		this.setY(dim.getHeight()/3);
-		
 	}
 	
 	public void update(DeltaState deltaState) {	}

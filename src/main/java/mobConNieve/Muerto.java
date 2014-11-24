@@ -27,7 +27,7 @@ public class Muerto extends EstadoNieve{
 		this.getMob().setAppearance(sprite);
 		this.bros = bros;
 		//sonido muerto
-		Sound sonidoMuerto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("mobDie2.wav"));
+		Sound sonidoMuerto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("mobDie.wav"));
 		sonidoMuerto.play();
 		// TODO Auto-generated constructor stub
 	}

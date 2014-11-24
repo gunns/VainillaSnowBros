@@ -51,4 +51,26 @@ public class MusicaFondo extends GameComponent<SnowBrosScene>{
 		gameSound.play();
 		timer.start();
 	}
+	
+	public void parar()
+	{
+		//SoundPlayer.INSTANCE.parar(this.gameSound);
+		timer.stop();
+		//this.gameSound.parar();
+		//Sound sonidoGameOver = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("gameOver.wav"));
+	    //gameSound = sonidoGameOver;
+		//gameSound.play();
+	    this.destroy();
+	}
+
+	public Sound getGameSound() {
+		return gameSound;
+	}
+
+	public void setGameSound(Sound gameSound) {
+		this.gameSound = gameSound;
+	}
+	
+	
+	
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
+import sonidoContinuo.Musica;
 import sonidoContinuo.MusicaFondo;
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
@@ -54,12 +55,12 @@ public class SnowBrosScene extends GameScene{
 	//musica fondo
 	
 	
-	private SoundPlay musica;
+	private Musica musica;
 	
 	
-	private MusicaFondo music;
+	//private MusicaFondo music;
 	
-	public SnowBrosScene(Dimension dim, double velocity){
+	public SnowBrosScene(Dimension dim, double velocity) throws Exception{
 		super();
 		
 		CartelInicioNivel cartelInicio = new CartelInicioNivel(dim, 1, velocity);
@@ -96,9 +97,9 @@ public class SnowBrosScene extends GameScene{
 		*/
 		this.initSound();
 		
-		music = new MusicaFondo(gameSound);
-		this.addComponent(music);
-		music.reproducir();
+		musica = new Musica();
+		this.addComponent(musica);
+		musica.reproducir();
 		
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
@@ -183,6 +184,8 @@ public class SnowBrosScene extends GameScene{
 	
 	public void cartelLose(){
 		this.buildBackground(Color.black);
+		
+		this.musica.parar();
 		this.addComponent(new Cartel(this.gameDimension,0));
 		this.setPlayState(false);
 		this.stop();
@@ -542,6 +545,18 @@ public class SnowBrosScene extends GameScene{
 		bros.setVidas(vida1);
 		this.addComponent(vida1);
 
+		
+	}
+
+
+
+	public void gameOverMusic() {
+		// TODO Auto-generated method stub
+		this.musica.parar();
+		this.removeComponent(musica);
+		Sound sonidoGameOver = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("gameOver.wav"));
+	    sonidoGameOver.play();
+//	    SoundPlayer.INSTANCE.parar(this.music.getGameSound());
 		
 	}
 	

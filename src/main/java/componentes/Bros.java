@@ -33,9 +33,10 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	private int alto = 25;
 	private double velocity;
 	public boolean derecha = true;
+	
 	public boolean muriendo;
 	public Integer tiempoMuriendo;
-	
+	public Integer muriendoYSubiendo; 	
 	//DISPARO
 	public Direccion dir;
 	
@@ -60,12 +61,13 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.playState = playState;
 		this.setEstado(new CayendoBros(this.getY(),this));
 		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
-		this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() + 60))) ;
+		this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() ) - 60)) ;
 		this.setZ(1);
 		this.velocity = velocity;
 		this.estadoCapsula  = new EstadoCapsula();
 		this.muriendo=false;
 		this.tiempoMuriendo=500;
+		this.muriendoYSubiendo=500;
 		
 		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
 	}
@@ -96,15 +98,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		    //si está muriendo...
 		    if(this.muriendo)
 		     {
-		      if(this.tiempoMuriendo < 1)
-		      {
-		      this.muriendo = false;
-		      this.getScene().reanimarBros(this);
-		      }
-		    else 
-		     {
-		     this.tiempoMuriendo = this.tiempoMuriendo - 1;
-		     }
+		      this.brosMuere();
 		     }
 		    else
 		    {
@@ -198,11 +192,44 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		   }
 		  } else{
 		   //TODO MORIR
-		   this.perderVida();
+			  this.muriendo = true;
+			  Sound sonidoMuerte = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("Player Death.wav"));
+		      sonidoMuerte.play();
+			  
+		   //this.perderVida();
 		   }
 		  }
 		 }
-		 }
+	}
+	
+		
+	 private void brosMuere() {
+		// TODO Auto-generated method stub
+				if(this.muriendoYSubiendo > 1)
+				{
+				this.muriendoYSubiendo = this.muriendoYSubiendo - 1;
+				this.setY(this.getY() - 0.20);
+				}
+				else
+					if(this.tiempoMuriendo > 1)
+						{
+						this.tiempoMuriendo = this.tiempoMuriendo -1;
+						}
+					else
+						{
+						this.muriendo = false;
+						this.tiempoMuriendo = 500;
+						this.muriendoYSubiendo = 500;
+						 if(this.vidas.getCantidadVidas() == 0)
+							{
+							this.getScene().cartelLose();
+							this.getScene().gameOverMusic();
+							}
+						 else
+							 this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
+						}
+	}
+	
 	
 	public void perderVida()
 	{
