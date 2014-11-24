@@ -63,11 +63,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() + 60))) ;
 		this.setZ(1);
 		this.velocity = velocity;
-		this.estadoCapsula  = new EstadoCapsula(); 
-		this.muriendo=false;
-		this.tiempoMuriendo=500;
-		
-		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
+		this.estadoCapsula  = new EstadoCapsula();
 		this.muriendo=false;
 		this.tiempoMuriendo=500;
 		
