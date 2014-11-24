@@ -203,6 +203,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			  this.muriendo = true;
 			  Sound sonidoMuerte = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("Player Death.wav"));
 		      sonidoMuerte.play();
+		      Sprite sprite = Sprite.fromImage("BrosMuere.png");
+		      this.setAppearance(sprite);
 			  
 		   //this.perderVida();
 		   }
@@ -212,7 +214,6 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 		
 	 private void brosMuere() {
-		// TODO Auto-generated method stub
 				if(this.muriendoYSubiendo > 1)
 				{
 				this.muriendoYSubiendo = this.muriendoYSubiendo - 1;

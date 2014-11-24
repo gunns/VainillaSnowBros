@@ -2,6 +2,7 @@ package componentes;
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
+import com.uqbar.vainilla.appearances.Sprite;
 
 public class Reanimacion extends GameComponent<SnowBrosScene>{
 	
@@ -21,6 +22,8 @@ public void update(DeltaState deltaState)
 	if(this.tiempoReanimacion < 1)
 		{
 		//reposicionarBros
+		Sprite spriteVive = Sprite.fromImage("BrosDrc.png");
+		bros.setAppearance(spriteVive);
 		bros.setX(sns.getGameDimension().getWidth()/2-bros.getAppearance().getWidth()/2);
 		bros.setY(sns.getGameDimension().getHeight()-(bros.getAppearance().getHeight())-25);
 		bros.setZ(1);
