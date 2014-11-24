@@ -3,8 +3,6 @@ package componentes;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.uqbar.vainilla.appearances.Sprite;
-
 public class Fondos {
 	ArrayList<Fondo> fondos;
 	Fondo Afondo;

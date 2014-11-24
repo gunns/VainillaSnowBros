@@ -43,26 +43,27 @@ public class Suelo {
 	private void unaLinea(int nSuelos, int k){
 		int j; 
 		Random r = new Random();
-		int inicio =  r.nextInt(2);
+		int inicio =  r.nextInt(4);
+		j = inicio;
 		for (int val=nSuelos;val>0;val--){
-			for (j=inicio;j<inicio+r.nextInt(8)+4;j++){
+			for (j=inicio;j<inicio+r.nextInt(4)+4;j++){
 				if (j<anchura){
 					density[j][k] = 1;
 				}
+				else{break;}
 			}
-			inicio = inicio+r.nextInt(8);
+			inicio = r.nextInt(5)+j;
 		}
-		
 	}
 
 	private void Fill(){
 		Ground();
 		int j;
 		Random r = new Random();
-		int valorDado = r.nextInt(8)+4;
+		int valorDado = r.nextInt(7)+4;
 		for (j=7;j<=28;j+=7){
 			unaLinea(valorDado+1,j);
-			valorDado = r.nextInt(8)+4;
+			valorDado = r.nextInt(7)+4;
 		}
 	}
 
