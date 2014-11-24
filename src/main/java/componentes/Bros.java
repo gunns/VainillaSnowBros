@@ -16,6 +16,8 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.events.constants.Key;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 
 public class Bros extends GameComponent<SnowBrosScene>{
@@ -31,7 +33,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	private int alto = 25;
 	private double velocity;
 	public boolean derecha = true;
-	
+	public boolean muriendo;
+	public Integer tiempoMuriendo;
 	
 	//DISPARO
 	public Direccion dir;
@@ -45,6 +48,10 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	//Vidas
 	Vidas vidas;
 	
+	//Sonidos
+	Sound sonidoSalto;
+	
+	
 	public Bros(Dimension dim, boolean playState, double velocity){
 		Sprite sprite = Sprite.fromImage("BrosDrc.png");
 		this.setAppearance(sprite);
@@ -53,10 +60,18 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.playState = playState;
 		this.setEstado(new CayendoBros(this.getY(),this));
 		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
-		this.setY(this.gameDimension.getHeight()-(this.getAppearance().getHeight())-40);
+		this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() + 60))) ;
 		this.setZ(1);
 		this.velocity = velocity;
-		this.estadoCapsula  = new EstadoCapsula();
+		this.estadoCapsula  = new EstadoCapsula(); 
+		this.muriendo=false;
+		this.tiempoMuriendo=500;
+		
+		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
+		this.muriendo=false;
+		this.tiempoMuriendo=500;
+		
+		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
 	}
 
 	protected boolean getPlayState() {return this.playState;}
@@ -74,99 +89,124 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	
 	public void update(DeltaState deltaState) {
-		
-		
-		if(this.getScene().getPlayState())
-		{
-				this.getScene().tomarTesoro(this);
-			//Colision con enemigos (rectangulos)
-			//restar el tiempo de invencibilidad
-			if(this.invencible && !this.getEstado().siendoArrastrado()){
-				this.tiempoInvencible--;
-				if(this.tiempoInvencible < 1)
-					{
-					this.invencible = false;
-					}
-			}
-			
-		if (!this.getScene().enemigoColisionaConBros(this) || (this.getScene().enemigoColisionaConBros(this) && this.invencible)){
-			//TODO Agarrar tesoro
-			
-			if((this.getScene().esferaRodanteColisionaConBros(this)))
-				{
-				this.setEstado(new SiendoArrastrado());
-				this.getEstado().setBros(this);
-				this.getEstado().update(deltaState);
-				}
-			else{
-					
-				//COMANDO SALTAR
-				if(deltaState.isKeyPressed(Key.A)) {
-					if(this.derecha){
-						Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
-						this.setAppearance(sprite.crop(ancho+7,alto));
-						this.saltar();
-					}else {
-						Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
-						this.setAppearance(sprite.crop(ancho+7,alto));
-						this.saltar();
-						}
-					}
-				
-				if(deltaState.isKeyBeingHold(Key.DOWN)&&deltaState.isKeyPressed(Key.A)){
-					if(this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
-						Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
-						this.setAppearance(sprite.crop(ancho+7, alto));
-						this.setY(this.getY()+5);
-					}
-					if(!this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
-						Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
-						this.setAppearance(sprite.crop(ancho+7, alto));
-						this.setY(this.getY()+5);
-					}
-				}
-				this.getEstado().update(deltaState);
-				
-				//COMANDO MOVER
-				if (deltaState.isKeyBeingHold(Key.RIGHT)) {
-					this.derecha = true;
-					Sprite sprite = Sprite.fromImage("BrosDrc.png");
-					this.setAppearance(sprite);
-					this.moverALaDerecha(deltaState);
-					
-					}
-				else
-					if(deltaState.isKeyBeingHold(Key.LEFT)) 
-						{
-						this.derecha = false;
-						Sprite sprite = Sprite.fromImage("BrosIzq.png");
-						this.setAppearance(sprite);
-						this.moverALaIzquierda(deltaState);
-						}
-				
-				//COMANDO:DISPARAR			
-				if(deltaState.isKeyPressed(Key.S))
-							{
-							this.CongelaOEmpuja(deltaState);
-							}
-				
-				//RENDER SPRITE AL DEJAR DE DISPARAR
-				if(deltaState.isKeyReleased(Key.S)){
-					if(this.derecha){
-						Sprite sprite = Sprite.fromImage("BrosDrc.png");
-						this.setAppearance(sprite);
-					}else {
-						Sprite sprite = Sprite.fromImage("BrosIzq.png");
-						this.setAppearance(sprite);
-						}
-				}
-			}
-		} else{
-			//TODO MORIR
-			this.perderVida();
-			}
-		}
-	}
+		  
+		  
+		  if(this.getScene().getPlayState())
+		  {
+		   
+		    this.getScene().tomarTesoro(this);
+		    
+		    
+		    //si está muriendo...
+		    if(this.muriendo)
+		     {
+		      if(this.tiempoMuriendo < 1)
+		      {
+		      this.muriendo = false;
+		      this.getScene().reanimarBros(this);
+		      }
+		    else 
+		     {
+		     this.tiempoMuriendo = this.tiempoMuriendo - 1;
+		     }
+		     }
+		    else
+		    {
+		   //Colision con enemigos (rectangulos)
+		   //restar el tiempo de invencibilidad
+		  
+		   if(this.invencible && !this.getEstado().siendoArrastrado()){
+		    this.tiempoInvencible--;
+		    if(this.tiempoInvencible < 1)
+		     {
+		     this.invencible = false;
+		     }
+		   }
+		   
+		  if (!this.getScene().enemigoColisionaConBros(this) || (this.getScene().enemigoColisionaConBros(this) && this.invencible)){
+		   //TODO Agarrar tesoro
+		   
+		   if((this.getScene().esferaRodanteColisionaConBros(this)))
+		    {
+		    this.setEstado(new SiendoArrastrado());
+		    this.getEstado().setBros(this);
+		    this.getEstado().update(deltaState);
+		    }
+		   else{
+		     
+		    //COMANDO SALTAR
+		    if(deltaState.isKeyPressed(Key.A)) {
+		     if(this.derecha){
+		      Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
+		      this.setAppearance(sprite.crop(ancho+7,alto));
+		      this.saltar();
+		     }else {
+		      Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
+		      this.setAppearance(sprite.crop(ancho+7,alto));
+		      this.saltar();
+		      }
+		     }
+		    
+		    if(deltaState.isKeyBeingHold(Key.DOWN)&&deltaState.isKeyPressed(Key.A)){
+		     if(this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
+		      Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
+		      this.setAppearance(sprite.crop(ancho+7, alto));
+		      this.setY(this.getY()+5);
+		      //sonido salto abajo
+		      Sound sonidoSalto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump_11.wav"));
+		      sonidoSalto.play();
+		     }
+		     if(!this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
+		      Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
+		      this.setAppearance(sprite.crop(ancho+7, alto));
+		      this.setY(this.getY()+5);
+		      Sound sonidoSalto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump_11.wav"));
+		      sonidoSalto.play();
+		     }
+		    }
+		    this.getEstado().update(deltaState);
+		    
+		    //COMANDO MOVER
+		    if (deltaState.isKeyBeingHold(Key.RIGHT)) {
+		     this.derecha = true;
+		     Sprite sprite = Sprite.fromImage("BrosDrc.png");
+		     this.setAppearance(sprite);
+		     this.moverALaDerecha(deltaState);
+		     
+		     }
+		    else
+		     if(deltaState.isKeyBeingHold(Key.LEFT)) 
+		      {
+		      this.derecha = false;
+		      Sprite sprite = Sprite.fromImage("BrosIzq.png");
+		      this.setAppearance(sprite);
+		      this.moverALaIzquierda(deltaState);
+		      }
+		    
+		    //COMANDO:DISPARAR   
+		    if(deltaState.isKeyPressed(Key.S))
+		       {
+		       this.CongelaOEmpuja(deltaState);
+		       }
+		    
+		    //RENDER SPRITE AL DEJAR DE DISPARAR
+		    if(deltaState.isKeyReleased(Key.S)){
+		     if(this.derecha){
+		      Sprite sprite = Sprite.fromImage("BrosDrc.png");
+		      this.setAppearance(sprite);
+		     }else {
+		      Sprite sprite = Sprite.fromImage("BrosIzq.png");
+		      this.setAppearance(sprite);
+		      }
+		    }
+		   }
+		  } else{
+		   //TODO MORIR
+		   this.perderVida();
+		   }
+		  }
+		 }
+		 }
 	
 	public void perderVida()
 	{
@@ -182,17 +222,13 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	
 	private void morir() {
-		// TODO Hacer que muera y reaparezca en el origen del nivel;
-		//Integer tiempoMuriendo = 500;
-		//for(Integer i = 0; i< tiempoMuriendo; i++)
-			//{
-			
-			//}
-			this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
-		this.getScene().reanimarBros(this);
-			
-		
-	}
+		  // TODO Hacer que muera y reaparezca en el origen del nivel;
+		 
+		   this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
+		   
+		   this.muriendo =true;
+		   this.tiempoMuriendo = 500;
+		 }
 
 	//COMPROBAR CASO SI EMPUJA BOLA DE NIEVE O SOLO DISPARA NIEVE
 	public void CongelaOEmpuja(DeltaState deltaState){
@@ -214,11 +250,17 @@ public class Bros extends GameComponent<SnowBrosScene>{
 				Sprite sprite = Sprite.fromImage("BrosDisparaDrc.png");
 				this.setAppearance(sprite);
 				this.disparar();
+				//sonido disparo
+				Sound sonidoDisparo = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("snowShot.wav"));
+				sonidoDisparo.play();
+				
 			}else {
 				this.saltar();
 				Sprite sprite = Sprite.fromImage("BrosDisparaIzq.png");
 				this.setAppearance(sprite);
 				this.disparar();
+				Sound sonidoDisparo = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("snowShot.wav"));
+				sonidoDisparo.play();
 				}
 			
 		}
