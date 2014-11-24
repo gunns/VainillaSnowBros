@@ -2,7 +2,11 @@ package com.uqbar.snowBros;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
+
+import javax.swing.Timer;
 
 import sonidoContinuo.Musica;
 import sonidoContinuo.MusicaFondo;
@@ -19,6 +23,7 @@ import componentes.Mob;
 import componentes.Piso;
 import componentes.Cartel;
 import componentes.Puntaje;
+import componentes.Reanimacion;
 import componentes.Snow;
 import componentes.Suelo;
 import componentes.Vidas;
@@ -488,13 +493,13 @@ public class SnowBrosScene extends GameScene{
 		return !ret;
 		}
 
-	public void reanimarBros(Bros bros2) {
+	public void reanimarBros(final Bros bros) 
+	{
 		// TODO reaparece en el inicio del nivel
-		bros2.setX(this.gameDimension.getWidth()/2-bros2.getAppearance().getWidth()/2);
-		bros2.setY(this.gameDimension.getHeight()-(bros2.getAppearance().getHeight())-25);
-		bros2.setZ(1);
-		
-	}
+		this.removeComponent(bros);
+		Reanimacion reanimacion = new Reanimacion(bros, this);
+		this.addComponent(reanimacion);
+		}
 	
 	public boolean estaCercaBrosdeMob(Mob mob){
 		boolean ret=false;
@@ -558,6 +563,18 @@ public class SnowBrosScene extends GameScene{
 	    sonidoGameOver.play();
 //	    SoundPlayer.INSTANCE.parar(this.music.getGameSound());
 		
+	}
+
+
+
+	public Dimension getGameDimension() {
+		return gameDimension;
+	}
+
+
+
+	public void setGameDimension(Dimension gameDimension) {
+		this.gameDimension = gameDimension;
 	}
 	
 	
