@@ -11,22 +11,28 @@ public class Pasivo extends EstadoAgresividad {
 		this.derecha=true;
 	}
 
-	// NO PUEDO HACER ANDAR EL MOVER, SI ALGUNO ME PUEDE AYUDAR LE AGRADESCO
+	public void volverseAgresivo(){
+		this.getMob().setEstadoAgresividad(new Agresivo(this.getMob()));
+	}
+	
 	public void mover(DeltaState deltaState){
 		if(this.getMob().getScene().getPlayState()){
-			while(derecha&&this.getMob().noLlegoAlFinal() &&this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1)){
+			if(this.getMob().esPeligroso()&&derecha&&this.getMob().noLlegoAlFinal() &&!this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1)){
 				this.moverALaDerecha(deltaState);
 				if(!this.getMob().noLlegoAlFinal()||this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1)){
-					derecha=false;
+					this.derecha=false;
 				}
 			}
-			while(!derecha&&this.getMob().noLlegoAlComienzo()&&!this.getMob().getScene().terminaElPiso((this.getMob().getX()-this.getMob().getAppearance().getWidth()-1), this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))
+			if(this.getMob().esPeligroso()&&!derecha&&this.getMob().noLlegoAlComienzo()&&!this.getMob().getScene().terminaElPiso((this.getMob().getX()-1), this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))
 				{
 				this.moverALaIzquierda(deltaState);
-				if(!this.getMob().noLlegoAlComienzo()||this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))
+				if(!this.getMob().noLlegoAlComienzo()||this.getMob().getScene().terminaElPiso(this.getMob().getX()-1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))
 						{
-					derecha=true;
+					this.derecha=true;
 				}
+			}
+			if(this.getMob().getScene().estaCercaBrosdeMob(this.getMob())){
+				this.volverseAgresivo();
 			}
 		}
 	}

@@ -106,7 +106,9 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.velocity = velocity;
 	}
 
-	
+	public boolean esPeligroso(){
+		return this.getEstadoNieve().esPeligroso();
+	}
 	
 	
 	public Direccion getDir() {
@@ -137,11 +139,11 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			this.dir = new Derecha();
 			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlFinal()){
-					this.setX(this.getX()+(this.getVelocity()*1.5+ (this.getVelocity()/4))* deltaState.getDelta());
+					this.setX(this.getX()+(this.getVelocity()*1.5+ (this.getVelocity()/4 - 6))* deltaState.getDelta());
 				}
 			}else{
 				if (this.noLlegoAlFinal()){
-					this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());
+					this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4 - 6))* deltaState.getDelta());
 				}
 			}
 		}
@@ -152,11 +154,11 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			this.dir = new Izquierda();
 			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlComienzo()){
-					this.setX(this.getX()- (this.getVelocity()*1.5 + (this.getVelocity()/4 - 4))* deltaState.getDelta());
+					this.setX(this.getX()- (this.getVelocity()*1.5 + (this.getVelocity()/4 - 6))* deltaState.getDelta());
 				}
 			}else{
 				if (this.noLlegoAlComienzo()){
-					this.setX(this.getX()-(this.getVelocity() + (this.getVelocity()/4) - 4)* deltaState.getDelta());
+					this.setX(this.getX()-(this.getVelocity() + (this.getVelocity()/4) - 6)* deltaState.getDelta());
 				}
 			}
 		}

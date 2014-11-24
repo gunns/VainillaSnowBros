@@ -7,6 +7,8 @@ import mobConNieve.Empujado;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import componentes.Mob;
 import componentes.Snow;
@@ -55,6 +57,9 @@ public class Izquierda extends Direccion {
 			{
 			mob.getEstadoNieve().setRebotes(mob.getEstadoNieve().getRebotes() - 1);
 			mob.getEstadoNieve().setDir(new Derecha());
+			//sonido rebote
+			Sound sonidoRebote = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("rebote.wav"));
+			sonidoRebote.play();
 			}
 		
 		}
@@ -62,6 +67,9 @@ public class Izquierda extends Direccion {
 		{
 		mob.getScene().esferaExploto(mob);
 		mob.destroy();
+		//sonido explosion
+		Sound sonidoExplosion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("snowBallExplode.wav"));
+		sonidoExplosion.play();
 		}
 	}
 	

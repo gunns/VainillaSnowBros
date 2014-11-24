@@ -11,6 +11,8 @@ import componentes.Mob;
 import componentes.Snow;
 
 import com.uqbar.vainilla.GameComponent;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 public class Empujado extends EstadoNieve{
 
@@ -24,6 +26,9 @@ public class Empujado extends EstadoNieve{
 		this.dir = dir;
 		mob.setVelocity(mob.getVelocity() * 2);
 		this.bros = bros;
+		//sonido empuje
+		Sound sonidoEmpuje = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("pullSnowBall.wav"));
+		sonidoEmpuje.play();
 		
 		bros.sumarPuntaje(500);
 		// TODO Auto-generated constructor stub

@@ -19,7 +19,7 @@ this.bros = bros;
 puntos = 0;
 
 Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-Label label =new Label(font ,Color.green , "score" +(this.puntos).toString());
+Label label =new Label(font ,Color.blue , "score" +(this.puntos).toString());
 
 this.setAppearance(label);
 
@@ -30,15 +30,15 @@ this.setY(y);
 
 @Override
 public void update(DeltaState deltaState) {
-	Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-	this.setAppearance(new Label(font ,Color.green ,"score " +(this.puntos).toString()));
+ Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
+ this.setAppearance(new Label(font ,Color.blue ,"score " +(this.puntos).toString()));
 
 }
 
 
 public void sumarPuntaje(Integer puntos)
 {
-this.puntos = this.puntos + puntos;	
+this.puntos = this.puntos + puntos; 
 }
-	
+ 
 }

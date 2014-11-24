@@ -8,6 +8,8 @@ import tesoros.Tesoros;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Sprite;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import componentes.Bros;
 import componentes.Mob;
@@ -24,6 +26,9 @@ public class Muerto extends EstadoNieve{
 		Sprite sprite = Sprite.fromImage("MobMuerto.png");
 		this.getMob().setAppearance(sprite);
 		this.bros = bros;
+		//sonido muerto
+		Sound sonidoMuerto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("mobDie2.wav"));
+		sonidoMuerto.play();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -67,6 +72,10 @@ public class Muerto extends EstadoNieve{
 		this.bros = bros;
 	}
 
+	public  void arrolla(Mob mob)
+	{
+	
+	}
 	
 	
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Sprite;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import componentes.Mob;
 import componentes.Snow;
@@ -40,7 +42,9 @@ public class NieveFaseF extends EstadoNieve{
 			{
 			this.getMob().setEstadoNieve(new Empujado(this.getMob(), 0, this.getMob().getDir().direccionContraria(), mob.getEstadoNieve().getBros()));
 			mob.getEstadoNieve().setDir(mob.getDir().direccionContraria());
-			
+			//sonido empuje
+			Sound sonidoEmpuje = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("pullSnowBall.wav"));
+			sonidoEmpuje.play();
 			//this.getMob().getEstadoNieve().getBros().sumarPuntaje(500);
 			}
 	}

@@ -7,6 +7,8 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.colissions.CollisionDetector;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import componentes.Bros;
 
@@ -55,6 +57,10 @@ public class Tesoro extends GameComponent<SnowBrosScene>{
 		public void sumarPuntaje(Bros bros) {
 			bros.sumarPuntaje(this.getValor());
 			this.destroy();
+			//sonido item
+			Sound sonidoItem = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("item.wav"));
+			sonidoItem.play();
+			// TODO Auto-generated constructor stub
 			
 		}
 
