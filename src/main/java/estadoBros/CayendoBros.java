@@ -19,7 +19,8 @@ public class CayendoBros extends EstadoBros {
 	}
 	
 	public void update(DeltaState deltaState){
-		if(!this.getBros().getScene().hayColisionConUnPiso(this.getBros()) && !this.getBros().getScene().hayColisionConUnaEsfera(this.getBros())) {
+		if(!this.getBros().getScene().hayColisionConUnPiso(this.getBros()) && !this.getBros().getScene().hayColisionConUnaEsfera(this.getBros())) 
+				{
 			double incrementoVelocidad = this.getBros().getScene().getVelocity()/4;
 			double velocidadIncremento = this.getBros().getScene().getVelocity() + incrementoVelocidad;
 			double velocidadIncrementadaPorDelta = velocidadIncremento * deltaState.getDelta();

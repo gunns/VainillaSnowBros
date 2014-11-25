@@ -14,6 +14,8 @@ import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
+import estadoBros.SiendoArrastrado;
+
 public class Empujado extends EstadoNieve{
 
 	private int rebotes;
@@ -59,7 +61,7 @@ public class Empujado extends EstadoNieve{
 		this.dir.primerMovimiento(this.getMob(), deltaState);
 		this.dir.rodar(this.getMob(), deltaState); 
 		//if(this.getMob().getScene().colisionaEstaEsferaConBros(this.getMob()))
-			this.getMob().getScene().arrastrarBros(this.getMob());
+			//this.getMob().getScene().arrastrarBros(this.getMob());
 			this.getMob().getScene().matarMobsEnElCamino(this.getMob());
 			
 	}
@@ -68,6 +70,9 @@ public class Empujado extends EstadoNieve{
 	{
 		bros.setInvencible(true);
 		bros.setTiempoInvencible(500);
+		//cambiar estado de bros
+		bros.setEstado(new SiendoArrastrado(this.getMob(), bros));
+		
 		bros.setX(this.getMob().getX() + this.getMob().getAppearance().getWidth()/2);
 	}
 	

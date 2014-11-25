@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import com.uqbar.vainilla.DeltaState;
 
+import componentes.Bros;
 import componentes.Mob;
 import componentes.Snow;
 
@@ -41,4 +42,6 @@ public abstract class Direccion {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public abstract  void desplazarBrosArrastrado(Bros bros, Mob mob, DeltaState deltaState );
 }

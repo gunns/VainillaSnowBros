@@ -12,10 +12,12 @@ import sonidoContinuo.Musica;
 import sonidoContinuo.MusicaFondo;
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
+import Cartel.CartelLevelComplete;
 import capsulas.Capsula;
 import capsulas.CapsulaPotencia;
 import capsulas.CapsulaPrisa;
 import capsulas.CapsulaRango;
+import componentes.AnimacionRegeneracion;
 import componentes.Bros;
 import componentes.CartelInicioNivel;
 import componentes.Enemigos;
@@ -340,6 +342,26 @@ public class SnowBrosScene extends GameScene{
 	
 	return colisiona;
 	}
+	
+	public Mob esferaQueColisionaConBros(Bros bros)
+	{//Este metodo retorna mob con estado Empujado si o si
+		Mob esfera = null;
+		for(GameComponent each : this.getComponents())
+		{
+		if(each.getClass() == Mob.class)
+			{
+			Mob mob = (Mob) each;
+			
+			if(this.colisionBolaRodanteConBros(each, bros) && mob.getEstadoNieve().puedeRebotar())
+				{
+				esfera = mob; 
+				//mob.getEstadoNieve().arrastrarBros(bros);
+				}
+			}
+		}
+		return esfera;
+	} 
+	
 
 	public void esferaExploto(Mob mob) {
 		// TODO Auto-generated method stub
@@ -351,7 +373,7 @@ public class SnowBrosScene extends GameScene{
 				if(bros.getEstado().siendoArrastrado())
 				bros.getEstado().cambiarMovimiento(bros);
 				//bros.saltar();
-				bros.setTiempoInvencible(1000);
+				bros.setTiempoInvencible(500);
 				//TODO musica?
 				//this.gameSound.play();
 				}
@@ -493,11 +515,10 @@ public class SnowBrosScene extends GameScene{
 		return !ret;
 		}
 
-	public void reanimarBros(final Bros bros) 
+	public void reanimarBros(Bros bros) 
 	{
 		// TODO reaparece en el inicio del nivel
-		this.removeComponent(bros);
-		Reanimacion reanimacion = new Reanimacion(bros, this);
+		Reanimacion reanimacion = new Reanimacion(bros, this, 17);
 		this.addComponent(reanimacion);
 		}
 	
@@ -533,7 +554,8 @@ public class SnowBrosScene extends GameScene{
 		// TODO Auto-generated method stub
 		
 		this.bros= new Bros(dim,this.playState, velocity);
-		this.addComponent(this.bros);
+		Reanimacion r = new Reanimacion(bros, this, 17);
+		this.addComponent(r);
 		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
 		this.addComponents(this.enemigos.getEnemigos());
 		
@@ -550,6 +572,7 @@ public class SnowBrosScene extends GameScene{
 		bros.setVidas(vida1);
 		this.addComponent(vida1);
 
+		
 		
 	}
 
@@ -577,6 +600,49 @@ public class SnowBrosScene extends GameScene{
 		this.gameDimension = gameDimension;
 	}
 	
+	
+	public boolean enemigosExterminados()
+	{
+		boolean nivelTerminado = true;
+		for(GameComponent each : this.getComponents())
+			{
+			if(each.getClass() == Mob.class || esUnTesoro(each))
+				{
+				nivelTerminado = false;
+				}
+			}
+		return nivelTerminado;
+	}
+
+
+
+	public void nivelCompleto() {
+		CartelLevelComplete cartel = new CartelLevelComplete(gameDimension, 1);
+		this.addComponent(cartel);
+		this.musica.parar();
+		Sound sonidoNivelCompleto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("levelComplete2.wav"));
+	      sonidoNivelCompleto.play();
+		this.stop();
+		
+	}
+
+
+
+	public void soltarBrosAdherido(Mob mob) {
+		// TODO Auto-generated method stub
+		for(GameComponent each: this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) each;
+				if(esferaRodanteColisionaConBros(bros))
+					{
+					bros.esferaSueltaBros();
+					}
+				}
+			}
+		
+	}
 	
 	
 	

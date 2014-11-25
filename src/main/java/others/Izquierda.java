@@ -10,6 +10,10 @@ import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
+
+
+import componentes.Bros;
+import componentes.Explosion;
 import componentes.Mob;
 import componentes.Snow;
 
@@ -66,10 +70,18 @@ public class Izquierda extends Direccion {
 	else
 		{
 		mob.getScene().esferaExploto(mob);
-		mob.destroy();
+		//AnimacionBreak animacion = new AnimacionBreak(mob.getX(), mob.getY(), mob);
+		//mob.getScene().addComponent(animacion);
+		
 		//sonido explosion
 		Sound sonidoExplosion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("snowBallExplode.wav"));
+		
+		
 		sonidoExplosion.play();
+		Explosion explosion = new Explosion(mob.getX() - 15, mob.getY() - 20);
+		mob.getScene().addComponent(explosion);
+		//mob.getScene().soltarBrosAdherido(mob);
+		mob.destroy();
 		}
 	}
 	
@@ -83,6 +95,16 @@ public class Izquierda extends Direccion {
 	@Override
 	public void moverEsfera(Mob mob, DeltaState deltaState) {
 		mob.moverEsferaALaIzquierda(deltaState);
+		
+	}
+
+	@Override
+	public void desplazarBrosArrastrado(Bros bros, Mob mob,
+			DeltaState deltaState) {
+		// TODO Auto-generated method stub
+		//bros.moverALaIzquierda(mob.getVelocity(), deltaState);
+		bros.setX(mob.getX() + mob.getAppearance().getWidth()/2);
+		bros.setY(mob.getY());
 		
 	}
 }

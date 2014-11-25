@@ -51,7 +51,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.setEstadoAgresividad(new Pasivo(this));
 		this.setEstado(new CayendoMob(this.getY(),this));
 		this.setX(r.nextInt(gameDimension.width-ancho));
-		this.setY(r.nextInt(gameDimension.height)-40);
+		this.setY(r.nextInt(gameDimension.height)-60);
 		this.setZ(0);
 		this.setEstadoNieve(new SinNieve(this, 0));
 		this.velocity = velocity;
@@ -78,6 +78,14 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.getEstado().update(deltaState);
 		this.getEstadoNieve().update(deltaState);
 		this.getEstadoAgresividad().update(deltaState);
+		
+		 //A veces el bros se cae solo(vaya a saber quien el por que), para que esto no pase, se posicionara siempre en la parte superior
+		  //del suelo mas bajo
+		  if(this.getY() > this.gameDimension.getHeight())
+			  {
+			  this.setY(this.gameDimension.getHeight() - 40);
+			  }
+		  
 		}
 	}
 	
@@ -139,11 +147,11 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			this.dir = new Derecha();
 			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlFinal()){
-					this.setX(this.getX()+(this.getVelocity()*1.5+ (this.getVelocity()/4 - 6))* deltaState.getDelta());
+					this.setX(this.getX()+(this.getVelocity()*1.5+ (this.getVelocity()/4 - 4))* deltaState.getDelta());
 				}
 			}else{
 				if (this.noLlegoAlFinal()){
-					this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4 - 6))* deltaState.getDelta());
+					this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4 - 4))* deltaState.getDelta());
 				}
 			}
 		}
@@ -154,11 +162,11 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			this.dir = new Izquierda();
 			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlComienzo()){
-					this.setX(this.getX()- (this.getVelocity()*1.5 + (this.getVelocity()/4 - 6))* deltaState.getDelta());
+					this.setX(this.getX()- (this.getVelocity()*1.5 + (this.getVelocity()/4 - 4))* deltaState.getDelta());
 				}
 			}else{
 				if (this.noLlegoAlComienzo()){
-					this.setX(this.getX()-(this.getVelocity() + (this.getVelocity()/4) - 6)* deltaState.getDelta());
+					this.setX(this.getX()-(this.getVelocity() + (this.getVelocity()/4) - 4)* deltaState.getDelta());
 				}
 			}
 		}

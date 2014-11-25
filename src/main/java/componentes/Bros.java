@@ -9,6 +9,7 @@ import tesoros.Tesoro;
 import estadoBros.CayendoBros;
 import estadoBros.EstadoBros;
 import estadoBros.SiendoArrastrado;
+import estadoBros.SubiendoBros;
 import estadosCapsula.EstadoCapsula;
 
 import com.uqbar.snowBros.SnowBrosScene;
@@ -42,6 +43,9 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	//DISPARO
 	public Direccion dir;
 	
+	public double aparicionEnX;
+	public double aparicionEnY;
+	
 	
 	//ESTADOS LUEGO DE TOMAR LAS CAPSULAS
 	EstadoCapsula estadoCapsula;
@@ -54,6 +58,9 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	//Sonidos
 	Sound sonidoSalto;
 	
+	//paricion
+	boolean aparicion;
+	
 	
 	public Bros(Dimension dim, boolean playState, double velocity){
 		Sprite sprite = Sprite.fromImage("BrosDrc.png");
@@ -62,8 +69,10 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.gameDimension= dim;
 		this.playState = playState;
 		this.setEstado(new CayendoBros(this.getY(),this));
-		this.setX(this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2);
-		this.setY((this.gameDimension.getHeight()-(this.getAppearance().getHeight() ) - 60)) ;
+		this.aparicionEnX = this.gameDimension.getWidth()/2-this.getAppearance().getWidth()/2;
+		this.aparicionEnY = this.gameDimension.getHeight()-(this.getAppearance().getHeight() ) - 25;
+		this.setX(aparicionEnX);
+		this.setY(aparicionEnY) ;
 		this.setZ(1);
 		this.velocity = velocity;
 		this.estadoCapsula  = new EstadoCapsula();
@@ -74,6 +83,9 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
 		invisible = false;
 		tiempoInvisible = 200;
+		aparicion = true;
+		
+		
 	}
 
 	protected boolean getPlayState() {return this.playState;}
@@ -91,17 +103,31 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	
 	public void update(DeltaState deltaState) {
-		  
-		  
 		  if(this.getScene().getPlayState())
 		  {
-		   
+		   //hay enemigos?
+			  if(this.getScene().enemigosExterminados())
+			  	{
+				  this.getScene().nivelCompleto();
+				  
+			  	}
+			  //A veces el bros se cae solo(vaya a saber quien el por que), para que esto no pase, se posicionara siempre en la parte superior
+			  //del suelo mas bajo
+			  if(this.getY() > this.gameDimension.getHeight())
+				  {
+				  this.setY(this.gameDimension.getHeight() - 40);
+				  }
+			  if(this.getX() > this.gameDimension.getWidth())
+			  {
+			  this.setX(this.gameDimension.getWidth());
+			  }
+			  if(this.getX() < 0)
+			  {
+			  this.setX(0);
+			  }
+			  
+			  
 		    this.getScene().tomarTesoro(this);
-		    
-		    if(this.invisible)
-		    	{
-		    	
-		    	}
 		    
 		    //si está muriendo...
 		    if(this.muriendo)
@@ -126,9 +152,12 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		   
 		   if((this.getScene().esferaRodanteColisionaConBros(this)))
 		    {
-		    this.setEstado(new SiendoArrastrado());
-		    this.getEstado().setBros(this);
-		    this.getEstado().update(deltaState);
+			   
+			  Mob esfera = this.getScene().esferaQueColisionaConBros(this);  
+		      this.setEstado(new SiendoArrastrado(esfera, this));
+		    //this.getEstado().setBros(this);
+		    //this.getEstado().update(deltaState);
+			   //TODO modificar
 		    }
 		   else{
 		     
@@ -233,14 +262,18 @@ public class Bros extends GameComponent<SnowBrosScene>{
 							{
 							this.getScene().cartelLose();
 							this.getScene().gameOverMusic();
+							this.getScene().removeComponent(this);
 							}
 						 else
+						 	{
 							 this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
-						 	 this.getScene().reanimarBros(this);
 						 	 this.invencible = true;
 						 	 this.tiempoInvencible = 500;
 						 	 //correccion de error de reposicionamiento del bros al morir
 						 	 this.setEstado(new CayendoBros((this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25),this));
+						 	this.getScene().reanimarBros(this);
+						 	this.getScene().removeComponent(this);
+						 	}
 						}
 	}
 
@@ -291,7 +324,10 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	
 
-	public void saltar() {this.getEstado().saltar();}
+	public void saltar() 
+	{
+		this.getEstado().saltar();
+		}
 	
 	private void moverALaDerecha(DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
@@ -301,15 +337,20 @@ public class Bros extends GameComponent<SnowBrosScene>{
 						if(this.getEstadoCapsula().isPrisa())
 					this.setX(this.getX()+(this.getScene().getVelocity()*1.5+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
 					else
+					{
 					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
+						this.getScene().moverEsfera(this, deltaState);
+					}
 				}
 			}else{
 				if (this.noLlegoAlFinal()){
 					if(this.getEstadoCapsula().isPrisa())
 					this.setX(this.getX()+(this.getScene().getVelocity()*1.5+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
 					else
+					{
 					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
 					this.getScene().moverEsfera(this, deltaState);
+					}
 				}
 			}
 		}
@@ -319,11 +360,18 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		if(!this.getScene().getSystemPause()){
 			this.dir = new Izquierda();
 			if(!playState && !this.getScene().getPlayState()){
-				if (this.noLlegoAlComienzo()){
+				if (this.noLlegoAlComienzo())
+					{
 					if(this.getEstadoCapsula().isPrisa())
-					this.setX(this.getX()- (this.getScene().getVelocity()*1.5 + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+						{
+						this.setX(this.getX()- (this.getScene().getVelocity()*1.5 + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+						this.getScene().moverEsfera(this, deltaState);
+						}
 					else
+					{
 					this.setX(this.getX()- (this.getScene().getVelocity() + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					this.getScene().moverEsfera(this, deltaState);
+					}
 				}
 			}else{
 				if (this.noLlegoAlComienzo()){
@@ -336,6 +384,40 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			}
 		}
 	}
+	
+	public void moverALaDerecha(double velocity, DeltaState deltaState) {
+		if(!this.getScene().getSystemPause()){
+			this.dir = new Derecha();
+			if(!playState && !this.getScene().getPlayState()){
+				if (this.noLlegoAlFinal()){
+					this.setX(this.getX()+(velocity + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					}
+			}else{
+				if (this.noLlegoAlFinal()){
+					this.setX(this.getX()+(velocity + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					}
+				}
+			}
+		}
+	
+	public void moverALaIzquierda(double velocity, DeltaState deltaState) {
+		if(!this.getScene().getSystemPause()){
+			this.dir = new Izquierda();
+			if(!playState && !this.getScene().getPlayState()){
+				if (this.noLlegoAlComienzo())
+					{
+					this.setX(this.getX()- (velocity + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					}
+				}
+			}else{
+				if (this.noLlegoAlComienzo()){
+					this.setX(this.getX()-(velocity + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+				}
+			}
+		}
+	
+	
+	
 	
 	private boolean noLlegoAlFinal() {return this.getX()+this.getAppearance().getWidth()<= gameDimension.getWidth();}
 	
@@ -397,4 +479,27 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public void setVidas(Vidas vidas) {
 		this.vidas = vidas;
 	}
+
+	public double getAparicionEnX() {
+		return aparicionEnX;
+	}
+
+	public void setAparicionEnX(double aparicionEnX) {
+		this.aparicionEnX = aparicionEnX;
+	}
+
+	public double getAparicionEnY() {
+		return aparicionEnY;
+	}
+
+	public void setAparicionEnY(double aparicionEnY) {
+		this.aparicionEnY = aparicionEnY;
+	}
+
+	public void esferaSueltaBros() {
+		this.setEstado(new SubiendoBros(this.getY(), this));
+//		this.setY(this.getY() - 50);
+		
+	}
+	
 }
