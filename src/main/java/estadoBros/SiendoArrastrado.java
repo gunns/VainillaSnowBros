@@ -19,22 +19,22 @@ public class SiendoArrastrado extends EstadoBros{
 
 	
 	public void update(DeltaState deltaState){
-		if(!bros.getScene().hayColisionConUnPiso(bros)) {
+		//if(!bros.getScene().hayColisionConUnPiso(bros)) {
 			//double incrementoVelocidad = bros.getScene().getVelocity()/4*2;
 			//double velocidadIncremento = bros.getScene().getVelocity() + incrementoVelocidad;
 			//double velocidadIncrementadaPorDelta = velocidadIncremento * deltaState.getDelta();
 			//double incrementoY = bros.getY() + velocidadIncrementadaPorDelta;
 			//bros.setY(incrementoY);
-		}
-			else
-			{
+		//}
+			//else
+			//{
 				if(deltaState.isKeyPressed(Key.A))
 					{
 					this.cambiarMovimiento(bros);
 					bros.setTiempoInvencible(500);
 					//this.getBros().setEstado(new SubiendoBros(this.getBros().getY(),this.getBros()));
 					}
-			}
+			//}
 		
 		esfera.getDir().desplazarBrosArrastrado(bros, esfera, deltaState);
 		//this.bros.setX(this.esfera.getX() + esfera.getAppearance().getWidth()/2);
@@ -51,7 +51,8 @@ public class SiendoArrastrado extends EstadoBros{
 		//bros.setEstado(new SubiendoBros(this.getyInicial(),this.getBros()));
 		
 		bros.setY(bros.getY() - 60);
-		bros.setEstado(new CayendoBros(bros.getY() ,bros));
+		//bros.setEstado(new CayendoBros(bros.getY() ,bros));
+		bros.setEstado(new CayendoBros(this.getyInicial(),bros));
 		//bros.saltar();
 		//this.getBros().setEstado(new CayendoBros(this.getyInicial(),this.getBros()));
 		
@@ -59,5 +60,10 @@ public class SiendoArrastrado extends EstadoBros{
 
 	public boolean siendoArrastrado(){
 		return true;
+	}
+	
+	public void saltar(){
+		this.cambiarMovimiento(bros);
+		bros.setTiempoInvencible(500);
 	}
 }

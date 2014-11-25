@@ -77,8 +77,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.velocity = velocity;
 		this.estadoCapsula  = new EstadoCapsula();
 		this.muriendo=false;
-		this.tiempoMuriendo=500;
-		this.muriendoYSubiendo=500;
+		this.tiempoMuriendo=300;
+		this.muriendoYSubiendo=300;
 		
 		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
 		invisible = false;
@@ -106,6 +106,11 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		  if(this.getScene().getPlayState())
 		  {
 		   //hay enemigos?
+			  if(this.getEstado().siendoArrastrado())
+			  	{
+				  this.getEstado().update(deltaState);
+			  	}
+			  
 			  if(this.getScene().enemigosExterminados())
 			  	{
 				  this.getScene().nivelCompleto();
@@ -159,20 +164,11 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		    //this.getEstado().update(deltaState);
 			   //TODO modificar
 		    }
-		   else{
+		   else
+		   {
 		     
 		    //COMANDO SALTAR
-		    if(deltaState.isKeyPressed(Key.A)) {
-		     if(this.derecha){
-		      Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
-		      this.setAppearance(sprite.crop(ancho+7,alto));
-		      this.saltar();
-		     }else {
-		      Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
-		      this.setAppearance(sprite.crop(ancho+7,alto));
-		      this.saltar();
-		      }
-		     }
+		    
 		    
 		    if(deltaState.isKeyBeingHold(Key.DOWN)&&deltaState.isKeyPressed(Key.A)){
 		     if(this.derecha&&this.getY()<this.gameDimension.getHeight()-40&&this.getScene().hayColisionConUnPiso(this)){
@@ -194,7 +190,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		    this.getEstado().update(deltaState);
 		    
 		    //COMANDO MOVER
-		    if (deltaState.isKeyBeingHold(Key.RIGHT)) {
+		    if (deltaState.isKeyBeingHold(Key.RIGHT) && !this.getEstado().siendoArrastrado()) {
 		     this.derecha = true;
 		     Sprite sprite = Sprite.fromImage("BrosDrc.png");
 		     this.setAppearance(sprite);
@@ -202,7 +198,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		     
 		     }
 		    else
-		     if(deltaState.isKeyBeingHold(Key.LEFT)) 
+		     if(deltaState.isKeyBeingHold(Key.LEFT) && !this.getEstado().siendoArrastrado()) 
 		      {
 		      this.derecha = false;
 		      Sprite sprite = Sprite.fromImage("BrosIzq.png");
@@ -211,7 +207,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		      }
 		    
 		    //COMANDO:DISPARAR   
-		    if(deltaState.isKeyPressed(Key.S))
+		    if(deltaState.isKeyPressed(Key.S)&& !this.getEstado().siendoArrastrado())
 		       {
 		       this.CongelaOEmpuja(deltaState);
 		       }
@@ -226,7 +222,20 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		      this.setAppearance(sprite);
 		      }
 		    }
-		   }
+		   }//TODO
+		   //COMANDO SALTAR
+		   if(deltaState.isKeyPressed(Key.A)) {
+			     if(this.derecha){
+			      Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
+			      this.setAppearance(sprite.crop(ancho+7,alto));
+			      this.saltar();
+			     }else {
+			      Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
+			      this.setAppearance(sprite.crop(ancho+7,alto));
+			      this.saltar();
+			      }
+			     }
+		   
 		  } else{
 		   //TODO MORIR
 			  this.muriendo = true;
@@ -256,8 +265,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 					else
 						{
 						this.muriendo = false;
-						this.tiempoMuriendo = 500;
-						this.muriendoYSubiendo = 500;
+						this.tiempoMuriendo = 300;
+						this.muriendoYSubiendo = 300;
 						 if(this.vidas.getCantidadVidas() == 0)
 							{
 							this.getScene().cartelLose();
@@ -268,7 +277,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 						 	{
 							 this.vidas.setCantidadVidas(this.vidas.getCantidadVidas() - 1);
 						 	 this.invencible = true;
-						 	 this.tiempoInvencible = 500;
+						 	 this.tiempoInvencible = 300;
 						 	 //correccion de error de reposicionamiento del bros al morir
 						 	 this.setEstado(new CayendoBros((this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25),this));
 						 	this.getScene().reanimarBros(this);
@@ -323,7 +332,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	
 	
-
+//SALTA
 	public void saltar() 
 	{
 		this.getEstado().saltar();
