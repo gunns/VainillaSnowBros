@@ -146,7 +146,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		     }
 		    
 		    if(deltaState.isKeyBeingHold(Key.DOWN)&&deltaState.isKeyPressed(Key.A)){
-		     if(this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
+		     if(this.derecha&&this.getY()<this.gameDimension.getHeight()-40&&this.getScene().hayColisionConUnPiso(this)){
 		      Sprite sprite = Sprite.fromImage("BrosSaltaDrc.png");
 		      this.setAppearance(sprite.crop(ancho+7, alto));
 		      this.setY(this.getY()+5);
@@ -154,7 +154,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		      Sound sonidoSalto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump_11.wav"));
 		      sonidoSalto.play();
 		     }
-		     if(!this.derecha&&this.getY()<this.gameDimension.getHeight()-40){
+		     if(!this.derecha&&this.getY()<this.gameDimension.getHeight()-40&&this.getScene().hayColisionConUnPiso(this)){
 		      Sprite sprite = Sprite.fromImage("BrosSaltaIzq.png");
 		      this.setAppearance(sprite.crop(ancho+7, alto));
 		      this.setY(this.getY()+5);
