@@ -21,6 +21,8 @@ import componentes.AnimacionRegeneracion;
 import componentes.Bros;
 import componentes.CartelInicioNivel;
 import componentes.Enemigos;
+import componentes.Fondo;
+import componentes.Fondos;
 import componentes.Mob;
 import componentes.Piso;
 import componentes.Cartel;
@@ -77,6 +79,7 @@ public class SnowBrosScene extends GameScene{
 		
 		this.addComponent(cartelInicio);
 		
+		
 		/*
 		
 		
@@ -132,8 +135,11 @@ public class SnowBrosScene extends GameScene{
 	
 	private void buildBackground(Color color) {
 		if (backGround != null) {this.removeComponent(this.backGround);}
-		Sprite sprite = Sprite.fromImage("fondo.jpg");
-		this.backGround = new GameComponent<GameScene>(sprite.scale(1.4, 1.4),0, 0);
+		Fondos fondo = new Fondos();
+//		Fondo name = fondo.getFondos().get(4);
+		Fondo name = fondo.randomFondo();
+		Sprite sprite = Sprite.fromImage(name.getFile());;
+		this.backGround = new GameComponent<GameScene>(sprite.scale(name.getEscala1(),name.getEscala2()),0, 0);
 		this.backGround.setZ(-1);
 		this.addComponent(this.backGround);
 	}
