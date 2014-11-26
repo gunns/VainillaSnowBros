@@ -1,4 +1,5 @@
 package componentes;
+
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
@@ -6,7 +7,7 @@ import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
-public class Reanimacion extends GameComponent<SnowBrosScene>{
+public class Reposicionar extends GameComponent<SnowBrosScene>{
 	
 Bros bros;
 Integer tiempoReanimacion;
@@ -30,7 +31,7 @@ Sprite sprite10;
 Sprite[] sprites;
 
 
-public Reanimacion(Bros bros, SnowBrosScene sns, Integer tiempo){
+public Reposicionar(Bros bros, SnowBrosScene sns, Integer tiempo){
 	this.bros = bros;
 	this.sns = sns;
 	//tiempoReanimacion = 400;
@@ -91,16 +92,13 @@ public void update(DeltaState deltaState)
 	{
 		Sprite spriteVive = Sprite.fromImage("BrosDrc.png");
 		bros.setAppearance(spriteVive);
+		//bros.setNivelCompleto(false);
+		bros.setNivelCompleto(false);
 		bros.setX(bros.getAparicionEnX());
 		bros.setY(bros.getAparicionEnY());
 		bros.setZ(1);
-		bros.setInvencible(true);
-		bros.setTiempoInvencible(200);
-		this.destroy();
-		//
-		//bros.nivelCompleto = false;
-		sns.addComponent(bros);
-	
+		//sns.addComponent(bros);
+	this.destroy();
 	}
 else
 	{

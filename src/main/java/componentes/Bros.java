@@ -60,7 +60,11 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	//paricion
 	boolean aparicion;
+	//chequeando si terminó el nivel
+	boolean nivelCompleto;
 	
+	//booleano para reposicionar el bros
+	boolean reposicionando;
 	
 	public Bros(Dimension dim, boolean playState, double velocity){
 		Sprite sprite = Sprite.fromImage("BrosDrc.png");
@@ -84,6 +88,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		invisible = false;
 		tiempoInvisible = 200;
 		aparicion = true;
+		nivelCompleto = false;
+		reposicionando = false;
 		
 		
 	}
@@ -103,17 +109,37 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	
 	public void update(DeltaState deltaState) {
+		
+		
+		
 		  if(this.getScene().getPlayState())
 		  {
-		   //hay enemigos?
+			  if(this.reposicionando)
+			  	{
+				  
+				  this.nuevoNivel();
+			  	}
+			  else
+			  {
+			  //si termino nivel
+			  if(this.nivelCompleto)
+			  	{
+				  this.saltarAlSiguienteNivel();
+				  Sprite sprite = Sprite.fromImage("win.png");
+			      this.setAppearance(sprite);
+			  	}
+			  else
+			  {
+		   
 			  if(this.getEstado().siendoArrastrado())
 			  	{
 				  this.getEstado().update(deltaState);
 			  	}
-			  
-			  if(this.getScene().enemigosExterminados())
+			//hay enemigos?
+			  if(this.getScene().enemigosExterminados())// && !this.getScene().isNivelCompleto())
 			  	{
 				  this.getScene().nivelCompleto();
+				  this.nivelCompleto = true;
 				  
 			  	}
 			  //A veces el bros se cae solo(vaya a saber quien el por que), para que esto no pase, se posicionara siempre en la parte superior
@@ -153,7 +179,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		   }
 		   
 		  if (!this.getScene().enemigoColisionaConBros(this) || (this.getScene().enemigoColisionaConBros(this) && this.invencible)){
-		   //TODO Agarrar tesoro
+		   
 		   
 		   if((this.getScene().esferaRodanteColisionaConBros(this)))
 		    {
@@ -162,7 +188,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		      this.setEstado(new SiendoArrastrado(esfera, this));
 		    //this.getEstado().setBros(this);
 		    //this.getEstado().update(deltaState);
-			   //TODO modificar
+			   
 		    }
 		   else
 		   {
@@ -222,7 +248,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		      this.setAppearance(sprite);
 		      }
 		    }
-		   }//TODO
+		   }
 		   //COMANDO SALTAR
 		   if(deltaState.isKeyPressed(Key.A)) {
 			     if(this.derecha){
@@ -237,7 +263,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			     }
 		   
 		  } else{
-		   //TODO MORIR
+		   //MORIR
 			  this.muriendo = true;
 			  Sound sonidoMuerte = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("Player Death.wav"));
 		      sonidoMuerte.play();
@@ -248,10 +274,14 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		   }
 		  }
 		 }
+		  }
+	}
 	}
 	
 		
-	 private void brosMuere() {
+	
+
+	private void brosMuere() {
 				if(this.muriendoYSubiendo > 1)
 				{
 				this.muriendoYSubiendo = this.muriendoYSubiendo - 1;
@@ -336,7 +366,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public void saltar() 
 	{
 		this.getEstado().saltar();
-	}
+		}
 	
 	private void moverALaDerecha(DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
@@ -364,7 +394,6 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			}
 		}
 	}
-	
 	private void moverALaIzquierda(DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
 			this.dir = new Izquierda();
@@ -468,7 +497,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	}
 
 	public void sumarPuntaje(Integer puntos) {
-		//TODO Modificar
+		
 		this.getPuntaje().sumarPuntaje(puntos);
 		
 	}
@@ -511,4 +540,67 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		
 	}
 	
+	 private void saltarAlSiguienteNivel() 
+	 	{
+		if(this.getY() > -40 && (this.nivelCompleto))
+			{
+			this.setY(this.getY() - 2.5);
+			}
+		else
+			{
+			//MANTENER EL BROS AHÍ HASTA QUE SE REPOSICIONE
+			//this.nuevoNivel(this.getScene());
+			this.setY(-40);
+			//this.setNivelCompleto(false);
+			//this.destroy();
+			//Reposicionar reposicion = new Reposicionar(this, this.getScene(), 17);
+			//this.getScene().addComponent(reposicion);
+			}
+	 	}
+
+	public boolean isNivelCompleto() {
+		return nivelCompleto;
+	}
+
+	public void setNivelCompleto(boolean nivelCompleto) {
+		this.nivelCompleto = nivelCompleto;
+	}
+	
+	
+	public void nuevoNivel()
+	{
+	 	 //this.invencible = true;
+	 	 //this.tiempoInvencible = 300;
+	 	 //correccion de error de reposicionamiento del bros al morir
+	 	 //this.setEstado(new CayendoBros((this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25),this));
+	 	//s.reanimarBros(this);
+	 	//this.nivelCompleto = false;
+	 	//s.removeComponent(this);
+		//this.destroy();
+		Reposicionar reposicion = new Reposicionar(this, this.getScene(), 17);
+		this.getScene().addComponent(reposicion);
+		this.reposicionando = false;
+		
+		//this.setX(100);
+		//this.setY(400);
+		//this.nivelCompleto = false;
+		
+		//this.destroy();
+		
+	
+	}
+
+	public boolean isReposicionando() {
+		return reposicionando;
+	}
+
+	public void setReposicionando(boolean reposicionando) {
+		this.reposicionando = reposicionando;
+	}
+
+
+	
+	
 }
+
+

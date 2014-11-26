@@ -44,30 +44,25 @@ public class CartelLevelComplete extends GameComponent<SnowBrosScene>{
 		this.setX(dim.getWidth()/3);
 		this.setY(dim.getHeight()/3);
 		
-		//tiempoDeCartel = 700;
+		tiempoDeCartel = 700;
 		
 		
 		
 	}
 	
-	//public void update(DeltaState deltaState) {
-		//if(tiempoDeCartel == 400)
-			//{
-			//voz inicio de nivel
-			//Sound vozMotivacion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("ready2.wav"));
-			//vozMotivacion.play();
-			//tiempoDeCartel = tiempoDeCartel - 1;
-			//}
-		//if(tiempoDeCartel > 1)
-		//{
-		//tiempoDeCartel = tiempoDeCartel - 1;
-		//}
-		//else
-			//{
-			//this.destroy();
-			//this.getScene().comenzarNivel(gameDimension, velocity);
-			//}
-	//}
+	public void update(DeltaState deltaState) {
+		if(tiempoDeCartel > 0)
+			{
+			tiempoDeCartel = tiempoDeCartel - 1;
+			}
+		else
+			{
+			
+			
+			this.destroy();
+			this.getScene().siguienteNivel();
+			}
+	}
 }
 
 	
