@@ -14,7 +14,7 @@ public class Agresivo extends EstadoAgresividad{
 	}
 	
 	public void mover(DeltaState deltaState){
-		if(this.getMob().getScene().brosEstaAbajoDeMob(this.getMob())){
+		if(this.getMob().getScene().brosEstaAbajoDeMob(this.getMob())&& this.getMob().esPeligroso()){
 		     if(this.getMob().derecha&&this.getMob().getY()<this.getMob().gameDimension.getHeight()-40&&this.getMob().getScene().hayColisionConUnPiso(this.getMob())){
 			      //Sprite sprite = Sprite.fromImage("MobSaltaDrc.png");
 			      //this.getMob().setAppearance(sprite.crop(this.getMob().getAncho()+7, this.getMob().getAlto()));
@@ -31,8 +31,8 @@ public class Agresivo extends EstadoAgresividad{
 			      sonidoSalto.play();
 			     }
 		}
-		if(this.getMob().getScene().brosEstaArribaDeMob(this.getMob())){
-			
+		if(this.getMob().getScene().brosEstaArribaDeMob(this.getMob())&& this.getMob().getScene().hayColisionConUnPiso(this.getMob())&&this.getMob().esPeligroso()){
+			this.getMob().getEstado().saltar();
 		}
 	}
 	public void update(DeltaState deltaState){

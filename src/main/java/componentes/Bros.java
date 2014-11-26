@@ -336,7 +336,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public void saltar() 
 	{
 		this.getEstado().saltar();
-		}
+	}
 	
 	private void moverALaDerecha(DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
