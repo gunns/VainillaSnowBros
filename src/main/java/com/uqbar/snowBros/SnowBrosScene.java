@@ -538,6 +538,16 @@ public class SnowBrosScene extends GameScene{
 		}
 		return ret;
 	}
+	
+	public boolean brosEstaAbajoDeMob(Mob mob){
+		return bros.getY()>mob.getY()+20;
+	}
+	
+
+	public boolean brosEstaArribaDeMob(Mob mob) {
+		return bros.getY()<mob.getY();
+	}
+	
 
 	public Sound getGameSound() {
 		return gameSound;
@@ -649,7 +659,9 @@ public class SnowBrosScene extends GameScene{
 			}
 		
 	}
-	
+
+
+
 	
 	
 }
