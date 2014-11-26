@@ -805,6 +805,18 @@ public class SnowBrosScene extends GameScene{
 	public void setNumeroNivel(Integer numeroNivel) {
 		this.numeroNivel = numeroNivel;
 	}
+
+
+
+	public boolean brosEstaALaDerechaDeMob(Mob mob) {
+		return this.getBros().getX()>mob.getX();
+	}
+
+
+
+	public boolean brosEstaALaIzquierdaDeMob(Mob mob) {
+		return mob.getX()>this.getBros().getX();
+	}
 	
 	
 }
