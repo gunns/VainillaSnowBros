@@ -16,6 +16,11 @@ public class Enemigos{
 			int nEnemigos=0;
 			for (nEnemigos=0; nEnemigos <= r.nextInt(2)+4; nEnemigos++){
 				Mob aMob=new Mob(this.dim,playState, velocity);
+				for (Mob c :mobs){
+					if(c.getX()==aMob.getX() && c.getY()==aMob.getY()){
+						aMob.setX(r.nextInt(dim.width-(int)aMob.getAppearance().getWidth()));
+					}
+				}
 				mobs.add(aMob);
 			}
 	}
