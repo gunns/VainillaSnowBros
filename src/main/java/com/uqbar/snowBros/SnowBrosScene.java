@@ -187,6 +187,24 @@ public class SnowBrosScene extends GameScene{
 		return hayColision;
 		}
 	
+	public boolean hayColisionTotalConUnPiso(GameComponent<SnowBrosScene> componenteRectangular){
+		boolean hayColision = false;
+		Piso piso;
+		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
+		for(GameComponent<?> each : this.getComponents())
+			//piso = this.suelo.getSuelos().get(n);
+			if(each.getClass() == Piso.class)
+			{
+				Piso unPiso  = (Piso) each;
+			if(CollisionDetector.INSTANCE.collidesRectAgainstRect(componenteRectangular.getX(),
+					componenteRectangular.getY(),
+					(int) (componenteRectangular.getAppearance().getWidth()), (int) (componenteRectangular.getAppearance().getHeight()),
+					unPiso.getX(), unPiso.getY(),(int) (unPiso.getAppearance().getWidth()),(int) (unPiso.getAppearance().getHeight()))){
+				hayColision = true;
+				}
+			}
+		return hayColision;
+		}
 	public boolean enemigoColisionaConBros(GameComponent<SnowBrosScene> componenteRectangular){
 		boolean hayColision = false;
 		Mob mob;
@@ -514,7 +532,7 @@ public class SnowBrosScene extends GameScene{
 		rectanguloPrueba.setX(x);
 		rectanguloPrueba.setY(y);
 		rectanguloPrueba.setAppearance(new Rectangle(Color.blue, width, height));
-		boolean ret= this.hayColisionConUnPiso(rectanguloPrueba);
+		boolean ret= this.hayColisionTotalConUnPiso(rectanguloPrueba);
 		rectanguloPrueba.destroy();
 		return ret;
 	}

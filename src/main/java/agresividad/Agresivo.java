@@ -31,7 +31,7 @@ public class Agresivo extends EstadoAgresividad{
 			      sonidoSalto.play();
 			     }
 		}
-		if(this.getMob().getScene().brosEstaArribaDeMob(this.getMob())&& this.getMob().getScene().hayColisionConUnPiso(this.getMob())&&this.getMob().esPeligroso()){
+		if(this.getMob().getScene().brosEstaArribaDeMob(this.getMob())&& this.getMob().getScene().hayColisionConUnPiso(this.getMob())&&this.getMob().esPeligroso()&&this.getMob().getScene().tieneUnPisoJustoArriba(this.getMob().getX(),this.getMob().getY()-100 , 100, this.getMob().getAncho())){
 			this.getMob().getEstado().saltar();
 		}
 	}

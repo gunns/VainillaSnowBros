@@ -50,7 +50,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.playState = playState;
 		this.setEstadoAgresividad(new Pasivo(this));
 		this.setEstado(new CayendoMob(this.getY(),this));
-		this.setX(r.nextInt(gameDimension.width-ancho));
+		this.setX(r.nextInt(gameDimension.width-(int)this.getAppearance().getWidth()));
 		this.setY(r.nextInt(gameDimension.height)-60);
 		this.setZ(0);
 		this.setEstadoNieve(new SinNieve(this, 0));
