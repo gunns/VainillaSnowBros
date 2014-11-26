@@ -747,6 +747,14 @@ public class SnowBrosScene extends GameScene{
 	}
 
 
+	public boolean brosEstaAbajoDeMob(Mob mob){
+		return bros.getY()>mob.getY()+20;
+	}
+	
+
+	public boolean brosEstaArribaDeMob(Mob mob) {
+		return bros.getY()<mob.getY();
+	}
 
 	private void reposicionar() {
 		
