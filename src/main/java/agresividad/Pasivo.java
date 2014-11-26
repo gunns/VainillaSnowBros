@@ -20,6 +20,8 @@ public class Pasivo extends EstadoAgresividad {
 			if(this.getMob().esPeligroso()&&derecha&&this.getMob().noLlegoAlFinal() &&!this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1)){
 				this.moverALaDerecha(deltaState);
 				if(!this.getMob().noLlegoAlFinal()||this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1)){
+					//TODO actualiza tiempo de reaccion
+					this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
 					this.derecha=false;
 				}
 			}
@@ -28,15 +30,27 @@ public class Pasivo extends EstadoAgresividad {
 				this.moverALaIzquierda(deltaState);
 				if(!this.getMob().noLlegoAlComienzo()||this.getMob().getScene().terminaElPiso(this.getMob().getX()-1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))
 						{
+					//TODO actualiza tiempo de reaccion
+					this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
 					this.derecha=true;
 				}
 			}
 			if(this.getMob().getScene().estaCercaBrosdeMob(this.getMob())){
+				//TODO actualiza tiempo de reaccion
+				this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
 				this.volverseAgresivo();
 			}
 		}
 	}
 	public void update(DeltaState deltaState){
+		if(this.getMob().getTiempoDeReaccionActual() > 1)
+			{
+			//TODO actualiza tiempo de reaccion
+			this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccionActual() - 1);
+			}
+		else
+		{
 		this.mover(deltaState);
+		}
 	}
 }

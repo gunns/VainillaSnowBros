@@ -30,6 +30,8 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	Random r = new Random();
 	public EstadoAgresividad estadoAgresividad;
 	public boolean derecha = true;
+	public Integer tiempoDeReaccion;
+	public Integer tiempoDeReaccionActual;
 
 	public EstadoAgresividad getEstadoAgresividad() {
 		return estadoAgresividad;
@@ -55,6 +57,9 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.setZ(0);
 		this.setEstadoNieve(new SinNieve(this, 0));
 		this.velocity = velocity;
+		
+		this.tiempoDeReaccion = 100;
+		this.tiempoDeReaccionActual = 100;
 	}
 	
 	public EstadoMob getEstado() {return estado;}
@@ -170,6 +175,22 @@ public class Mob extends GameComponent<SnowBrosScene> {
 				}
 			}
 		}
+	}
+
+	public Integer getTiempoDeReaccion() {
+		return tiempoDeReaccion;
+	}
+
+	public void setTiempoDeReaccion(Integer tiempoDeReaccion) {
+		this.tiempoDeReaccion = tiempoDeReaccion;
+	}
+
+	public Integer getTiempoDeReaccionActual() {
+		return tiempoDeReaccionActual;
+	}
+
+	public void setTiempoDeReaccionActual(Integer tiempoDeReaccionActual) {
+		this.tiempoDeReaccionActual = tiempoDeReaccionActual;
 	}
 	
 	

@@ -12,7 +12,8 @@ public class CayendoMob extends EstadoMob{
 	Sound sonidoSalto;
 	
 	public CayendoMob(double yInicial, Mob mob){
-		sonidoSalto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump_02.wav"));
+		
+		//sonidoSalto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump_02.wav"));
 		this.setMob(mob);
 		this.setyInicial(yInicial);
 	}
@@ -33,7 +34,7 @@ public class CayendoMob extends EstadoMob{
 	@Override
 	public void cambiarMovimiento(Mob mob) {
 		this.getMob().setEstado(new SubiendoMob(this.getMob().getY(),this.getMob()));	
-		this.sonidoSalto.play();
+		//this.sonidoSalto.play();
 		
 	}
 }
