@@ -2,6 +2,7 @@ package componentes;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Enemigos{
 	
@@ -11,10 +12,12 @@ public class Enemigos{
 	public Enemigos(Dimension dim,boolean playState, double velocity){
 			this.mobs = new ArrayList<Mob>();
 			this.dim=dim;
-			Mob mob1=new Mob(dim,playState, velocity);
-			mobs.add(mob1);
-			Mob mob2=new Mob(this.dim,playState, velocity);
-			mobs.add(mob2);
+			Random r = new Random();
+			int nEnemigos=0;
+			for (nEnemigos=0; nEnemigos <= r.nextInt(2)+4; nEnemigos++){
+				Mob aMob=new Mob(this.dim,playState, velocity);
+				mobs.add(aMob);
+			}
 	}
 	
 	public ArrayList<Mob> getEnemigos(){return mobs;}
