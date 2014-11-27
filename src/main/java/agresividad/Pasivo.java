@@ -1,6 +1,8 @@
 package agresividad;
 
 import com.uqbar.vainilla.DeltaState;
+import com.uqbar.vainilla.appearances.Sprite;
+
 import componentes.Mob;
 
 public class Pasivo extends EstadoAgresividad {
@@ -22,6 +24,8 @@ public class Pasivo extends EstadoAgresividad {
 				if(!this.getMob().noLlegoAlFinal()||this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1)){
 					//TODO actualiza tiempo de reaccion
 					this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
+					Sprite sprite = Sprite.fromImage("MobIzq.png");
+					this.getMob().setAppearance(sprite);
 					this.derecha=false;
 				}
 			}
@@ -32,6 +36,8 @@ public class Pasivo extends EstadoAgresividad {
 						{
 					//TODO actualiza tiempo de reaccion
 					this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
+					Sprite sprite = Sprite.fromImage("MobDrc.png");
+					this.getMob().setAppearance(sprite);
 					this.derecha=true;
 				}
 			}

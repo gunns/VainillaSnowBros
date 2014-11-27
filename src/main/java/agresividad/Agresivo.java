@@ -16,9 +16,9 @@ public class Agresivo extends EstadoAgresividad{
 	public void mover(DeltaState deltaState){
 		if(this.getMob().getScene().brosEstaAbajoDeMob(this.getMob())&& this.getMob().esPeligroso()){
 		     if(this.getMob().derecha&&this.getMob().getY()<this.getMob().gameDimension.getHeight()-40&&this.getMob().getScene().hayColisionConUnPiso(this.getMob())){
-			      //Sprite sprite = Sprite.fromImage("MobSaltaDrc.png");
-			      //this.getMob().setAppearance(sprite.crop(this.getMob().getAncho()+7, this.getMob().getAlto()));
-			      this.getMob().setY(this.getMob().getY()+5);
+			      Sprite sprite = Sprite.fromImage("MobCae.png");
+			      this.getMob().setAppearance(sprite);
+			      this.getMob().setY(this.getMob().getY()+6);
 			    //TODO actualiza tiempo de reaccion
 					this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
 					//TODO adios sonido salto
@@ -27,9 +27,9 @@ public class Agresivo extends EstadoAgresividad{
 			      //sonidoSalto.play();
 			     }
 			     if(!this.getMob().derecha&&this.getMob().getY()<this.getMob().gameDimension.getHeight()-40&&this.getMob().getScene().hayColisionConUnPiso(this.getMob())){
-			      //Sprite sprite = Sprite.fromImage("MobSaltaIzq.png");
-			      //this.getMob().setAppearance(sprite.crop(this.getMob().getAncho()+7, this.getMob().getAlto()));
-			      this.getMob().setY(this.getMob().getY()+5);
+			      Sprite sprite = Sprite.fromImage("MobCae.png");
+			      this.getMob().setAppearance(sprite);
+			      this.getMob().setY(this.getMob().getY()+6);
 			    //TODO actualiza tiempo de reaccion
 					this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
 					//TODO adios sonido salto
@@ -38,6 +38,13 @@ public class Agresivo extends EstadoAgresividad{
 			     }
 		}
 		if(this.getMob().esPeligroso()&&this.getMob().getScene().brosEstaArribaDeMob(this.getMob())&& this.getMob().getScene().hayColisionConUnPiso(this.getMob())&&this.getMob().esPeligroso()&&this.getMob().getScene().tieneUnPisoJustoArriba(this.getMob().getX(),this.getMob().getY()-100 , 100, this.getMob().getAncho())){
+			if(this.getMob().derecha){
+				Sprite sprite = Sprite.fromImage("MobSaltaIzq.png");
+			    this.getMob().setAppearance(sprite);
+			}else{
+				Sprite sprite = Sprite.fromImage("MobSaltaDrc.png");
+			    this.getMob().setAppearance(sprite);
+			}
 			this.getMob().getEstado().saltar();
 			//TODO actualiza tiempo de reaccion
 			this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
