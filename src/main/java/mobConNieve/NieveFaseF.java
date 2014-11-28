@@ -40,7 +40,7 @@ public class NieveFaseF extends EstadoNieve{
 	public void arrolla(Mob mob) {
 		if(mob.getScene().colisionaEsferaConEsfera(this.getMob(),mob ) )
 			{
-			this.getMob().setEstadoNieve(new Empujado(this.getMob(), 0, this.getMob().getDir().direccionContraria(), mob.getEstadoNieve().getBros()));
+			this.getMob().setEstadoNieve(new Empujado(this.getMob(), 0, mob.getDir(), mob.getEstadoNieve().getBros()));
 			mob.getEstadoNieve().setDir(mob.getDir().direccionContraria());
 			//sonido empuje
 			Sound sonidoEmpuje = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("pullSnowBall.wav"));

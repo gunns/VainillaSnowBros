@@ -30,13 +30,13 @@ public class SiendoArrastrado extends EstadoBros{
 			//{
 				if(deltaState.isKeyPressed(Key.A))
 					{
-					this.cambiarMovimiento(bros);
-					bros.setTiempoInvencible(500);
+					this.saltar();
 					//this.getBros().setEstado(new SubiendoBros(this.getBros().getY(),this.getBros()));
 					}
 			//}
 		
 		esfera.getDir().desplazarBrosArrastrado(bros, esfera, deltaState);
+		bros.setInvencible(true);
 		//this.bros.setX(this.esfera.getX() + esfera.getAppearance().getWidth()/2);
 		//this.bros.setY(this.esfera.getY());
 			
@@ -64,6 +64,6 @@ public class SiendoArrastrado extends EstadoBros{
 	
 	public void saltar(){
 		this.cambiarMovimiento(bros);
-		bros.setTiempoInvencible(500);
+		bros.setTiempoInvencible(250);
 	}
 }

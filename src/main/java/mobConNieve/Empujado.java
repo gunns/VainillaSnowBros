@@ -24,7 +24,7 @@ public class Empujado extends EstadoNieve{
 	
 	public Empujado(Mob mob, double duracionNieve, Direccion dir, Bros bros) {
 		super(mob, duracionNieve);
-		this.rebotes = 4;
+		this.rebotes = 3;
 		this.dir = dir;
 		mob.setVelocity(mob.getVelocity() * 2);
 		this.bros = bros;

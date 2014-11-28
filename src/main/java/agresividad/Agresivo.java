@@ -160,7 +160,23 @@ public class Agresivo extends EstadoAgresividad{
 	public void moverseALaIzquierda(DeltaState deltaState)
 	{
 		this.moverALaIzquierda(deltaState);
-		if(this.acabaDeTocarElLimite || !this.getMob().noLlegoAlComienzo())
+		if(this.acabaDeTocarElLimite)
+				{
+				if(this.getMob().getScene().tieneUnPisoJustoArriba(this.getMob().getX(),this.getMob().getY()-100 , 100, this.getMob().getAncho()))
+					{
+					this.saltar(deltaState);
+					this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
+					this.persiguiendo = false;
+					}
+				else
+					{
+					this.bajar(deltaState);
+					this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
+					this.persiguiendo = false;
+					}
+				}
+				else
+				if(!this.getMob().noLlegoAlComienzo())
 			{
 			this.persiguiendo = false;
 			this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
@@ -170,12 +186,28 @@ public class Agresivo extends EstadoAgresividad{
 	public void moverseALaDerecha(DeltaState deltaState)
 	{
 		this.moverALaDerecha(deltaState);
-		if(this.acabaDeTocarElLimite || !this.getMob().noLlegoAlFinal())
+		if(this.acabaDeTocarElLimite)
+		{
+		if(this.getMob().getScene().tieneUnPisoJustoArriba(this.getMob().getX(),this.getMob().getY()-100 , 100, this.getMob().getAncho()))
 			{
-			this.persiguiendo = false;
+			this.saltar(deltaState);
 			this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
+			this.persiguiendo = false;
 			}
+		else
+			{
+			this.bajar(deltaState);
+			this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
+			this.persiguiendo = false;
+			}
+		}
+		else
+		if(!this.getMob().noLlegoAlFinal())
+	{
+	this.persiguiendo = false;
+	this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
 	}
+}
 	
 	
 	

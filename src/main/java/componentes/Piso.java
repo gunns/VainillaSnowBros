@@ -17,6 +17,7 @@ public class Piso extends GameComponent<SnowBrosScene>{
 	public Piso(double coordY, double coordX, Color col, int ancho, int alto){
 		this.ancho = ancho;
 		this.alto = alto;
+		
 		Sprite sprite = Sprite.fromImage("Suelo.png");
 		this.setAppearance(sprite);
 //		this.setAppearance(new Rectangle(Color.black,ancho,alto));
@@ -27,6 +28,18 @@ public class Piso extends GameComponent<SnowBrosScene>{
 	
 	
 	
+
+public void asignarPiso(SnowBrosScene s) {
+		// TODO Auto-generated method stub
+	if(s.getNumeroNivel()>=5)
+	{
+	Sprite sprite = Sprite.fromImage("Suelo2.png");
+	this.setAppearance(sprite);
+	}
+	}
+
+
+
 
 public void update(DeltaState deltaState)
 {

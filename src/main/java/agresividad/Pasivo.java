@@ -30,7 +30,7 @@ public class Pasivo extends EstadoAgresividad {
 		//Mover por mover
 		//Mover para saltar
 		//Mover para bajar
-		if(this.numeroDeMovimiento >10)
+		if(this.numeroDeMovimiento <=5)
 			{
 			this.saltara = true;
 			this.moverParaSaltar(deltaState);
@@ -50,6 +50,8 @@ public class Pasivo extends EstadoAgresividad {
 	{
 		
 	this.getMob().getDir().moverMob(this, deltaState);
+	this.saltara = false;
+	this.bajara = false;
 	if(this.acabaDeTocarElLimite || !this.getMob().noLlegoAlComienzo() || !this.getMob().noLlegoAlFinal())
 		{
 		this.setearNumeroDeMovimiento();

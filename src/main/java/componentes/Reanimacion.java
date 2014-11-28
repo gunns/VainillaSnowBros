@@ -6,6 +6,8 @@ import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
+import estadosCapsula.EstadoCapsula;
+
 public class Reanimacion extends GameComponent<SnowBrosScene>{
 	
 Bros bros;
@@ -55,7 +57,7 @@ public Reanimacion(Bros bros, SnowBrosScene sns, Integer tiempo){
 	
 	
 	
-	sprites = new Sprite[19];
+	sprites = new Sprite[16];
 	sprites[0] = sprite1;
 	sprites[1] = sprite2;
 	sprites[2] = sprite3;
@@ -72,9 +74,6 @@ public Reanimacion(Bros bros, SnowBrosScene sns, Integer tiempo){
 	sprites[13] = sprite8;
 	sprites[14] = sprite9;
 	sprites[15] = sprite10;
-	sprites[16] = sprite8;
-	sprites[17] = sprite9;
-	sprites[18] = sprite10;
 	
 	 //sonido aparicion
     Sound sonidoAparicion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("appear.wav"));
@@ -87,7 +86,7 @@ public void update(DeltaState deltaState)
 	if(this.getScene().getPlayState())
 	{
 	
-	if(this.current > 18)
+	if(this.current > 15)
 	{
 		Sprite spriteVive = Sprite.fromImage("BrosDrc.png");
 		bros.setAppearance(spriteVive);
@@ -95,7 +94,8 @@ public void update(DeltaState deltaState)
 		bros.setY(bros.getAparicionEnY());
 		bros.setZ(1);
 		bros.setInvencible(true);
-		bros.setTiempoInvencible(200);
+		bros.setTiempoInvencible(500);
+		bros.setEstadoCapsula(new EstadoCapsula());
 		this.destroy();
 		//
 		//bros.nivelCompleto = false;
@@ -140,7 +140,7 @@ if(this.tiempoAnimacionAux < 1)
 }
 
 public void reposicionar(Integer current) {
-	if(current < 18)
+	if(current < 15)
 		{
 		if(sprites[current -1].getHeight() < sprites[current].getHeight())
 			{

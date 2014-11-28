@@ -81,8 +81,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.velocity = velocity;
 		this.estadoCapsula  = new EstadoCapsula();
 		this.muriendo=false;
-		this.tiempoMuriendo=300;
-		this.muriendoYSubiendo=300;
+		this.tiempoMuriendo=180;
+		this.muriendoYSubiendo=150;
 		
 		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
 		invisible = false;
@@ -295,8 +295,8 @@ public class Bros extends GameComponent<SnowBrosScene>{
 					else
 						{
 						this.muriendo = false;
-						this.tiempoMuriendo = 300;
-						this.muriendoYSubiendo = 300;
+						this.tiempoMuriendo = 180;
+						this.muriendoYSubiendo = 150;
 						 if(this.vidas.getCantidadVidas() == 0)
 							{
 							this.getScene().cartelLose();
@@ -577,6 +577,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	 	//this.nivelCompleto = false;
 	 	//s.removeComponent(this);
 		//this.destroy();
+	 	 this.setEstado(new CayendoBros((this.gameDimension.getHeight()-(this.getAppearance().getHeight())-25),this));
 		Reposicionar reposicion = new Reposicionar(this, this.getScene(), 17);
 		this.getScene().addComponent(reposicion);
 		this.reposicionando = false;

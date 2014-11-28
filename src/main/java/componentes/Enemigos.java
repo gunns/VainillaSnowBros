@@ -14,8 +14,8 @@ public class Enemigos{
 			this.dim=dim;
 			Random r = new Random();
 			int nEnemigos=0;
-			for (nEnemigos=0; nEnemigos < 1; nEnemigos++){
-//			for (nEnemigos=0; nEnemigos <= r.nextInt(2)+4; nEnemigos++){
+			//for (nEnemigos=0; nEnemigos < 1; nEnemigos++){
+			for (nEnemigos=0; nEnemigos <= r.nextInt(2)+4; nEnemigos++){
 				Mob aMob=new Mob(this.dim,playState, velocity);
 				for (Mob c :mobs){
 					if(c.getX()==aMob.getX() && c.getY()==aMob.getY()){

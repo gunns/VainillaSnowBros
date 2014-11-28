@@ -120,8 +120,15 @@ public class Derecha extends Direccion{
 	@Override
 	public void setearImagenSalto(Mob mob) {
 		//setear imagen
-		mob.setAppearance(Sprite.fromImage("MobSaltaDrc.png"));
+		mob.setAppearance(mob.getApariencia().getMobSaltaDerecha());
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setearImagen(Mob mob) {
+		if(mob.esPeligroso())
+		mob.setAppearance(mob.getApariencia().getMobDerecha());
 		
 	}
 	

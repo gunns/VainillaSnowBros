@@ -23,8 +23,8 @@ public class Muerto extends EstadoNieve{
 	Bros bros;
 	public Muerto(Mob mob, Bros bros, double duracionMuerto) {
 		super(mob, duracionMuerto);
-		Sprite sprite = Sprite.fromImage("MobMuerto.png");
-		this.getMob().setAppearance(sprite);
+		//Sprite sprite = Sprite.fromImage("MobMuerto.png");
+		this.getMob().setAppearance(this.getMob().getApariencia().getMobMuere());
 		this.bros = bros;
 		//sonido muerto
 		Sound sonidoMuerto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("mobDie.wav"));
@@ -52,7 +52,7 @@ public class Muerto extends EstadoNieve{
 			Tesoros tesoros = new Tesoros(); 
 			Tesoro premio = (Tesoro)tesoros.dropear();
 			premio.setX(this.getMob().getX());
-			premio.setY(this.getMob().getY() - this.getMob().getAppearance().getHeight());
+			premio.setY(this.getMob().getY() + (this.getMob().getAppearance().getHeight()/2));
 			this.getMob().getScene().addComponent(premio);
 			
 			this.getBros().sumarPuntaje(300);

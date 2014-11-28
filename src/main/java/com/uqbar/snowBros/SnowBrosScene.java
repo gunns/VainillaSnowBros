@@ -666,6 +666,9 @@ public class SnowBrosScene extends GameScene{
 		Sound sonidoNivelCompleto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("nextLevel.wav"));
 		//																												"levelComplete2.wav"
 	      sonidoNivelCompleto.play();
+	      this.numeroNivel = numeroNivel +1;
+	      this.musica.actualizar(this.numeroNivel);
+	      
 		//this.stop();
 		
 	}
@@ -708,9 +711,12 @@ public class SnowBrosScene extends GameScene{
 
 
 	public void siguienteNivel() {
+		//nivel+1
+		
 		//TODO mucho que hacer
 		//Reposicionar el bros al inicio de la pantalla
-				
+			
+		
 			this.reposicionar();
 			
 			//agregar Enemigos
@@ -721,8 +727,7 @@ public class SnowBrosScene extends GameScene{
 			this.nuevosPisos();
 			
 			
-			//nivel+1
-			this.numeroNivel = numeroNivel +1;
+			
 			//cartel
 			
 			CartelSiguienteNivel cartel = new CartelSiguienteNivel(gameDimension, this.numeroNivel);
@@ -761,6 +766,10 @@ public class SnowBrosScene extends GameScene{
 			}
 		
 		this.suelo= new Suelo(this.gameDimension);
+		for(Piso piso : suelo.getSuelos())
+			{
+			piso.asignarPiso(this);
+			}
 		this.addComponents(suelo.getSuelos());
 		
 		

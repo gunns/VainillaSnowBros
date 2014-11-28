@@ -26,7 +26,13 @@ public class CayendoMob extends EstadoMob{
 			double velocidadIncrementadaPorDelta = velocidadIncremento * deltaState.getDelta();
 			double incrementoY = this.getMob().getY() + velocidadIncrementadaPorDelta;
 			this.getMob().setY(incrementoY);
+			
 		}
+		else
+			{
+			this.getMob().getDir().setearImagen(this.getMob());
+			}
+		
 	}
 
 	public void saltar(){

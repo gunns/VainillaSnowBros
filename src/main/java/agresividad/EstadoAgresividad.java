@@ -42,7 +42,7 @@ public class EstadoAgresividad {
 	
 	public void moverALaDerecha(DeltaState deltaState) {
 		//setear imagen
-				this.getMob().setAppearance(Sprite.fromImage("MobDrc.png"));
+				this.getMob().setAppearance(this.getMob().getApariencia().getMobDerecha());
 				if (!this.getMob().noLlegoAlFinal())
 				{
 					this.getMob().setDir(new Izquierda());
@@ -83,7 +83,7 @@ public class EstadoAgresividad {
 	
 	public void moverALaIzquierda(DeltaState deltaState) {
 		//setear imagen
-		this.getMob().setAppearance(Sprite.fromImage("MobIzq.png"));
+		this.getMob().setAppearance(this.getMob().getApariencia().getMobIzquierda());
 		//if(!this.getMob().getScene().getSystemPause()){
 			//this.getMob().dir = new Izquierda();
 			//if(!this.getMob().playState && !this.getMob().getScene().getPlayState()){
@@ -120,7 +120,7 @@ public class EstadoAgresividad {
 	public void bajar(DeltaState deltaState)
 	{
 		//setear imagen
-		this.getMob().setAppearance(Sprite.fromImage("MobCae.png"));
+		this.getMob().setAppearance(this.getMob().getApariencia().getMobBaja());
 		this.getMob().setY(this.getMob().getY() + 5);
 	}
 	
@@ -181,7 +181,7 @@ public class EstadoAgresividad {
 	public void setearNumeroDeMovimiento()
 	{
 		Random rand = new Random();//creamos una instancia de Random 
-		int posAleatoria = rand.nextInt(15);//obtenemos una posicion entre 0 y el tamano del arreglo 
+		int posAleatoria = rand.nextInt(17);//obtenemos una posicion entre 0 y el tamano del arreglo 
 		this.numeroDeMovimiento = posAleatoria;
 	}
 	

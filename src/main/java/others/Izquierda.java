@@ -122,7 +122,15 @@ public class Izquierda extends Direccion {
 	public void setearImagenSalto(Mob mob) {
 		// TODO Auto-generated method stub
 		//setear imagen
-				mob.setAppearance(Sprite.fromImage("MobSaltaIzq.png"));
+				mob.setAppearance(mob.getApariencia().getMobSaltaIzquierda());
+	}
+
+	@Override
+	public void setearImagen(Mob mob) {
+		if(mob.esPeligroso())
+		mob.setAppearance(mob.getApariencia().getMobIzquierda());
+		// TODO Auto-generated method stub
+		
 	}
 }
 

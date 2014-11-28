@@ -40,7 +40,7 @@ public class CartelInicioNivel extends GameComponent<SnowBrosScene>{
 
 		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
 		String cadena = new String("           Floor " + numeroNivel.toString() + "\n         Prepárate" );
-		Label label =new Label(font ,Color.red ,cadena); 
+		Label label =new Label(font ,Color.blue ,cadena); 
 
 		this.setAppearance(label);
 		

@@ -12,6 +12,7 @@ import mobConNieve.EstadoNieve;
 import mobConNieve.SinNieve;
 import agresividad.EstadoAgresividad;
 import agresividad.Pasivo;
+import apariencias.AparienciaMob;
 
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
@@ -32,7 +33,13 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public boolean derecha = true;
 	public Integer tiempoDeReaccion;
 	public Integer tiempoDeReaccionActual;
+	
+	public AparienciaMob apariencia;
 
+
+	
+	
+	
 	public EstadoAgresividad getEstadoAgresividad() {
 		return estadoAgresividad;
 	}
@@ -60,6 +67,9 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		
 		this.tiempoDeReaccion = 100;
 		this.tiempoDeReaccionActual = 100;
+		
+		
+		this.apariencia= new AparienciaMob("MobDrc.png", "MobIzq.png", "MobSaltaDrc.png", "MobSaltaIzq.png", "MobCae.png", "MobMuerto.png");
 	}
 	
 	public EstadoMob getEstado() {return estado;}
@@ -88,9 +98,16 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		  //del suelo mas bajo
 		  if(this.getY() > this.gameDimension.getHeight() + 10)
 			  {
-			  this.setY(this.gameDimension.getHeight() - 40);
+			  this.setY(this.gameDimension.getHeight() - 45);
 			  }
-		  
+		  if(this.getX() > this.gameDimension.getWidth())
+		  	{
+			  this.setX(this.gameDimension.getWidth()-20);
+		  	}
+		  if(this.getX() < -5)
+		  	{
+			  this.setX(1);
+		  	}
 		}
 	}
 	
@@ -191,6 +208,14 @@ public class Mob extends GameComponent<SnowBrosScene> {
 
 	public void setTiempoDeReaccionActual(Integer tiempoDeReaccionActual) {
 		this.tiempoDeReaccionActual = tiempoDeReaccionActual;
+	}
+
+	public AparienciaMob getApariencia() {
+		return apariencia;
+	}
+
+	public void setApariencia(AparienciaMob apariencia) {
+		this.apariencia = apariencia;
 	}
 	
 	

@@ -50,4 +50,6 @@ public abstract class Direccion {
 	public abstract void moverMob(EstadoAgresividad e, DeltaState deltaState);
 
 	public abstract void setearImagenSalto(Mob mob);
+
+	public abstract void setearImagen(Mob mob);
 }

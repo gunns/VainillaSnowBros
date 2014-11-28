@@ -41,13 +41,30 @@ public class Musica extends GameComponent<SnowBrosScene>{
 	
 	
 	public void reproducir(){
-		sonido.play();
 		sonido.loop();
+		sonido.play();
 	}
 	public void parar(){
 		this.sonido.stop();
 	}
 	
-	
+	public void actualizar(Integer numeroNivel)
+	{
+		if(numeroNivel == 5)
+			{
+			this.parar();
+			URL url = Musica.class.getResource("stage2.wav");
+			sonido = Applet.newAudioClip(url);
+			this.reproducir();
+			}
+		else
+			if(numeroNivel== 10)
+				{
+				this.parar();
+				URL url = Musica.class.getResource("stage5.1.wav");
+				sonido = Applet.newAudioClip(url);
+				this.reproducir();
+				}
+	}
 	
 }

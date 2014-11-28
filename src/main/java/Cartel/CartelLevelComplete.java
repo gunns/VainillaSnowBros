@@ -44,7 +44,7 @@ public class CartelLevelComplete extends GameComponent<SnowBrosScene>{
 		this.setX(dim.getWidth()/3);
 		this.setY(dim.getHeight()/3);
 		
-		tiempoDeCartel = 700;
+		tiempoDeCartel = 450;
 		
 		
 		
