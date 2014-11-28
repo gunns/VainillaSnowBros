@@ -36,7 +36,7 @@ public class CartelLevelComplete extends GameComponent<SnowBrosScene>{
 		//this.velocity = velocity;
 
 		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-		String cadena = new String("           Level" + numeroNivel.toString() + " Complete" + "\n                 Good Job!" );
+		String cadena = new String("           Level" + numeroNivel.toString()  + "\n        Complete!           " );
 		Label label =new Label(font ,Color.black ,cadena); 
 
 		this.setAppearance(label);

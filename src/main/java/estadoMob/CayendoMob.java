@@ -1,6 +1,7 @@
 package estadoMob;
 
 import com.uqbar.vainilla.DeltaState;
+import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
@@ -33,6 +34,9 @@ public class CayendoMob extends EstadoMob{
 	}
 	@Override
 	public void cambiarMovimiento(Mob mob) {
+		//setear imagen
+		this.getMob().getDir().setearImagenSalto(mob);
+		
 		this.getMob().setEstado(new SubiendoMob(this.getMob().getY(),this.getMob()));	
 		//this.sonidoSalto.play();
 		

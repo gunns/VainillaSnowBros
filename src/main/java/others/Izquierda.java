@@ -4,11 +4,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import mobConNieve.Empujado;
+import agresividad.EstadoAgresividad;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
+import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
+
+
 
 
 
@@ -106,6 +110,19 @@ public class Izquierda extends Direccion {
 		bros.setX(mob.getX() + mob.getAppearance().getWidth()/2);
 		bros.setY(mob.getY());
 		
+	}
+
+	@Override
+	public void moverMob(EstadoAgresividad e, DeltaState deltaState) {
+		e.moverALaIzquierda(deltaState);
+		
+	}
+
+	@Override
+	public void setearImagenSalto(Mob mob) {
+		// TODO Auto-generated method stub
+		//setear imagen
+				mob.setAppearance(Sprite.fromImage("MobSaltaIzq.png"));
 	}
 }
 

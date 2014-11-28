@@ -598,6 +598,14 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.reposicionando = reposicionando;
 	}
 
+	public boolean isMuriendo() {
+		return muriendo;
+	}
+
+	public void setMuriendo(boolean muriendo) {
+		this.muriendo = muriendo;
+	}
+
 
 	
 	

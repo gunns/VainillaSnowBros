@@ -9,6 +9,9 @@ import java.util.List;
 
 import javax.swing.Timer;
 
+import others.Derecha;
+import others.Direccion;
+import others.Izquierda;
 import sonidoContinuo.Musica;
 import sonidoContinuo.MusicaFondo;
 import tesoros.Tesoro;
@@ -657,7 +660,7 @@ public class SnowBrosScene extends GameScene{
 
 	public void nivelCompleto() {
 		this.nivelCompleto = true;
-		CartelLevelComplete cartel = new CartelLevelComplete(gameDimension, 1);
+		CartelLevelComplete cartel = new CartelLevelComplete(gameDimension, this.numeroNivel);
 		this.addComponent(cartel);
 		//this.musica.parar();
 		Sound sonidoNivelCompleto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("nextLevel.wav"));
@@ -766,13 +769,54 @@ public class SnowBrosScene extends GameScene{
 
 
 	public boolean brosEstaAbajoDeMob(Mob mob){
-		return bros.getY()>mob.getY()+20;
+		boolean estaAbajo = false;
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) each;
+				estaAbajo= (mob.getY()- mob.getAppearance().getHeight()) < (bros.getY() - bros.getAppearance().getHeight());
+				//estaAbajo = (bros.getY() - bros.getAppearance().getHeight()) -(mob.getY()- mob.getAppearance().getHeight()) <= 70;
+				}
+			}
+		return estaAbajo;
 	}
+	
+ public boolean brosEstaALaAlturaDelMob(Mob mob)
+ {
+	 boolean estaIgual = false;
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) each;
+				estaIgual = (
+						 (bros.getY()+20) > (mob.getY())
+						 &&
+						 (bros.getY()-20) < mob.getY()
+						 );
+				//estaArriba = (mob.getY()- mob.getAppearance().getHeight()) - (bros.getY() - bros.getAppearance().getHeight()) <= 70 ;
+				}
+			}
+		return estaIgual;
+ }
 	
 
 	public boolean brosEstaArribaDeMob(Mob mob) {
-		return bros.getY()<mob.getY();
+		boolean estaArriba = false;
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) each;
+				estaArriba = (mob.getY()- mob.getAppearance().getHeight()) > (bros.getY() - bros.getAppearance().getHeight());
+				//estaArriba = (mob.getY()- mob.getAppearance().getHeight()) - (bros.getY() - bros.getAppearance().getHeight()) <= 70 ;
+				}
+			}
+		return estaArriba;
 	}
+	
+	
 
 	private void reposicionar() {
 		
@@ -809,14 +853,108 @@ public class SnowBrosScene extends GameScene{
 
 
 	public boolean brosEstaALaDerechaDeMob(Mob mob) {
+		//TODO modificar para 2 jugadores
 		return this.getBros().getX()>mob.getX();
 	}
 
 
 
 	public boolean brosEstaALaIzquierdaDeMob(Mob mob) {
+		//TODO modificar para 2 jugadores
 		return mob.getX()>this.getBros().getX();
 	}
+
+
+
+	public boolean hayUnBrosCerca(Mob mob) {
+		// tanto en X como en Y
+		boolean estaCerca = false;
+		//boolean encontre = false;
+		//TODO modificar para 2 jugadores 
+		
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) each;
+				estaCerca = this.brosCercanoAMob(bros, mob);
+				}
+			}
+		return estaCerca;
+		
+	}
 	
+	public boolean brosCercanoAMob(Bros bros, Mob mob)
+	{
+		double distanciaX;
+		double distanciaY;
+		boolean cercano = false;
+		if(bros.getX() < mob.getX())
+		{
+		distanciaX = mob.getX() - bros.getX();
+		}
+	else
+		{
+		distanciaX =bros.getX() -  mob.getX();
+		}
+	if(bros.getY() < mob.getY())
+		{
+		distanciaY = mob.getY() - bros.getY();
+		}
+	else
+		{
+		distanciaY = bros.getY() - mob.getY();
+		}
+	
+	//cercano = (distanciaX <= (this.gameDimension.getWidth()/5)) && (distanciaY <= (this.gameDimension.getHeight()/3));
+	cercano = (distanciaX <= 100) && (distanciaY <= 300);
+	return cercano;
+	}
+	
+	
+	
+	
+	public boolean brosCercanoEstaVivo(Mob mob){
+		
+
+
+		//TODO modificar para 2 jugadores
+		boolean cercanoYVivo = false;
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros)each;
+				if(!bros.isMuriendo() && brosCercanoAMob(bros, mob))
+					{
+					//encontre
+					cercanoYVivo = true;
+					}
+				}
+				
+			}
+		return cercanoYVivo;
+		
+	}
+
+
+
+	public Direccion ubicacionDelBros(Mob mob) {
+		//boolean encontre = false;
+		//TODO modificar para 2 jugadores 
+		Direccion ubicacionBros =  new Izquierda();
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+					Bros bros = (Bros) each;
+					if(bros.getX() > mob.getX())
+					{
+						ubicacionBros = new Derecha();
+					}
+				}
+			}
+		return ubicacionBros;
+	}
 	
 }

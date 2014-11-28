@@ -2,6 +2,8 @@ package others;
 
 import java.awt.Dimension;
 
+import agresividad.EstadoAgresividad;
+
 import com.uqbar.vainilla.DeltaState;
 
 import componentes.Bros;
@@ -44,4 +46,8 @@ public abstract class Direccion {
 	}
 
 	public abstract  void desplazarBrosArrastrado(Bros bros, Mob mob, DeltaState deltaState );
+
+	public abstract void moverMob(EstadoAgresividad e, DeltaState deltaState);
+
+	public abstract void setearImagenSalto(Mob mob);
 }

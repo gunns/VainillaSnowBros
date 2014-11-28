@@ -86,7 +86,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		
 		 //A veces el bros se cae solo(vaya a saber quien el por que), para que esto no pase, se posicionara siempre en la parte superior
 		  //del suelo mas bajo
-		  if(this.getY() > this.gameDimension.getHeight())
+		  if(this.getY() > this.gameDimension.getHeight() + 10)
 			  {
 			  this.setY(this.gameDimension.getHeight() - 40);
 			  }
