@@ -1,14 +1,14 @@
 package others;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Dimension;
 
 import mobConNieve.Empujado;
 import agresividad.EstadoAgresividad;
 
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.appearances.Circle;
-import com.uqbar.vainilla.appearances.Sprite;
+//import com.uqbar.vainilla.appearances.Circle;
+//import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 

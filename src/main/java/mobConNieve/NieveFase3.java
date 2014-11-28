@@ -1,8 +1,8 @@
 package mobConNieve;
 
-import java.awt.Color;
+//import java.awt.Color;
 
-import com.uqbar.vainilla.appearances.Circle;
+//import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Sprite;
 
 import componentes.Mob;

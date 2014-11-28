@@ -1,12 +1,12 @@
 package estadoMob;
 
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.appearances.Sprite;
+//import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
-import com.uqbar.vainilla.sound.SoundBuilder;
+//import com.uqbar.vainilla.sound.SoundBuilder;
 
 import componentes.Mob;
-import estadoBros.SubiendoBros;
+//import estadoBros.SubiendoBros;
 
 public class CayendoMob extends EstadoMob{
 

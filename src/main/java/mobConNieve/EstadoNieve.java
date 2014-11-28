@@ -1,11 +1,11 @@
 package mobConNieve;
 
-import java.awt.Color;
+//import java.awt.Color;
 
 import others.Direccion;
 
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.appearances.Circle;
+//import com.uqbar.vainilla.appearances.Circle;
 
 import componentes.Bros;
 import componentes.Mob;

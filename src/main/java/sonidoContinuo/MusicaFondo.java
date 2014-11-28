@@ -10,12 +10,12 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import com.uqbar.snowBros.SnowBrosScene;
-import com.uqbar.vainilla.DeltaState;
+//import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.sound.Sound;
-import com.uqbar.vainilla.sound.SoundBuilder;
-import com.uqbar.vainilla.sound.SoundPlay;
-import com.uqbar.vainilla.sound.SoundPlayer;
+//import com.uqbar.vainilla.sound.SoundBuilder;
+//import com.uqbar.vainilla.sound.SoundPlay;
+//import com.uqbar.vainilla.sound.SoundPlayer;
 
 public class MusicaFondo extends GameComponent<SnowBrosScene>{
 	

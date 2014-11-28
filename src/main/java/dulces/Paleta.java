@@ -1,8 +1,8 @@
 package dulces;
 
-import java.awt.Color;
+//import java.awt.Color;
 
-import com.uqbar.vainilla.appearances.Rectangle;
+//import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.appearances.Sprite;
 
 public class Paleta extends Dulce{

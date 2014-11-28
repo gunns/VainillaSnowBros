@@ -1,7 +1,5 @@
 package mobConNieve;
 
-import java.util.List;
-
 import others.Direccion;
 
 import com.uqbar.vainilla.DeltaState;
@@ -10,7 +8,7 @@ import componentes.Bros;
 import componentes.Mob;
 import componentes.Snow;
 
-import com.uqbar.vainilla.GameComponent;
+//import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 

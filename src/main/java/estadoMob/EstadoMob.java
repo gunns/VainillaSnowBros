@@ -2,7 +2,7 @@ package estadoMob;
 
 import com.uqbar.vainilla.DeltaState;
 
-import componentes.Bros;
+//import componentes.Bros;
 import componentes.Mob;
 
 public abstract class EstadoMob {

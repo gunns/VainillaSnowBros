@@ -3,7 +3,7 @@ package componentes;
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-import com.uqbar.vainilla.appearances.Animation;
+//import com.uqbar.vainilla.appearances.Animation;
 import com.uqbar.vainilla.appearances.Sprite;
 
 public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{

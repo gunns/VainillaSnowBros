@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
-import tesoros.Tesoro;
+//import tesoros.Tesoro;
 import estadoBros.CayendoBros;
 import estadoBros.EstadoBros;
 import estadoBros.SiendoArrastrado;
@@ -78,7 +78,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.setX(aparicionEnX);
 		this.setY(aparicionEnY) ;
 		this.setZ(1);
-		this.velocity = velocity;
+		this.setVelocity(velocity);
 		this.estadoCapsula  = new EstadoCapsula();
 		this.muriendo=false;
 		this.tiempoMuriendo=180;
@@ -605,6 +605,14 @@ public class Bros extends GameComponent<SnowBrosScene>{
 
 	public void setMuriendo(boolean muriendo) {
 		this.muriendo = muriendo;
+	}
+
+	public double getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(double velocity) {
+		this.velocity = velocity;
 	}
 
 

@@ -2,9 +2,9 @@ package estadoMob;
 
 import com.uqbar.vainilla.DeltaState;
 
-import componentes.Bros;
+//import componentes.Bros;
 import componentes.Mob;
-import estadoBros.CayendoBros;
+//import estadoBros.CayendoBros;
 
 public class SubiendoMob extends EstadoMob {
 

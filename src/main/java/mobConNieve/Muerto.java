@@ -1,21 +1,21 @@
 package mobConNieve;
 
-import java.awt.Color;
+//import java.awt.Color;
 
 import tesoros.Tesoro;
 import tesoros.Tesoros;
 
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.appearances.Circle;
-import com.uqbar.vainilla.appearances.Sprite;
+//import com.uqbar.vainilla.appearances.Circle;
+//import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
 import componentes.Bros;
 import componentes.Mob;
 import componentes.Snow;
-import dulces.Caramelo;
-import dulces.Dulce;
+//import dulces.Caramelo;
+//import dulces.Dulce;
 
 public class Muerto extends EstadoNieve{
 
