@@ -6,7 +6,7 @@ import others.Derecha;
 import others.Izquierda;
 
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.appearances.Sprite;
+//import com.uqbar.vainilla.appearances.Sprite;
 
 import componentes.Mob;
 

@@ -1,12 +1,12 @@
 package agresividad;
 
-import java.util.Random;
+//import java.util.Random;
 
-import tesoros.Tesoro;
+//import tesoros.Tesoro;
 
 import com.uqbar.vainilla.DeltaState;
 
-import componentes.Bros;
+//import componentes.Bros;
 import componentes.Mob;
 
 public class Pasivo extends EstadoAgresividad {

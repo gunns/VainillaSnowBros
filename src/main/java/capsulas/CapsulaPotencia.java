@@ -1,7 +1,7 @@
 package capsulas;
-import java.awt.Color;
+//import java.awt.Color;
 
-import com.uqbar.vainilla.appearances.Rectangle;
+//import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;

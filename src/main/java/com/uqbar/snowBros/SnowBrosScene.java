@@ -2,18 +2,18 @@ package com.uqbar.snowBros;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
+//import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Timer;
+//import javax.swing.Timer;
 
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
 import sonidoContinuo.Musica;
-import sonidoContinuo.MusicaFondo;
+//import sonidoContinuo.MusicaFondo;
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
 import Cartel.CartelLevelComplete;
@@ -21,7 +21,7 @@ import capsulas.Capsula;
 import capsulas.CapsulaPotencia;
 import capsulas.CapsulaPrisa;
 import capsulas.CapsulaRango;
-import componentes.AnimacionRegeneracion;
+//import componentes.AnimacionRegeneracion;
 import componentes.Bros;
 import componentes.CartelInicioNivel;
 import componentes.CartelSiguienteNivel;
@@ -46,13 +46,13 @@ import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
-import com.uqbar.vainilla.sound.SoundPlay;
-import com.uqbar.vainilla.sound.SoundPlayer;
+//import com.uqbar.vainilla.sound.SoundPlay;
+//import com.uqbar.vainilla.sound.SoundPlayer;
 
 import dulces.Caramelo;
 import dulces.Paleta;
 import dulces.Pastel;
-import estadoBros.CayendoBros;
+//import estadoBros.CayendoBros;
 
 
 public class SnowBrosScene extends GameScene{
@@ -173,7 +173,7 @@ public class SnowBrosScene extends GameScene{
 	
 	public boolean hayColisionConUnPiso(GameComponent<SnowBrosScene> componenteRectangular){
 		boolean hayColision = false;
-		Piso piso;
+		//Piso piso;
 		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
 		for(GameComponent<?> each : this.getComponents())
 			//piso = this.suelo.getSuelos().get(n);
@@ -192,7 +192,7 @@ public class SnowBrosScene extends GameScene{
 	
 	public boolean hayColisionTotalConUnPiso(GameComponent<SnowBrosScene> componenteRectangular){
 		boolean hayColision = false;
-		Piso piso;
+		//Piso piso;
 		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
 		for(GameComponent<?> each : this.getComponents())
 			//piso = this.suelo.getSuelos().get(n);
@@ -368,7 +368,7 @@ public class SnowBrosScene extends GameScene{
 	{
 	boolean colisiona= false;
 	List<GameComponent<?>> esferas = this.getComponents();
-	for(GameComponent each : esferas)
+	for(GameComponent<?> each : esferas)
 		{
 		if(each.getClass() == Mob.class)
 			{
@@ -388,7 +388,7 @@ public class SnowBrosScene extends GameScene{
 	public Mob esferaQueColisionaConBros(Bros bros)
 	{//Este metodo retorna mob con estado Empujado si o si
 		Mob esfera = null;
-		for(GameComponent each : this.getComponents())
+		for(GameComponent<?> each : this.getComponents())
 		{
 		if(each.getClass() == Mob.class)
 			{
@@ -424,7 +424,7 @@ public class SnowBrosScene extends GameScene{
 
 	public boolean colisionaEstaEsferaConBros(Mob mob) {
 		boolean hayColision = false;
-		for(GameComponent c : this.getComponents())
+		for(GameComponent<?> c : this.getComponents())
 		{
 		if(c.getClass() == Bros.class)
 			{
@@ -439,7 +439,7 @@ public class SnowBrosScene extends GameScene{
 	}
 
 	public void arrastrarBros(Mob mob) {
-		for(GameComponent each : this.getComponents())
+		for(GameComponent<?> each : this.getComponents())
 		{
 		if(each.getClass() == Bros.class)
 			{
@@ -454,7 +454,7 @@ public class SnowBrosScene extends GameScene{
 
 	public void matarMobsEnElCamino(Mob mob) 
 	{
-		for(GameComponent each : this.getComponents())
+		for(GameComponent<?> each : this.getComponents())
 			{
 			if(each.getClass()== Mob.class)
 				{
@@ -577,10 +577,10 @@ public class SnowBrosScene extends GameScene{
 	
 
 	
-	private void playContinue() {
+	/*private void playContinue() {
 		this.gameSound.play();
 		
-	}
+	}*/
 
 
 	public void comenzarNivel(Dimension dim, double velocity) {
@@ -646,7 +646,7 @@ public class SnowBrosScene extends GameScene{
 	public boolean enemigosExterminados()
 	{
 		boolean nivelTerminado = true;
-		for(GameComponent each : this.getComponents())
+		for(GameComponent<?> each : this.getComponents())
 			{
 			if(each.getClass() == Mob.class || esUnTesoro(each))
 				{
@@ -682,7 +682,7 @@ public class SnowBrosScene extends GameScene{
 
 
 	public void soltarBrosAdherido(Mob mob) {
-		for(GameComponent each: this.getComponents())
+		for(GameComponent<?> each: this.getComponents())
 			{
 			if(each.getClass() == Bros.class)
 				{

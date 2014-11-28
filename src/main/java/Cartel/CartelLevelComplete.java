@@ -8,8 +8,8 @@ import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Label;
-import com.uqbar.vainilla.sound.Sound;
-import com.uqbar.vainilla.sound.SoundBuilder;
+//import com.uqbar.vainilla.sound.Sound;
+//import com.uqbar.vainilla.sound.SoundBuilder;
 
 public class CartelLevelComplete extends GameComponent<SnowBrosScene>{
 	Integer tiempoDeCartel;

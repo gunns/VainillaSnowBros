@@ -1,14 +1,14 @@
 package agresividad;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 
-import javax.swing.Timer;
+//import javax.swing.Timer;
 
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.appearances.Sprite;
-import com.uqbar.vainilla.sound.Sound;
-import com.uqbar.vainilla.sound.SoundBuilder;
+//import com.uqbar.vainilla.appearances.Sprite;
+//import com.uqbar.vainilla.sound.Sound;
+//import com.uqbar.vainilla.sound.SoundBuilder;
 
 import componentes.Mob;
 
