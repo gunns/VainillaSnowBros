@@ -78,7 +78,7 @@ public class Pasivo extends EstadoAgresividad {
 	}
 	public void moverParaBajar(DeltaState deltaState)
 	{																												
-		if(this.mobEstaEnElFondo())
+		if(this.mobEstaEnElFondo()&&!this.mobEstaTocandoUnPiso())
 			{
 			//setear el movimiento normal
 			this.setNumeroDeMovimiento(11);
@@ -99,7 +99,9 @@ public class Pasivo extends EstadoAgresividad {
 			}
 	}
 	
-	
+	public boolean mobEstaTocandoUnPiso(){
+		return this.getMob().getScene().hayColisionConUnPiso(this.getMob());
+	}
 
 	
 	

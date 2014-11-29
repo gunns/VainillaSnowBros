@@ -20,7 +20,7 @@ public class SnowBrosGame extends Game {
 	@Override
 	protected void setUpScenes() {
 		try{
-		this.scene = new SnowBrosScene(dimension,200);
+		this.scene = new SnowBrosScene(dimension,100);
 		this.setCurrentScene(scene);
 		}
 		catch (Exception e){}

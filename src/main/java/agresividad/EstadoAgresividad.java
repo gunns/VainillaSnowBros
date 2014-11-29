@@ -159,7 +159,7 @@ public class EstadoAgresividad {
 	
 	public boolean mobEstaEnElFondo()
 	{
-		return ((this.getMob().getY() - this.getMob().getAppearance().getWidth() + 50)  > (this.getMob().getScene().getGameDimension().getWidth())); 
+		return ((this.getMob().getY() + this.getMob().getAppearance().getHeight())  > (this.getMob().getScene().getGameDimension().getHeight())-50); 
 	}
 
 	public boolean isSaltara() {
