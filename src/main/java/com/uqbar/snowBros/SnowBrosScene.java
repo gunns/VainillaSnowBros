@@ -11,6 +11,8 @@ import java.util.List;
 
 
 
+
+
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
@@ -19,6 +21,8 @@ import sonidoContinuo.Musica;
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
 import mobs.DisparoFuego;
+import mobs.TrollAmarillo;
+import mobs.TrollRojo;
 import mobs.TrollVerde;
 import Cartel.CartelLevelComplete;
 import capsulas.Capsula;
@@ -52,6 +56,8 @@ import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 //import com.uqbar.vainilla.sound.SoundPlay;
 //import com.uqbar.vainilla.sound.SoundPlayer;
+
+
 
 
 
@@ -893,7 +899,9 @@ public class SnowBrosScene extends GameScene{
 	public boolean esUnMob(GameComponent<?> element)
 	{
 		return(element.getClass() == Mob.class ||
-				element.getClass() == TrollVerde.class);
+				element.getClass() == TrollVerde.class
+				|| element.getClass() == TrollAmarillo.class
+				|| element.getClass() == TrollRojo.class);
 	}
 	
 	

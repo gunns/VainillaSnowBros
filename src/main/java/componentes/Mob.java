@@ -36,6 +36,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public Integer tiempoDeReaccionActual;
 	
 	public AparienciaMob apariencia;
+	// = new AparienciaMob("MobDrc.png", "MobIzq.png", "MobSaltaDrc.png", "MobSaltaIzq.png", "MobCae.png", "MobMuerto.png");
 
 
 	
@@ -52,8 +53,9 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	//MOVIMIENTO
 	public Direccion dir;
 	
-	public Mob(Dimension dim, boolean playState, double velocity){
-		Sprite sprite = Sprite.fromImage("MobIzq.png");
+	public Mob(Dimension dim, boolean playState, double velocity, AparienciaMob apariencia){
+		//Sprite sprite = Sprite.fromImage("MobIzq.png");
+		Sprite sprite = apariencia.getMobIzquierda();
 		this.setAppearance(sprite);
 		this.dir =  new Derecha();
 		this.gameDimension= dim;
@@ -69,8 +71,8 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.tiempoDeReaccion = 100;
 		this.tiempoDeReaccionActual = 100;
 		
+		this.apariencia = apariencia;
 		
-		this.apariencia= new AparienciaMob("MobDrc.png", "MobIzq.png", "MobSaltaDrc.png", "MobSaltaIzq.png", "MobCae.png", "MobMuerto.png");
 	}
 	
 	public EstadoMob getEstado() {return estado;}

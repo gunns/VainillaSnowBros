@@ -17,11 +17,13 @@ public class TrollVerde extends Mob{
 	public Sprite disparoDerecha;
 	public Sprite disparoIzquierda;
 	
+	
 
 	public TrollVerde(Dimension dim, boolean playState, double velocity) {
-		super(dim, playState, velocity);
+		//AparienciaMob apariencia = new AparienciaMob("mob2Drc.png", "mob2Izq.png", "mob2SaltoDrc.png", "mob2SaltoIzq.png", "mob2Baja.png", "mob2Muere.png");
+		super(dim, playState, velocity, new AparienciaMob("mob2Drc.png", "mob2Izq.png", "mob2SaltoDrc.png", "mob2SaltoIzq.png", "mob2Baja.png", "mob2Muere.png"));
 		// TODO Auto-generated constructor stub
-		this.setApariencia(new AparienciaMob("mob2Drc.png", "mob2Izq.png", "mob2SaltoDrc.png", "mob2SaltoIzq.png", "mob2Baja.png", "mob2Muere.png"));
+		
 		this.tiempoPreparandoDisparo = 120;
 		this.descansandoDeDisparo = 0;
 		//this.setEstadoAgresividad(new PasivoTrollVerde(this));
