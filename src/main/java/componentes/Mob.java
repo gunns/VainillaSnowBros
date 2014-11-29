@@ -10,6 +10,7 @@ import estadoMob.CayendoMob;
 import estadoMob.EstadoMob;
 import mobConNieve.EstadoNieve;
 import mobConNieve.SinNieve;
+import agresividad.Agresivo;
 import agresividad.EstadoAgresividad;
 import agresividad.Pasivo;
 import apariencias.AparienciaMob;
@@ -63,7 +64,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.setY(r.nextInt(gameDimension.height)-60);
 		this.setZ(0);
 		this.setEstadoNieve(new SinNieve(this, 0));
-		this.velocity = velocity;
+		this.velocity = velocity/2;
 		
 		this.tiempoDeReaccion = 100;
 		this.tiempoDeReaccionActual = 100;
@@ -219,6 +220,18 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	}
 	
 	
-	
+	public void volverseAgresivo(){
+		this.setEstadoAgresividad(new Agresivo(this));
+	}
+
+	public boolean brosCercanoEstaVivo() {
+			// TODO Auto-generated method stub
+			return (this.getScene().brosCercanoEstaVivo(this));
+		}
+
+	public void volversePasivo() {
+		this.setEstadoAgresividad(new Pasivo(this));
+		
+	}
 	
 }

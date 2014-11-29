@@ -9,6 +9,8 @@ import java.util.List;
 
 //import javax.swing.Timer;
 
+
+
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
@@ -16,6 +18,8 @@ import sonidoContinuo.Musica;
 //import sonidoContinuo.MusicaFondo;
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
+import mobs.DisparoFuego;
+import mobs.TrollVerde;
 import Cartel.CartelLevelComplete;
 import capsulas.Capsula;
 import capsulas.CapsulaPotencia;
@@ -48,6 +52,8 @@ import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 //import com.uqbar.vainilla.sound.SoundPlay;
 //import com.uqbar.vainilla.sound.SoundPlayer;
+
+
 
 import dulces.Caramelo;
 import dulces.Paleta;
@@ -272,7 +278,7 @@ public class SnowBrosScene extends GameScene{
 		List <GameComponent<?>> c = this.getComponents();
 		for(GameComponent<?> each : c)
 			{
-			if(each.getClass().equals(Mob.class)){
+			if(esUnMob(each)){
 				Mob mob = (Mob) each;
 				if(this.colisionBolaNieveConBros(each, bros) && mob.getEstadoNieve().PuedoEmpujar())
 						{
@@ -289,7 +295,7 @@ public class SnowBrosScene extends GameScene{
 		List <GameComponent<?>> c = this.getComponents();
 		for(GameComponent<?> each : c)
 			{
-			if(each.getClass().equals(Mob.class)){
+			if(esUnMob(each)){
 				Mob mob = (Mob) each;
 				if(this.colisionBolaNieveConBros(each, bros) && mob.getEstadoNieve().PuedoEmpujar())
 						{
@@ -332,7 +338,7 @@ public class SnowBrosScene extends GameScene{
 		List <GameComponent<?>> c = this.getComponents();
 		for(GameComponent<?> each : c)
 		{
-		if(each.getClass().equals(Mob.class)){
+		if(esUnMob(each)){
 			Mob mob = (Mob) each;
 			if(this.colisionBolaNieveConBros(mob, bros) && mob.getEstadoNieve().PuedoEmpujar() && this.hayColisionConUnPiso(bros))
 					{
@@ -351,7 +357,7 @@ public class SnowBrosScene extends GameScene{
 		List<GameComponent<?>> c = this.getComponents();
 		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
 		for(GameComponent<?> each : c ){
-			if(each.getClass() ==(Mob.class))
+			if(esUnMob(each))
 			{
 				mob = (Mob) each;
 			if(this.colisionBolaNieveConBros(mob, bros) && mob.getEstadoNieve().PuedoEmpujar())
@@ -370,7 +376,7 @@ public class SnowBrosScene extends GameScene{
 	List<GameComponent<?>> esferas = this.getComponents();
 	for(GameComponent<?> each : esferas)
 		{
-		if(each.getClass() == Mob.class)
+		if(esUnMob(each))
 			{
 			Mob mob = (Mob) each;
 			
@@ -390,7 +396,7 @@ public class SnowBrosScene extends GameScene{
 		Mob esfera = null;
 		for(GameComponent<?> each : this.getComponents())
 		{
-		if(each.getClass() == Mob.class)
+		if(esUnMob(each))
 			{
 			Mob mob = (Mob) each;
 			
@@ -456,7 +462,7 @@ public class SnowBrosScene extends GameScene{
 	{
 		for(GameComponent<?> each : this.getComponents())
 			{
-			if(each.getClass()== Mob.class)
+			if(esUnMob(each))
 				{
 				Mob mobColisionado = (Mob) each;
 				mobColisionado.arrolla(mob);
@@ -648,7 +654,7 @@ public class SnowBrosScene extends GameScene{
 		boolean nivelTerminado = true;
 		for(GameComponent<?> each : this.getComponents())
 			{
-			if(each.getClass() == Mob.class || esUnTesoro(each))
+			if(esUnMob(each) || esUnTesoro(each))
 				{
 				nivelTerminado = false;
 				}
@@ -713,35 +719,26 @@ public class SnowBrosScene extends GameScene{
 	public void siguienteNivel() {
 		//nivel+1
 		
-		//TODO mucho que hacer
-		//Reposicionar el bros al inicio de la pantalla
-			
-		
-			this.reposicionar();
-			
-			//agregar Enemigos
-			//por inv.rep. no debería haber ninguno
-			this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
-			this.addComponents(this.enemigos.getEnemigos());
-			//agrega pisos nuevos y  quita los anteriores
-			this.nuevosPisos();
-			
-			
-			
-			//cartel
-			
-			CartelSiguienteNivel cartel = new CartelSiguienteNivel(gameDimension, this.numeroNivel);
-			this.addComponent(cartel);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				//TODO mucho que hacer
+				//Reposicionar el bros al inicio de la pantalla
+					
 				
+					this.reposicionar();
+					
+					//agregar Enemigos
+					//por inv.rep. no debería haber ninguno
+					this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
+					this.addComponents(this.enemigos.getEnemigos());
+					//agrega pisos nuevos y  quita los anteriores
+					this.nuevosPisos();
+					
+					
+					
+					//cartel
+					
+					CartelSiguienteNivel cartel = new CartelSiguienteNivel(gameDimension, this.numeroNivel);
+					this.addComponent(cartel);
+								
 				
 				
 			 	 //unBros.invencible = true;
@@ -893,6 +890,13 @@ public class SnowBrosScene extends GameScene{
 		
 	}
 	
+	public boolean esUnMob(GameComponent<?> element)
+	{
+		return(element.getClass() == Mob.class ||
+				element.getClass() == TrollVerde.class);
+	}
+	
+	
 	public boolean brosCercanoAMob(Bros bros, Mob mob)
 	{
 		double distanciaX;
@@ -965,5 +969,69 @@ public class SnowBrosScene extends GameScene{
 			}
 		return ubicacionBros;
 	}
+
+
+
+	public boolean brosCercanoATroll(TrollVerde trollVerde) {
+		double distanciaX = 0;
+		double distanciaY = 0;
+		boolean cercano = false;
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) each;
+		if(bros.getX() < trollVerde.getX())
+		{
+		distanciaX = trollVerde.getX() - bros.getX();
+		}
+	else
+		{
+		distanciaX =bros.getX() - trollVerde.getX();
+		}
+	if(bros.getY() < trollVerde.getY())
+		{
+		distanciaY = trollVerde.getY() - bros.getY();
+		}
+	else
+		{
+		distanciaY = bros.getY() - trollVerde.getY();
+		}
+
+	}
+			
+	
+	//cercano = (distanciaX <= (this.gameDimension.getWidth()/5)) && (distanciaY <= (this.gameDimension.getHeight()/3));
+	
+	}
+		cercano = (distanciaX <= 300) && (distanciaY <= 300);
+		return cercano;
+}
+
+
+
+	public void matarBrosEnElCamino(DisparoFuego disparo) {
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) each;
+				if(!bros.muriendo)
+					{
+					if(CollisionDetector.INSTANCE.collidesRectAgainstRect(bros.getX(),
+							bros.getY(),
+							(int) (bros.getAppearance().getWidth()), (int) (bros.getAppearance().getHeight()),
+							disparo.getX(), disparo.getY(),(int) (disparo.getAppearance().getWidth()),(int) (disparo.getAppearance().getHeight()))
+							&& !bros.invencible)
+							{
+							bros.matarBros();
+							}
+					}
+				
+				}
+			}
+		
+		
+	}	
 	
 }

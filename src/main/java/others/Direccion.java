@@ -2,6 +2,8 @@ package others;
 
 import java.awt.Dimension;
 
+import mobs.DisparoFuego;
+import mobs.TrollVerde;
 import agresividad.EstadoAgresividad;
 
 import com.uqbar.vainilla.DeltaState;
@@ -52,4 +54,10 @@ public abstract class Direccion {
 	public abstract void setearImagenSalto(Mob mob);
 
 	public abstract void setearImagen(Mob mob);
+
+	public abstract void recorreFuego(DisparoFuego disparoFuego);
+
+	public abstract void spriteDisparar(TrollVerde tv);
+
+	public abstract void spritefuego(DisparoFuego disparoFuego);
 }

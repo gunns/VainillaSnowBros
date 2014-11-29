@@ -24,7 +24,7 @@ public class Empujado extends EstadoNieve{
 		super(mob, duracionNieve);
 		this.rebotes = 3;
 		this.dir = dir;
-		mob.setVelocity(mob.getVelocity() * 2);
+		mob.setVelocity(mob.getScene().getVelocity() * 2);
 		this.bros = bros;
 		//sonido empuje
 		Sound sonidoEmpuje = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("pullSnowBall.wav"));

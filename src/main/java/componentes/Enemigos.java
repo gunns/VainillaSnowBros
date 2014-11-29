@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Random;
 
+import mobs.TrollVerde;
+
 public class Enemigos{
 	
 	public ArrayList<Mob> mobs;
@@ -24,6 +26,8 @@ public class Enemigos{
 				}
 				mobs.add(aMob);
 			}
+			
+			this.mobs.add(new TrollVerde(dim, playState, (velocity*2)/3));
 	}
 	
 	public ArrayList<Mob> getEnemigos(){return mobs;}

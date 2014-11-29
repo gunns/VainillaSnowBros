@@ -6,7 +6,7 @@ import others.Derecha;
 import others.Izquierda;
 
 import com.uqbar.vainilla.DeltaState;
-//import com.uqbar.vainilla.appearances.Sprite;
+import com.uqbar.vainilla.appearances.Sprite;
 
 import componentes.Mob;
 
@@ -106,7 +106,7 @@ public class EstadoAgresividad {
 						}
 					else
 						{
-						this.getMob().setX(this.getMob().getX()-(this.getMob().getVelocity() + (this.getMob().getVelocity()/4 - 4))* deltaState.getDelta());
+						this.getMob().setX(this.getMob().getX()-(this.getMob().getScene().getVelocity() + (this.getMob().getVelocity()/4 - 4))* deltaState.getDelta());
 						this.acabaDeTocarElLimite = false;
 						}
 				}

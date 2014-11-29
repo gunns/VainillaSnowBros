@@ -616,7 +616,14 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	}
 
 
-	
+	public void matarBros() {
+		// TODO Auto-generated method stub
+		this.muriendo = true;
+		  Sound sonidoMuerte = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("Player Death.wav"));
+	      sonidoMuerte.play();
+	      Sprite sprite = Sprite.fromImage("BrosMuere.png");
+	      this.setAppearance(sprite);
+	}
 	
 }
 

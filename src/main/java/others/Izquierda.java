@@ -1,16 +1,20 @@
 package others;
 
-//import java.awt.Color;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import mobConNieve.Empujado;
+import mobs.DisparoFuego;
+import mobs.TrollVerde;
 import agresividad.EstadoAgresividad;
 
 import com.uqbar.vainilla.DeltaState;
-//import com.uqbar.vainilla.appearances.Circle;
-//import com.uqbar.vainilla.appearances.Sprite;
+import com.uqbar.vainilla.appearances.Circle;
+import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
+
+
 
 
 
@@ -130,6 +134,26 @@ public class Izquierda extends Direccion {
 		if(mob.esPeligroso())
 		mob.setAppearance(mob.getApariencia().getMobIzquierda());
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void recorreFuego(DisparoFuego disparoFuego) {
+		// TODO Auto-generated method stub
+		disparoFuego.setX(disparoFuego.getX() - 2);	
+	}
+
+	@Override
+	public void spriteDisparar(TrollVerde tv) {
+		// TODO Auto-generated method stub
+		tv.setAppearance(tv.disparoIzquierda);
+		
+	}
+
+	@Override
+	public void spritefuego(DisparoFuego disparoFuego) {
+		// TODO Auto-generated method stub
+		disparoFuego.setAppearance(disparoFuego.fuegoIzquierda);
 		
 	}
 }

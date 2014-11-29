@@ -1,12 +1,12 @@
 package agresividad;
 
-//import java.util.Random;
+import java.util.Random;
 
-//import tesoros.Tesoro;
+import tesoros.Tesoro;
 
 import com.uqbar.vainilla.DeltaState;
 
-//import componentes.Bros;
+import componentes.Bros;
 import componentes.Mob;
 
 public class Pasivo extends EstadoAgresividad {
@@ -101,9 +101,7 @@ public class Pasivo extends EstadoAgresividad {
 	
 	
 
-	public void volverseAgresivo(){
-		this.getMob().setEstadoAgresividad(new Agresivo(this.getMob()));
-	}
+	
 	
 	public void mover(DeltaState deltaState){
 	if(this.getMob().getScene().getPlayState())
@@ -122,9 +120,9 @@ public class Pasivo extends EstadoAgresividad {
 	}
 	
 	public void update(DeltaState deltaState){
-		if(this.getMob().getScene().brosCercanoEstaVivo(this.getMob()))
+		if(this.getMob().brosCercanoEstaVivo())
 			{
-			this.getMob().setEstadoAgresividad(new Agresivo(this.getMob()));
+			this.getMob().volverseAgresivo();
 			}
 		else
 		if(this.getMob().getTiempoDeReaccionActual() > 1)
@@ -138,6 +136,12 @@ public class Pasivo extends EstadoAgresividad {
 		}
 	}
 	
+	
+
+
+
+
+
 	public void moverEnX(DeltaState deltaState ){
 		this.getMob().getDir().moverMob(this, deltaState);
 	}
