@@ -474,6 +474,30 @@ public class SnowBrosScene extends GameScene{
 		return esfera;
 	} 
 	
+	public Mob esferaFQueColisionaConBros(Bros bros)
+	{//Este metodo retorna mob con estado Empujado si o si
+		Mob mob = null;
+		for(GameComponent<?> each : this.getComponents())
+		{
+		if(esUnMob(each))
+			{
+			Mob esfera = (Mob) each;
+			if (esfera.getEstadoNieve().PuedoEmpujar())
+				{
+				if(CollisionDetector.INSTANCE.collidesRectAgainstRect(esfera.getX(),
+						esfera.getY(),(int) esfera.getAppearance().getWidth(),
+						(int) esfera.getAppearance().getHeight(),
+						bros.getX(), bros.getY(),(int) bros.getAppearance().getWidth(), (int) bros.getAppearance().getHeight()))	
+					{
+					mob = esfera; 
+				//mob.getEstadoNieve().arrastrarBros(bros);
+					}
+				}
+			}
+		
+		}
+		return mob;
+	}
 
 	public void esferaExploto(Mob mob) {
 		

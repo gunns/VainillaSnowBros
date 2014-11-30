@@ -376,14 +376,24 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			this.getScene().moverEsfera(this, deltaState);
 				if (this.noLlegoAlFinal())
 					{
-					if(!this.getScene().hayColisionConUnaEsfera(this))	
-						{
-						this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());		
-						}
+					if(this.getScene().hayColisionConUnaEsfera(this))
+							{
+							Mob mob = this.getScene().esferaFQueColisionaConBros(this);
+							if(mob.getX() < this.getX() || (mob.getY() > this.getY() && !this.getScene().hayColisionConUnPiso(this)))
+									{
+									this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());
+									}
+							}
+							else
+							{
+							this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());	
+							}
+								
 					}
 		}
+		}
 	
-	}
+	
 	private void moverALaIzquierda(DeltaState deltaState) {
 		if(!this.getScene().getSystemPause())
 		{
@@ -391,7 +401,15 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			this.getScene().moverEsfera(this, deltaState);
 				if (this.noLlegoAlComienzo())
 					{
-					if(!this.getScene().hayColisionConUnaEsfera(this))
+					if(this.getScene().hayColisionConUnaEsfera(this))
+						{
+						Mob mob = this.getScene().esferaFQueColisionaConBros(this);
+						if(mob.getX() > this.getX() || (mob.getY() > this.getY() && !this.getScene().hayColisionConUnPiso(this)))
+							{
+							this.setX(this.getX()- (this.getVelocity() + (this.getVelocity()/4))* deltaState.getDelta());
+							}
+						}
+					else
 						{
 						this.setX(this.getX()- (this.getVelocity() + (this.getVelocity()/4))* deltaState.getDelta());
 						}
