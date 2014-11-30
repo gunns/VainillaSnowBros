@@ -5,14 +5,18 @@ import java.awt.Dimension;
 
 import mobConNieve.Empujado;
 import mobs.DisparoFuego;
+import mobs.TrollRojoEnojado;
 import mobs.TrollVerde;
 import agresividad.EstadoAgresividad;
 
+import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
+
+
 
 
 
@@ -169,6 +173,29 @@ public class Derecha extends Direccion{
 			{
 			bros.setX(mob.getX() - bros.getAppearance().getWidth());
 			}
+	}
+
+	@Override
+	public void spritePorCornear(TrollRojoEnojado tr) {
+		//tr.setY(tr.getY()-3);
+		tr.setAppearance(tr.getPreparandoCorneadaDerecha());
+		//this.setAppearance(sprite.crop(ancho+7, alto));
+		
+	}
+
+	@Override
+	public void cornear(TrollRojoEnojado tr, DeltaState deltaState) {
+		tr.setAppearance(tr.getCorneadaDerecha());
+		tr.setX(tr.getX() + (tr.getVelocity()*4 + (tr.getVelocity()))* deltaState.getDelta());
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean terminoRecorrido(Mob mob) {
+		return !mob.noLlegoAlFinal();
+	
+		
 	}
 	
 }

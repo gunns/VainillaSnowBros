@@ -3,9 +3,11 @@ package others;
 import java.awt.Dimension;
 
 import mobs.DisparoFuego;
+import mobs.TrollRojoEnojado;
 import mobs.TrollVerde;
 import agresividad.EstadoAgresividad;
 
+import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 
 import componentes.Bros;
@@ -62,4 +64,10 @@ public abstract class Direccion {
 	public abstract void spritefuego(DisparoFuego disparoFuego);
 
 	public abstract  void reacomodarBrosSiEsNecesario(Bros bros, Mob mob);
+
+	public abstract void spritePorCornear(TrollRojoEnojado tr);
+
+	public abstract void cornear(TrollRojoEnojado trollRojoEnojado, DeltaState deltaState);
+
+	public abstract boolean terminoRecorrido(Mob mob);
 }

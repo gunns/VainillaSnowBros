@@ -103,14 +103,6 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			  {
 			  this.setY(this.gameDimension.getHeight() - 45);
 			  }
-		  if(this.getX() > this.gameDimension.getWidth())
-		  	{
-			  this.setX(this.gameDimension.getWidth()-20);
-		  	}
-		  if(this.getX() < -5)
-		  	{
-			  this.setX(1);
-		  	}
 		}
 	}
 	

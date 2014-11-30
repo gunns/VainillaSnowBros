@@ -6,6 +6,7 @@ import java.util.Random;
 
 import mobs.TrollAmarillo;
 import mobs.TrollRojo;
+import mobs.TrollRojoEnojado;
 import mobs.TrollVerde;
 
 public class Enemigos{
@@ -37,17 +38,20 @@ public class Enemigos{
 			
 			*/
 				
-			this.mobs.add(new TrollRojo(dim, playState, (velocity*2)/3));
-			this.mobs.add(new TrollRojo(dim, playState, (velocity*2)/3));
-			this.mobs.add(new TrollRojo(dim, playState, (velocity*2)/3));
+			//this.mobs.add(new TrollRojo(dim, playState, (velocity*2)/3));
+			//this.mobs.add(new TrollRojo(dim, playState, (velocity*2)/3));
+			//this.mobs.add(new TrollRojo(dim, playState, (velocity*2)/3));
 			
-			this.mobs.add(new TrollVerde(dim, playState, (velocity*2)/3));
-			this.mobs.add(new TrollVerde(dim, playState, (velocity*2)/3));
+			//this.mobs.add(new TrollVerde(dim, playState, (velocity*2)/3));
+			//this.mobs.add(new TrollVerde(dim, playState, (velocity*2)/3));
 			
 			
-			this.mobs.add(new TrollAmarillo(dim, playState, (velocity*2)/3));
-			this.mobs.add(new TrollAmarillo(dim, playState, (velocity*2)/3));
-			this.mobs.add(new TrollAmarillo(dim, playState, (velocity*2)/3));
+			//this.mobs.add(new TrollAmarillo(dim, playState, (velocity*2)/3));
+			//this.mobs.add(new TrollAmarillo(dim, playState, (velocity*2)/3));
+			//this.mobs.add(new TrollAmarillo(dim, playState, (velocity*2)/3));
+			
+			this.mobs.add(new TrollRojoEnojado(dim, playState, (velocity*2)/3));
+			this.mobs.add(new TrollRojoEnojado(dim, playState, (velocity*2)/3));
 			}
 	
 	
