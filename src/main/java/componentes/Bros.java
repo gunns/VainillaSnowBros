@@ -368,92 +368,63 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.getEstado().saltar();
 		}
 	
-	private void moverALaDerecha(DeltaState deltaState) {
-		if(!this.getScene().getSystemPause()){
+	private void moverALaDerecha(DeltaState deltaState) 
+	{
+		if(!this.getScene().getSystemPause())
+		{
 			this.dir = new Derecha();
-			if(!playState && !this.getScene().getPlayState()){
-				if (this.noLlegoAlFinal()){
-						if(this.getEstadoCapsula().isPrisa())
-					this.setX(this.getX()+(this.getScene().getVelocity()*1.5+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
-					else
-					{
-					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
-						this.getScene().moverEsfera(this, deltaState);
-					}
+			this.getScene().moverEsfera(this, deltaState);
+				if (this.noLlegoAlFinal())
+				{
+				this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());		
 				}
-			}else{
-				if (this.noLlegoAlFinal()){
-					if(this.getEstadoCapsula().isPrisa())
-					this.setX(this.getX()+(this.getScene().getVelocity()*1.5+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
-					else
-					{
-					this.setX(this.getX()+(this.getScene().getVelocity()+ (this.getScene().getVelocity()/4))* deltaState.getDelta());
-					this.getScene().moverEsfera(this, deltaState);
-					}
-				}
-			}
 		}
+	
 	}
 	private void moverALaIzquierda(DeltaState deltaState) {
-		if(!this.getScene().getSystemPause()){
+		if(!this.getScene().getSystemPause())
+		{
 			this.dir = new Izquierda();
-			if(!playState && !this.getScene().getPlayState()){
+			this.getScene().moverEsfera(this, deltaState);
 				if (this.noLlegoAlComienzo())
 					{
-					if(this.getEstadoCapsula().isPrisa())
+					if(!this.getScene().hayColisionConUnaEsfera(this))
 						{
-						this.setX(this.getX()- (this.getScene().getVelocity()*1.5 + (this.getScene().getVelocity()/4))* deltaState.getDelta());
-						this.getScene().moverEsfera(this, deltaState);
+						this.setX(this.getX()- (this.getVelocity() + (this.getVelocity()/4))* deltaState.getDelta());
 						}
-					else
-					{
-					this.setX(this.getX()- (this.getScene().getVelocity() + (this.getScene().getVelocity()/4))* deltaState.getDelta());
-					this.getScene().moverEsfera(this, deltaState);
 					}
-				}
-			}else{
-				if (this.noLlegoAlComienzo()){
-					if(this.getEstadoCapsula().isPrisa())
-					this.setX(this.getX()-(this.getScene().getVelocity()*1.5 + (this.getScene().getVelocity()/4))* deltaState.getDelta());
-					else
-					this.setX(this.getX()-(this.getScene().getVelocity() + (this.getScene().getVelocity()/4))* deltaState.getDelta());
-					this.getScene().moverEsfera(this, deltaState);
-				}
-			}
 		}
 	}
 	
-	public void moverALaDerecha(double velocity, DeltaState deltaState) {
-		if(!this.getScene().getSystemPause()){
+	public void moverALaDerecha(double velocity, DeltaState deltaState)
+	{
+		if(!this.getScene().getSystemPause())
+		{
 			this.dir = new Derecha();
-			if(!playState && !this.getScene().getPlayState()){
-				if (this.noLlegoAlFinal()){
-					this.setX(this.getX()+(velocity + (this.getScene().getVelocity()/4))* deltaState.getDelta());
-					}
-			}else{
-				if (this.noLlegoAlFinal()){
-					this.setX(this.getX()+(velocity + (this.getScene().getVelocity()/4))* deltaState.getDelta());
-					}
-				}
-			}
-		}
-	
-	public void moverALaIzquierda(double velocity, DeltaState deltaState) {
-		if(!this.getScene().getSystemPause()){
-			this.dir = new Izquierda();
-			if(!playState && !this.getScene().getPlayState()){
-				if (this.noLlegoAlComienzo())
+			this.getScene().moverEsfera(this, deltaState);
+				if (this.noLlegoAlFinal())
+				{
+					if(!this.getScene().hayColisionConUnaEsfera(this))
 					{
-					this.setX(this.getX()- (velocity + (this.getScene().getVelocity()/4))* deltaState.getDelta());
+					this.setX(this.getX()+(velocity + (this.getVelocity()/4))* deltaState.getDelta());
 					}
 				}
-			}else{
-				if (this.noLlegoAlComienzo()){
-					this.setX(this.getX()-(velocity + (this.getScene().getVelocity()/4))* deltaState.getDelta());
-				}
-			}
 		}
+	}
 	
+	public void moverALaIzquierda(double velocity, DeltaState deltaState)
+	{
+		if(!this.getScene().getSystemPause())
+		{
+			this.dir = new Izquierda();
+			this.getScene().moverEsfera(this, deltaState);
+				if (this.noLlegoAlComienzo())
+				{
+					this.setX(this.getX()- (velocity + (this.getVelocity()/4))* deltaState.getDelta());
+				}
+		}
+		
+	}
 	
 	
 	

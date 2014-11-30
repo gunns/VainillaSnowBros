@@ -37,8 +37,16 @@ public class Pasivo extends EstadoAgresividad {
 			}
 		if(this.numeroDeMovimiento >5 && this.numeroDeMovimiento <=10)
 			{
-			this.bajara = true;
-			this.moverParaBajar(deltaState);
+			if(!this.mobEstaEnElFondo())
+				{
+				this.bajara = true;
+				this.moverParaBajar(deltaState);
+				}
+			else
+				{
+				this.setearNumeroDeMovimiento();
+				this.mobSeMueve(deltaState);
+				}
 			}
 		else
 			{
@@ -48,16 +56,9 @@ public class Pasivo extends EstadoAgresividad {
 	
 	public void moverSoloEnX(DeltaState deltaState)
 	{
-		
+		this.saltara = false;
+		this.bajara = false;	
 	this.getMob().getDir().moverMob(this, deltaState);
-	this.saltara = false;
-	this.bajara = false;
-	if(this.acabaDeTocarElLimite || !this.getMob().noLlegoAlComienzo() || !this.getMob().noLlegoAlFinal())
-		{
-		this.setearNumeroDeMovimiento();
-		//actualizar tiempo
-		this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
-		}
 	}
 	
 	public void moverParaSaltar(DeltaState deltaState)
@@ -145,6 +146,8 @@ public class Pasivo extends EstadoAgresividad {
 
 
 	public void moverEnX(DeltaState deltaState ){
+		this.saltara = false;
+		this.bajara = false;	
 		this.getMob().getDir().moverMob(this, deltaState);
 	}
 	

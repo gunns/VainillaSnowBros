@@ -7,6 +7,7 @@ import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
+import componentes.Bros;
 import componentes.Mob;
 import componentes.Snow;
 

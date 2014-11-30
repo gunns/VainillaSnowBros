@@ -96,6 +96,7 @@ public void update(DeltaState deltaState)
 		bros.setInvencible(true);
 		bros.setTiempoInvencible(500);
 		bros.setEstadoCapsula(new EstadoCapsula());
+		bros.setVelocity(this.getScene().getVelocity());
 		this.destroy();
 		//
 		//bros.nivelCompleto = false;

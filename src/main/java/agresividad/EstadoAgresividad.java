@@ -57,7 +57,7 @@ public class EstadoAgresividad {
 					}
 				else
 				{
-					if(this.getMob().getScene().terminaElPiso((this.getMob().getX()+1+this.getMob().getAppearance().getWidth()), this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))// && this.acabaDeTocarElLimite)
+					if(this.getMob().getScene().terminaElPiso((this.getMob().getX()+2+this.getMob().getAppearance().getWidth()), this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))// && this.acabaDeTocarElLimite)
 						{
 						this.getMob().setDir(new Izquierda());
 						this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
@@ -98,7 +98,7 @@ public class EstadoAgresividad {
 					}
 				else
 				{
-					if(this.getMob().getScene().terminaElPiso(this.getMob().getX()-1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))
+					if(this.getMob().getScene().terminaElPiso(this.getMob().getX()-2, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1))
 						{
 						this.getMob().setDir(new Derecha());
 						this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
@@ -181,8 +181,10 @@ public class EstadoAgresividad {
 	public void setearNumeroDeMovimiento()
 	{
 		Random rand = new Random();//creamos una instancia de Random 
-		int posAleatoria = rand.nextInt(17);//obtenemos una posicion entre 0 y el tamano del arreglo 
-		this.numeroDeMovimiento = posAleatoria;
+		int accionAleatoria = rand.nextInt(17);//obtenemos una posicion entre 0 y el tamano del arreglo
+		this.numeroDeMovimiento = accionAleatoria;
 	}
+	
+	
 	
 }

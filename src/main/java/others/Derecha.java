@@ -63,7 +63,8 @@ public class Derecha extends Direccion{
 	{
 		if(mob.noLlegoAlFinal())
 		{
-			mob.moverEsferaALaDerecha(deltaState);
+			//mob.moverEsferaALaDerecha(deltaState);
+			mob.setX(mob.getX() + (mob.getVelocity() + (mob.getVelocity()/4))* deltaState.getDelta());
 		}
 		else
 			{
@@ -101,9 +102,9 @@ public class Derecha extends Direccion{
 	}
 
 	@Override
-	public void moverEsfera(Mob mob, DeltaState deltaState) {
+	public void moverEsfera(Bros bros, Mob mob, DeltaState deltaState) {
 		// TODO Auto-generated method stub
-		mob.moverEsferaALaDerecha(deltaState);
+		mob.moverEsferaALaDerecha(bros, deltaState);
 	}
 
 	@Override
@@ -118,6 +119,12 @@ public class Derecha extends Direccion{
 	@Override
 	public void moverMob(EstadoAgresividad e, DeltaState deltaState) {
 		e.moverALaDerecha(deltaState);
+		if(e.acabaDeTocarElLimite || !e.getMob().noLlegoAlFinal())
+		{
+		e.setearNumeroDeMovimiento();
+		//actualizar tiempo
+		e.getMob().setTiempoDeReaccionActual(e.getMob().getTiempoDeReaccion());
+		}
 		
 	}
 
@@ -153,6 +160,15 @@ public class Derecha extends Direccion{
 	public void spritefuego(DisparoFuego disparoFuego) {
 		disparoFuego.setAppearance(disparoFuego.fuegoDerecha);
 		
+	}
+
+	@Override
+	public void reacomodarBrosSiEsNecesario(Bros bros, Mob mob) {
+		//mon es una esfera f, bros puede estar adentro y hay que reacomodar, se asume que el bros puede estar mirando a la derecha
+		if(bros.getScene().colisionBolaNieveFConBros(bros, mob))
+			{
+			bros.setX(mob.getX() - bros.getAppearance().getWidth());
+			}
 	}
 	
 }

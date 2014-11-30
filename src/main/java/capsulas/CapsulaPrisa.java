@@ -22,6 +22,7 @@ public class CapsulaPrisa extends Capsula {
 	public void sumarPuntaje(Bros bros) {
 		//TODO agregar solo puntaje para los dulces, las capsulas se redefinen
 		bros.getEstadoCapsula().setPrisa(true);
+		bros.setVelocity(bros.getVelocity()*1.5);
 		this.destroy();
 		//sonido capsula
 				Sound sonidoCapsula = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("capsula.wav"));

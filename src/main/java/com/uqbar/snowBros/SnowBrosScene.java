@@ -265,6 +265,30 @@ public class SnowBrosScene extends GameScene{
 			}
 	}	
 
+	public Mob EsferaFQueColisionaConBros(Bros bros)
+	//Se asegura que haya un Mob que colisiona con el bros
+	{
+		Mob mob = null;
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(esUnMob(each))
+				{
+				Mob esfera = (Mob) each;
+				if(esfera.getEstadoNieve().PuedoEmpujar())
+					{
+					if(CollisionDetector.INSTANCE.collidesRectAgainstRect(esfera.getX(),
+							esfera.getY(),(int) esfera.getAppearance().getWidth(),
+							(int) esfera.getAppearance().getHeight(),
+							bros.getX(), bros.getY(),(int) bros.getAppearance().getWidth(), (int) bros.getAppearance().getHeight()))
+						{
+						mob = esfera;
+						}
+					}
+				}
+			}
+		return mob;
+	}
+	
 	private boolean colisionNieveConMob(GameComponent<?> each, Mob mob2) {
 		boolean hayColision = false;
 		GameComponent<?> nieve = each;
@@ -326,6 +350,40 @@ public class SnowBrosScene extends GameScene{
 		return hayColision;
 	}
 	
+	public boolean colisionBolaNieveFConBros(Bros bros, Mob mob){
+		return(CollisionDetector.INSTANCE.collidesRectAgainstRect(bros.getX(),
+				bros.getY(),
+				(int) (bros.getAppearance().getWidth()), (int) (bros.getAppearance().getHeight()),
+				mob.getX(), mob.getY(),(int) (mob.getAppearance().getWidth()),(int) (mob.getAppearance().getHeight())));
+		}
+	
+	/*
+	public boolean colisionInternaBolaNieveFConBros(Bros bros){
+		boolean hayColision = false;
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(esUnMob(each))
+				{
+				Mob mob = (Mob) each;
+				if(mob.getEstadoNieve().PuedoEmpujar())
+					{
+					if(CollisionDetector.INSTANCE.collidesCircleAgainstRect(mob.getX(), mob.getY(),
+							mob.getAppearance().getWidth()/2,bros.getX(), bros.getY(),
+							bros.getAppearance().getWidth(), bros.getAppearance().getHeight()))
+								{
+						
+								if(
+								  (mob.getX()< (bros.getX()+bros.getAppearance().getWidth()) && (mob.getX()+ mob.getAppearance().getWidth()) > )
+								  
+								hayColision = true;
+								}
+					}
+				}
+			}
+		return hayColision;
+	}
+	*/
+	
 	public boolean colisionBolaRodanteConBros(GameComponent<?> each, Bros bros){
 		boolean hayColision = false;
 		GameComponent<?> mob = each;
@@ -348,7 +406,7 @@ public class SnowBrosScene extends GameScene{
 			Mob mob = (Mob) each;
 			if(this.colisionBolaNieveConBros(mob, bros) && mob.getEstadoNieve().PuedoEmpujar() && this.hayColisionConUnPiso(bros))
 					{
-				    bros.getDir().moverEsfera(mob, deltaState);
+				    bros.getDir().moverEsfera(bros,mob, deltaState);
 					}
 			}
 		}
@@ -1040,6 +1098,11 @@ public class SnowBrosScene extends GameScene{
 			}
 		
 		
-	}	
+	}
+
+
+
+	
+	
 	
 }

@@ -36,7 +36,7 @@ public abstract class Direccion {
 	public void setDir(Direccion dir) {
 	}
 
-	public abstract void moverEsfera(Mob mob, DeltaState deltaState);
+	public abstract void moverEsfera(Bros bros, Mob mob, DeltaState deltaState);
 
 
 
@@ -60,4 +60,6 @@ public abstract class Direccion {
 	public abstract void spriteDisparar(TrollVerde tv);
 
 	public abstract void spritefuego(DisparoFuego disparoFuego);
+
+	public abstract  void reacomodarBrosSiEsNecesario(Bros bros, Mob mob);
 }

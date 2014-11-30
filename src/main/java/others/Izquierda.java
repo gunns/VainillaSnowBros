@@ -63,7 +63,11 @@ public class Izquierda extends Direccion {
 	{
 		if(mob.noLlegoAlComienzo())
 		{
-			mob.moverEsferaALaIzquierda(deltaState);
+			//mob.moverEsferaALaIzquierda(deltaState);
+			
+			
+			
+			mob.setX(mob.getX()- (mob.getVelocity() + (mob.getVelocity()/4))* deltaState.getDelta());
 		}
 		else
 			{
@@ -101,8 +105,8 @@ public class Izquierda extends Direccion {
 	}
 
 	@Override
-	public void moverEsfera(Mob mob, DeltaState deltaState) {
-		mob.moverEsferaALaIzquierda(deltaState);
+	public void moverEsfera(Bros bros, Mob mob, DeltaState deltaState) {
+		mob.moverEsferaALaIzquierda(bros, deltaState);
 		
 	}
 
@@ -117,9 +121,15 @@ public class Izquierda extends Direccion {
 	}
 
 	@Override
-	public void moverMob(EstadoAgresividad e, DeltaState deltaState) {
+	public void moverMob(EstadoAgresividad e, DeltaState deltaState)
+	{
 		e.moverALaIzquierda(deltaState);
-		
+		if(e.acabaDeTocarElLimite || !e.getMob().noLlegoAlComienzo())
+		{
+		e.setearNumeroDeMovimiento();
+		//actualizar tiempo
+		e.getMob().setTiempoDeReaccionActual(e.getMob().getTiempoDeReaccion());
+		}
 	}
 
 	@Override
@@ -156,6 +166,16 @@ public class Izquierda extends Direccion {
 		disparoFuego.setAppearance(disparoFuego.fuegoIzquierda);
 		
 	}
+
+	@Override
+	public void reacomodarBrosSiEsNecesario(Bros bros, Mob mob) 
+	{
+		if(bros.getScene().colisionBolaNieveFConBros(bros, mob))
+		{
+		bros.setX(mob.getX() + mob.getAppearance().getWidth());
+		}
+	}
+		
 }
 
 

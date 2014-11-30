@@ -166,35 +166,33 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.setX(this.getX()+((this.getScene().getVelocity()*1.5 + (this.getScene().getVelocity()/4)) - 15));
 		
 	}
-	
-	public void moverEsferaALaDerecha(DeltaState deltaState) {
+	//TODO RECORDAR: COLOCAR SPRITE DEL BROS MOVIENDO LA ESFERA
+	public void moverEsferaALaDerecha(Bros bros, DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
 			this.dir = new Derecha();
-			if(!playState && !this.getScene().getPlayState()){
 				if (this.noLlegoAlFinal()){
-					this.setX(this.getX()+(this.getVelocity()*1.5+ (this.getVelocity()/4 - 4))* deltaState.getDelta());
-				}
-			}else{
-				if (this.noLlegoAlFinal()){
-					this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4 - 4))* deltaState.getDelta());
+					//Bros se mueve a la derecha, por lo que hay que asegurarse que el bros está a la izquierda
+					if(bros.getX()< this.getX())
+					{
+					this.setX(this.getX()+ (bros.getVelocity() + (bros.getVelocity()/4))* deltaState.getDelta());
+					}
 				}
 			}
 		}
-	}
 	
-	public void moverEsferaALaIzquierda(DeltaState deltaState) {
+	//TODO RECORDAR COLOCAR SPRITE DEL BROS MOVIENDO LA ESFERA
+	public void moverEsferaALaIzquierda(Bros bros, DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
 			this.dir = new Izquierda();
-			if(!playState && !this.getScene().getPlayState()){
-				if (this.noLlegoAlComienzo()){
-					this.setX(this.getX()- (this.getVelocity()*1.5 + (this.getVelocity()/4 - 4))* deltaState.getDelta());
-				}
-			}else{
-				if (this.noLlegoAlComienzo()){
-					this.setX(this.getX()-(this.getVelocity() + (this.getVelocity()/4) - 4)* deltaState.getDelta());
-				}
+				if (this.noLlegoAlComienzo())
+					{
+					//Bros se mueve a la izquierda, por lo que hay que aseurarse que el bros está a la derecha
+					if(bros.getX() > this.getX())
+						{
+						this.setX(this.getX()- (bros.getVelocity() + (bros.getVelocity()/4))* deltaState.getDelta());
+						}
+					}
 			}
-		}
 	}
 
 	public Integer getTiempoDeReaccion() {
