@@ -1,4 +1,4 @@
-package componentes;
+package suelos;
 
 import java.awt.Color;
 

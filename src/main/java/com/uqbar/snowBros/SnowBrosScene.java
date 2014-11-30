@@ -14,10 +14,14 @@ import java.util.List;
 
 
 
+
+
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
 import sonidoContinuo.Musica;
+import suelos.Piso;
+import suelos.Suelo;
 //import sonidoContinuo.MusicaFondo;
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
@@ -39,13 +43,11 @@ import componentes.Enemigos;
 import componentes.Fondo;
 import componentes.Fondos;
 import componentes.Mob;
-import componentes.Piso;
 import componentes.Cartel;
 import componentes.Puntaje;
 import componentes.Reanimacion;
 import componentes.Reposicionar;
 import componentes.Snow;
-import componentes.Suelo;
 import componentes.Vidas;
 
 import com.uqbar.vainilla.DeltaState;
@@ -58,6 +60,8 @@ import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 //import com.uqbar.vainilla.sound.SoundPlay;
 //import com.uqbar.vainilla.sound.SoundPlayer;
+
+
 
 
 
