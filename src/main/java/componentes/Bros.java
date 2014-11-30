@@ -375,9 +375,12 @@ public class Bros extends GameComponent<SnowBrosScene>{
 			this.dir = new Derecha();
 			this.getScene().moverEsfera(this, deltaState);
 				if (this.noLlegoAlFinal())
-				{
-				this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());		
-				}
+					{
+					if(!this.getScene().hayColisionConUnaEsfera(this))	
+						{
+						this.setX(this.getX()+(this.getVelocity()+ (this.getVelocity()/4))* deltaState.getDelta());		
+						}
+					}
 		}
 	
 	}
@@ -396,6 +399,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		}
 	}
 	
+	/*
 	public void moverALaDerecha(double velocity, DeltaState deltaState)
 	{
 		if(!this.getScene().getSystemPause())
@@ -426,7 +430,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		
 	}
 	
-	
+	*/
 	
 	private boolean noLlegoAlFinal() {return this.getX()+this.getAppearance().getWidth()<= gameDimension.getWidth();}
 	

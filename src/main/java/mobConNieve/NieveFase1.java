@@ -7,6 +7,7 @@ import com.uqbar.vainilla.appearances.Sprite;
 
 import componentes.Mob;
 import componentes.Snow;
+import estadoMob.CayendoMob;
 
 public class NieveFase1 extends EstadoNieve {
 	
@@ -14,6 +15,7 @@ public class NieveFase1 extends EstadoNieve {
 		super(mob, duracion);
 		Sprite sprite = Sprite.fromImage("MobSnow1.png");
 		this.getMob().setAppearance(sprite);
+		mob.setEstado(new CayendoMob(mob.getY(), mob));
 	}
 
 	@Override
