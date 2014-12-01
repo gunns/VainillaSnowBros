@@ -20,6 +20,7 @@ import java.util.List;
 
 
 
+
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
@@ -35,6 +36,7 @@ import mobs.TrollRojo;
 import mobs.TrollRojoEnojado;
 import mobs.TrollVerde;
 import Cartel.CartelLevelComplete;
+import Cartel.CartelWin;
 import boss.Boss;
 import boss.NivelBoss;
 //import boss.Boss;
@@ -70,6 +72,7 @@ import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 //import com.uqbar.vainilla.sound.SoundPlay;
 //import com.uqbar.vainilla.sound.SoundPlayer;
+
 
 
 
@@ -263,7 +266,7 @@ public class SnowBrosScene extends GameScene{
 	}
 	
 	public void cartelLose(){
-		this.buildBackground(Color.black);
+		//this.buildBackground(Color.black);
 		
 		this.musica.parar();
 		this.addComponent(new Cartel(this.gameDimension,0));
@@ -833,9 +836,11 @@ public class SnowBrosScene extends GameScene{
 		
 				//TODO mucho que hacer
 				//Reposicionar el bros al inicio de la pantalla
-		if(this.numeroNivel == 2)
+		if(this.numeroNivel == 20)
 		{
+		
 		this.nivelBoss = true;
+		
 		this.nivelCompleto = false;
 		NivelBoss nivelBoss = new NivelBoss();
 		this.addComponent(nivelBoss);
@@ -1263,6 +1268,38 @@ public class SnowBrosScene extends GameScene{
 				}
 			}
 		return unMob;
+		
+	}
+
+	public void bossDerrotado() {
+		CartelWin cartel = new CartelWin(gameDimension);
+		this.addComponent(cartel);
+		this.musica.parar();
+		this.stop();
+		
+		
+	}
+
+	public void bossMataBrosEnElCamino(Boss boss) {
+		for(GameComponent<?> each : this.getComponents())
+		{
+		if(each.getClass() == Bros.class)
+			{
+			Bros bros = (Bros) each;
+			if(!bros.muriendo)
+				{
+				if(CollisionDetector.INSTANCE.collidesRectAgainstRect(bros.getX(),
+						bros.getY(),
+						(int) (bros.getAppearance().getWidth()), (int) (bros.getAppearance().getHeight()),
+						boss.getX(), boss.getY(),(int) (boss.getAppearance().getWidth()),(int) (boss.getAppearance().getHeight()))
+						&& !bros.invencible)
+						{
+						bros.matarBros();
+						}
+				}
+			
+			}
+		}
 		
 	}
 	

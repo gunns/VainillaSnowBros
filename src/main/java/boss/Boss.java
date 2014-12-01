@@ -24,6 +24,8 @@ import componentes.Mob;
 import estadoMob.EstadoMob;
 
 public class Boss extends GameComponent<SnowBrosScene>{
+	
+	
 	/*primer (y seguramente unico) boss del juego
 	 el boss permanecerá en un solo lugar (en X) y saltará.
 	 este permanecera a la derecha
@@ -43,10 +45,13 @@ public class Boss extends GameComponent<SnowBrosScene>{
 	//public EstadoMovimientoBoss estadoMovimiento;
 	public Direccion direccion;
 	boolean acabaDeTocarElPiso;
+	private Sound golpe;
 	
-	public Boss(Dimension gameDimension)
+	public Boss(Dimension gameDimension){
 	//Boss snowMan
-	{ apareciendo = true;
+	
+	golpe =  new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("crash.wav"));
+	apareciendo = true;
 		saltando = false;
 		dim = gameDimension;
 		Sprite sprite = Sprite.fromImage("snowMan.png");
@@ -58,16 +63,16 @@ public class Boss extends GameComponent<SnowBrosScene>{
 		
 		this.setX(gameDimension.getWidth()/2-1);
 		tiempoInactividad = 700;
-		intervaloDeAccion = 700;
-		cantidadDeVidas = 8;
+		intervaloDeAccion = 300;
+		cantidadDeVidas = 15;
 		this.setEstado(new CaidaBrusca(this));
 		//saltando = true;
 	//this.setX(gameDimension.getWidth() - );	
-	}
 	
+	}
 	public void update(DeltaState deltaState){
-		if(!this.getScene().getSystemPause())
-		{
+		if(!this.getScene().getSystemPause() && this.getScene().getPlayState())
+			{
 		if(this.cantidadDeVidas <= 0)
 			{
 			this.morir();
@@ -77,8 +82,9 @@ public class Boss extends GameComponent<SnowBrosScene>{
 			
 		if(this.cantidadDeVidas < 10)
 			{
-			intervaloDeAccion = 100;
+			intervaloDeAccion = 80;
 			}
+		this.getScene().bossMataBrosEnElCamino(this);
 		
 		if(this.getScene().bossGolpeadoPorEsferaRodante(this))
 			{
@@ -96,8 +102,8 @@ public class Boss extends GameComponent<SnowBrosScene>{
 			mob.getScene().addComponent(explosion);
 			
 			//mob.getScene().soltarBrosAdherido(mob);
-			
 			mob.destroy();
+			
 					//alarido
 			}
 		
@@ -134,7 +140,8 @@ public class Boss extends GameComponent<SnowBrosScene>{
 	}
 
 	private void morir() {
-		// TODO Auto-generated method stub
+		this.destroy();
+		this.getScene().bossDerrotado();
 		
 	}
 
@@ -234,6 +241,7 @@ public class Boss extends GameComponent<SnowBrosScene>{
 
 	public void golpeoElPiso()
 	{
+		golpe.play();
 		this.saltando = false;
 		this.tiempoInactividad = intervaloDeAccion;
 		if(!this.getScene().hayEnemigos())
