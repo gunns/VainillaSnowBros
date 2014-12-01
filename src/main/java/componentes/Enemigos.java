@@ -22,10 +22,10 @@ public class Enemigos{
 			this.mobs = new ArrayList<Mob>();
 			this.sbs=snowi;
 			if(this.sbs.getNumeroNivel()<=1){
-				this.añadirTrollsRojos(1, dim, playState, velocity);
+				this.añadirTrollsRojos(2, dim, playState, velocity);
 			}else
 			if(this.sbs.getNumeroNivel()<=3){
-				this.añadirTrollsRojos(1, dim, playState, velocity);
+				this.añadirTrollsRojos(2, dim, playState, velocity);
 			}else
 			if(this.sbs.getNumeroNivel()<=6){
 				this.mobs.removeAll(this.getEnemigos());
