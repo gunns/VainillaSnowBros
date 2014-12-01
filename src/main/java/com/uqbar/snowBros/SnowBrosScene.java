@@ -691,7 +691,7 @@ public class SnowBrosScene extends GameScene{
 		this.bros= new Bros(dim,this.playState, velocity);
 		Reanimacion r = new Reanimacion(bros, this, 17);
 		this.addComponent(r);
-		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
+		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(),this);
 		this.addComponents(this.enemigos.getEnemigos());
 		
 		//CapsulaPrisa c1 = new CapsulaPrisa(200);
@@ -822,7 +822,7 @@ public class SnowBrosScene extends GameScene{
 					
 					//agregar Enemigos
 					//por inv.rep. no debería haber ninguno
-					this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
+					this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(),this);
 					this.addComponents(this.enemigos.getEnemigos());
 					//agrega pisos nuevos y  quita los anteriores
 					this.nuevosPisos();
