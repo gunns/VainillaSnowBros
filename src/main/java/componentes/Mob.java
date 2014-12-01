@@ -96,6 +96,9 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.getEstado().update(deltaState);
 		this.getEstadoNieve().update(deltaState);
 		this.getEstadoAgresividad().update(deltaState);
+		if(!this.esPeligroso()){
+			this.volversePasivo();
+		}
 		
 		 //A veces el bros se cae solo(vaya a saber quien el por que), para que esto no pase, se posicionara siempre en la parte superior
 		  //del suelo mas bajo
