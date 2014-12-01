@@ -63,10 +63,11 @@ public class AgresivoTrollRojoEnojado extends EstadoAgresividad{
 				tr.tiempoPreparandoCorneada--;
 				direccionDeCorneada.spritePorCornear(tr);
 				}
-		if(!this.getMob().esPeligroso()){
-			this.getMob().setEstado(new CayendoMob(this.getMob().getY(),this.getMob()));
-		}
 	}
+	if(!this.getMob().esPeligroso()){
+			this.getMob().setEstado(new CayendoMob(this.getMob().getY(),this.getMob()));
+	}
+	
 }
 
 }

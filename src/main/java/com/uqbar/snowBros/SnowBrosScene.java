@@ -839,14 +839,14 @@ public class SnowBrosScene extends GameScene{
 		if(this.numeroNivel == 20)
 		{
 		
-		this.nivelBoss = true;
-		
-		this.nivelCompleto = false;
-		NivelBoss nivelBoss = new NivelBoss();
-		this.addComponent(nivelBoss);
-		this.removeComponent(backGround);
-		this.backGround = new GameComponent<GameScene>(nivelBoss.getImagenFondo().scale(0.9, 1.2), 0, 0);
-		this.addComponent(backGround);
+			this.nivelBoss = true;
+			
+			this.nivelCompleto = false;
+			NivelBoss nivelBoss = new NivelBoss();
+			this.addComponent(nivelBoss);
+			this.removeComponent(backGround);
+			this.backGround = new GameComponent<GameScene>(nivelBoss.getImagenFondo().scale(0.9, 1.2), 0, 0);
+			this.addComponent(backGround);
 		}
 		else
 		{
@@ -854,33 +854,33 @@ public class SnowBrosScene extends GameScene{
 			this.addComponents(this.enemigos.getEnemigos());
 		}
 				
-					this.reposicionar();
-					
-					//agregar Enemigos
-					//por inv.rep. no debería haber ninguno
-					
-					this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(),this);
-					this.addComponents(this.enemigos.getEnemigos());
-					//agrega pisos nuevos y  quita los anteriores
-					this.nuevosPisos();
-					
-					
-					
-					//cartel
-					
-					CartelSiguienteNivel cartel = new CartelSiguienteNivel(gameDimension, this.numeroNivel);
-					this.addComponent(cartel);
+			this.reposicionar();
+			
+			//agregar Enemigos
+			//por inv.rep. no debería haber ninguno
+			
+			this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(),this);
+			this.addComponents(this.enemigos.getEnemigos());
+			//agrega pisos nuevos y  quita los anteriores
+			this.nuevosPisos();
+			
+			
+			
+			//cartel
+			
+			CartelSiguienteNivel cartel = new CartelSiguienteNivel(gameDimension, this.numeroNivel);
+			this.addComponent(cartel);
 
-					
-				
-				
-			 	 //unBros.invencible = true;
-			 	 //unBros.tiempoInvencible = 300;
-			 	 //correccion de error de reposicionamiento del bros al morir
-			 	 //unBros.setEstado(new CayendoBros((this.gameDimension.getHeight()-(unBros.getAppearance().getHeight())-25),unBros));
-				//this.reanimarBros(unBros);
-				
-					musica.actualizar(numeroNivel);
+			
+		
+		
+	 	 //unBros.invencible = true;
+	 	 //unBros.tiempoInvencible = 300;
+	 	 //correccion de error de reposicionamiento del bros al morir
+	 	 //unBros.setEstado(new CayendoBros((this.gameDimension.getHeight()-(unBros.getAppearance().getHeight())-25),unBros));
+		//this.reanimarBros(unBros);
+		
+			musica.actualizar(numeroNivel);
 	}
 
 

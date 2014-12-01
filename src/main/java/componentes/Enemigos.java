@@ -22,36 +22,36 @@ public class Enemigos{
 			this.mobs = new ArrayList<Mob>();
 			this.sbs=snowi;
 			if(this.sbs.getNumeroNivel()<=1){
-				this.añadirTrollsRojos(2, dim, playState, velocity);
+				this.añadirTrollsRojos(1, dim, playState, velocity);
 			}else
 			if(this.sbs.getNumeroNivel()<=3){
-				this.añadirTrollsRojos(4, dim, playState, velocity);
+				this.añadirTrollsRojos(1, dim, playState, velocity);
 			}else
 			if(this.sbs.getNumeroNivel()<=6){
-				this.añadirTrollsRojos(3, dim, playState, velocity);
-				this.añadirTrollsVerdes(2, dim, playState, velocity);
-			}
-			else
-			if(this.sbs.getNumeroNivel()<=10){
+				this.mobs.removeAll(this.getEnemigos());
 				this.añadirTrollsRojos(2, dim, playState, velocity);
-				this.añadirTrollsVerdes(2, dim, playState, velocity);
-				this.añadirTrollsAmarillos(2, dim, playState, velocity);
+				this.añadirTrollsVerdes(1, dim, playState, velocity);
+			}else
+			if(this.sbs.getNumeroNivel()<=10){
+				this.mobs.removeAll(this.getEnemigos());
+				this.añadirTrollsRojos(1, dim, playState, velocity);
+				this.añadirTrollsVerdes(1, dim, playState, velocity);
+				this.añadirTrollsAmarillos(1, dim, playState, velocity);
 			}else
 			if(this.sbs.getNumeroNivel()<=15){
-				this.añadirTrollsAmarillos(2, dim, playState, velocity);
-				this.añadirTrollsVerdes(2, dim, playState, velocity);
-				this.añadirTrollsRojosEnojados(2, dim, playState, velocity);
+				this.añadirTrollsAmarillos(1, dim, playState, velocity);
+				this.añadirTrollsVerdes(1, dim, playState, velocity);
+				this.añadirTrollsRojosEnojados(1, dim, playState, velocity);
 			}else
 			if(this.sbs.getNumeroNivel()<=19){
-				this.añadirTrollsAmarillos(2, dim, playState, velocity);
-				this.añadirTrollsRojosEnojados(3, dim, playState, velocity);
-				this.añadirTrollsVerdes(2, dim, playState, velocity);
-				this.añadirTrollsRojos(1, dim, playState, velocity);
+				this.añadirTrollsAmarillos(1, dim, playState, velocity);
+				this.añadirTrollsRojosEnojados(1, dim, playState, velocity);
+				this.añadirTrollsVerdes(1, dim, playState, velocity);
 			}
 		}
 	public void añadirTrollsAmarillos(int num, Dimension dim, boolean playState, double velocity){
 		int check=num;
-		while(check>=0){
+		while(check>0){
 			this.mobs.add(new TrollAmarillo(dim,playState,(velocity*2)/3));
 			check=check-1;
 		}
