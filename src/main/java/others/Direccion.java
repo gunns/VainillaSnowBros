@@ -6,6 +6,7 @@ import mobs.DisparoFuego;
 import mobs.TrollRojoEnojado;
 import mobs.TrollVerde;
 import agresividad.EstadoAgresividad;
+import boss.Boss;
 
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
@@ -70,4 +71,6 @@ public abstract class Direccion {
 	public abstract void cornear(TrollRojoEnojado trollRojoEnojado, DeltaState deltaState);
 
 	public abstract boolean terminoRecorrido(Mob mob);
+
+	public abstract void moverBoss(Boss boss);
 }

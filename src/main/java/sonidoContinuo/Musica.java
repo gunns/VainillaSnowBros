@@ -29,7 +29,7 @@ public class Musica extends GameComponent<SnowBrosScene>{
 	
 	AudioClip sonido;
 
-	public Musica() throws Exception{
+	public Musica() {
 		//URL url;
 		URL url = Musica.class.getResource("stage1.wav");
 		sonido = Applet.newAudioClip(url);
@@ -50,6 +50,15 @@ public class Musica extends GameComponent<SnowBrosScene>{
 	
 	public void actualizar(Integer numeroNivel)
 	{
+		/*
+		if(this.getScene().nivelBoss)
+			{
+			this.parar();
+			URL url = Musica.class.getResource("bossStage.wav");
+			sonido = Applet.newAudioClip(url);
+			this.reproducir();
+			}
+		else
 		if(numeroNivel == 5)
 			{
 			this.parar();
@@ -61,10 +70,11 @@ public class Musica extends GameComponent<SnowBrosScene>{
 			if(numeroNivel== 10)
 				{
 				this.parar();
-				URL url = Musica.class.getResource("stage5.1.wav");
+				URL url = Musica.class.getResource("stage5.3.wav");
 				sonido = Applet.newAudioClip(url);
 				this.reproducir();
 				}
+				*/
 	}
 	
 }

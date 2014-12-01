@@ -8,6 +8,7 @@ import mobs.DisparoFuego;
 import mobs.TrollRojoEnojado;
 import mobs.TrollVerde;
 import agresividad.EstadoAgresividad;
+import boss.Boss;
 
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
@@ -15,6 +16,7 @@ import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
+
 
 
 
@@ -195,6 +197,19 @@ public class Derecha extends Direccion{
 	public boolean terminoRecorrido(Mob mob) {
 		return !mob.noLlegoAlFinal();
 	
+		
+	}
+
+	@Override
+	public void moverBoss(Boss boss) {
+		if((boss.getX() + boss.getAppearance().getWidth()) >= boss.getDim().getWidth())
+			{
+			boss.setDireccion(new Izquierda());
+			}
+		else
+			{
+			boss.moverDerecha();
+			}
 		
 	}
 	

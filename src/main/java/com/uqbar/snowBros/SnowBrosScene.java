@@ -16,6 +16,10 @@ import java.util.List;
 
 
 
+
+
+
+
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
@@ -31,6 +35,9 @@ import mobs.TrollRojo;
 import mobs.TrollRojoEnojado;
 import mobs.TrollVerde;
 import Cartel.CartelLevelComplete;
+import boss.Boss;
+import boss.NivelBoss;
+//import boss.Boss;
 import capsulas.Capsula;
 import capsulas.CapsulaPotencia;
 import capsulas.CapsulaPrisa;
@@ -40,8 +47,11 @@ import componentes.Bros;
 import componentes.CartelInicioNivel;
 import componentes.CartelSiguienteNivel;
 import componentes.Enemigos;
+import componentes.Explosion;
 import componentes.Fondo;
 import componentes.Fondos;
+import componentes.InicioJuego;
+//import componentes.InicioJuego;
 import componentes.Mob;
 import componentes.Cartel;
 import componentes.Puntaje;
@@ -60,6 +70,10 @@ import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 //import com.uqbar.vainilla.sound.SoundPlay;
 //import com.uqbar.vainilla.sound.SoundPlayer;
+
+
+
+
 
 
 
@@ -95,75 +109,73 @@ public class SnowBrosScene extends GameScene{
 	
 	
 	private Musica musica;
+	public boolean nivelBoss; 
 	
 	
 	//private MusicaFondo music;
 	
 	public SnowBrosScene(Dimension dim, double velocity) throws Exception{
 		super();
-		
-		this.numeroNivel = 1;
-		this.nivelCompleto = false;
-		
-		CartelInicioNivel cartelInicio = new CartelInicioNivel(dim, numeroNivel, velocity);
+		nivelBoss = false;
 		this.velocity=velocity;
 		this.gameDimension= dim;
-		this.buildBackground(Color.blue);
+		InicioJuego inicio = new InicioJuego(gameDimension);
+		this.addComponent(inicio);
+		inicio.reproducir();
 		
-		this.addComponent(cartelInicio);
+		Sprite sprite = Sprite.fromImage("inicioSnowBros.png");
+		//Sprite sprite = Sprite.fromImage("bossStageImage.png");
 		
+		//this.backGround = new GameComponent<GameScene> sprite.scale
+		//this.backGround = new GameComponent<GameScene>(sprite.scale(name.getEscala1(),name.getEscala2()),0, 0);
+		if (backGround != null) {this.removeComponent(this.backGround);}
+		//Fondos fondo = new Fondos();
+//		Fondo name = fondo.getFondos().get(4);
+		//Fondo name = fondo.randomFondo();
 		
-		/*
+		this.backGround = new GameComponent<GameScene>(sprite.scale(0.46, 0.57), 0, 0);
+		//this.backGround = new GameComponent<GameScene>(sprite.scale(0.9, 1.2), 0, 0);
+		//SCALE TITLE 0.46, 0.57
+		this.backGround.setZ(-1);
+		this.addComponent(this.backGround);
 		
-		
-		
-		this.bros=new Bros(dim,this.playState, velocity);
-		this.addComponent(this.bros);
-		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity());
-		this.addComponents(this.enemigos.getEnemigos());
-		this.suelo= new Suelo(this.gameDimension);
-		this.addComponents(suelo.getSuelos());
-		
-		CapsulaPrisa c1 = new CapsulaPrisa(200);
-		c1.setX(100);
-		c1.setY(300);
-		this.addComponent(c1);
-		
-		Puntaje puntaje = new Puntaje(bros, 20, 20);
-		bros.setPuntaje(puntaje);
-		this.addComponent(puntaje);
-		
-		Vidas vida1 = new Vidas(bros);
-		bros.setVidas(vida1);
-		this.addComponent(vida1);
-		
-		*/
-		this.initSound();
 		
 		musica = new Musica();
 		this.addComponent(musica);
+		
+			
+	}
+	
+	public void comenzarJuego()
+	{
+
+		this.numeroNivel = 1;
+		this.nivelCompleto = false;
+		
+		CartelInicioNivel cartelInicio = new CartelInicioNivel(gameDimension, numeroNivel, velocity);
+		
+		
+		this.buildBackground(Color.blue);
+		
+		this.addComponent(cartelInicio);
+	
+		
+		//this.initSound();
+		
+		//musica = new Musica();
+		//this.addComponent(musica);
 		musica.reproducir();
 		
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
-		//this.playContinue();
 		
 		
-		//for(int i = 1; i > 0; i ++  )
-		//this.gameSound.play();
-		
-		
-		
-		
-		//musica = new SoundPlay();
-		
-		
-	}
 	
+	}
 	
 
 	protected void initSound() {
-		this.gameSound= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("stage1.wav"));
+		//this.gameSound= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("stage1.wav"));
 	}
 	
 	private void buildBackground(Color color) {
@@ -691,7 +703,7 @@ public class SnowBrosScene extends GameScene{
 		this.bros= new Bros(dim,this.playState, velocity);
 		Reanimacion r = new Reanimacion(bros, this, 17);
 		this.addComponent(r);
-		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(),this);
+		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(), this);
 		this.addComponents(this.enemigos.getEnemigos());
 		
 		//CapsulaPrisa c1 = new CapsulaPrisa(200);
@@ -749,10 +761,15 @@ public class SnowBrosScene extends GameScene{
 		boolean nivelTerminado = true;
 		for(GameComponent<?> each : this.getComponents())
 			{
-			if(esUnMob(each) || esUnTesoro(each))
+			if(nivelBoss)
 				{
 				nivelTerminado = false;
 				}
+			else
+				if(esUnMob(each) || esUnTesoro(each))
+					{
+					nivelTerminado = false;
+					}
 			}
 		return nivelTerminado;
 	}
@@ -768,7 +785,7 @@ public class SnowBrosScene extends GameScene{
 		//																												"levelComplete2.wav"
 	      sonidoNivelCompleto.play();
 	      this.numeroNivel = numeroNivel +1;
-	      this.musica.actualizar(this.numeroNivel);
+	      //this.musica.actualizar(this.numeroNivel);
 	      
 		//this.stop();
 		
@@ -816,12 +833,27 @@ public class SnowBrosScene extends GameScene{
 		
 				//TODO mucho que hacer
 				//Reposicionar el bros al inicio de la pantalla
-					
+		if(this.numeroNivel == 2)
+		{
+		this.nivelBoss = true;
+		this.nivelCompleto = false;
+		NivelBoss nivelBoss = new NivelBoss();
+		this.addComponent(nivelBoss);
+		this.removeComponent(backGround);
+		this.backGround = new GameComponent<GameScene>(nivelBoss.getImagenFondo().scale(0.9, 1.2), 0, 0);
+		this.addComponent(backGround);
+		}
+		else
+		{
+			this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(), this);
+			this.addComponents(this.enemigos.getEnemigos());
+		}
 				
 					this.reposicionar();
 					
 					//agregar Enemigos
 					//por inv.rep. no debería haber ninguno
+					
 					this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(),this);
 					this.addComponents(this.enemigos.getEnemigos());
 					//agrega pisos nuevos y  quita los anteriores
@@ -833,7 +865,8 @@ public class SnowBrosScene extends GameScene{
 					
 					CartelSiguienteNivel cartel = new CartelSiguienteNivel(gameDimension, this.numeroNivel);
 					this.addComponent(cartel);
-								
+
+					
 				
 				
 			 	 //unBros.invencible = true;
@@ -841,8 +874,9 @@ public class SnowBrosScene extends GameScene{
 			 	 //correccion de error de reposicionamiento del bros al morir
 			 	 //unBros.setEstado(new CayendoBros((this.gameDimension.getHeight()-(unBros.getAppearance().getHeight())-25),unBros));
 				//this.reanimarBros(unBros);
-				}
-
+				
+					musica.actualizar(numeroNivel);
+	}
 
 
 	private void nuevosPisos() {
@@ -1132,9 +1166,112 @@ public class SnowBrosScene extends GameScene{
 		
 	}
 
-
-
 	
 	
+	
+	public boolean brosEstaALaDerecha(Boss boss) {
+		boolean derecha = false;
+		for(GameComponent<?> each : this.getComponents())
+			{
+			if(each.getClass() == Bros.class)
+				{
+				Bros bros = (Bros) each;
+				derecha = bros.getX() > boss.getX();
+				}
+			}
+		return derecha;
+	}
+
+	public boolean tocoFondo(Boss boss) {
+		// TODO Auto-generated method stub
+		return ((boss.getY() + boss.getAppearance().getHeight())  > (this.getGameDimension().getHeight())-10);
+	}
+
+	public boolean hayEnemigos() {
+			boolean hay = false;
+			for(GameComponent<?> each : this.getComponents())
+				{
+					if(esUnMob(each))
+						{
+						hay = true;
+						}
+				}
+			return hay;
+		}
+	
+
+	public void invocarEnemigos()
+	{
+		this.enemigos= this.enemigos.enemigosParaBoss(gameDimension, playState, velocity);
+				//new Enemigos(this.gameDimension,this.playState, this.getVelocity());
+		this.addComponents(this.enemigos.getEnemigos());
+	}
+
+	public boolean bossGolpeadoPorEsferaRodante(Boss boss) {
+		
+		boolean colisiona= false;
+		List<GameComponent<?>> esferas = this.getComponents();
+		for(GameComponent<?> each : esferas)
+			{
+			if(esUnMob(each))
+				{
+				Mob mob = (Mob) each;
+				
+				if(mob.getEstadoNieve().puedeRebotar())
+					{
+					if(CollisionDetector.INSTANCE.collidesRectAgainstRect(boss.getX(),
+							boss.getY(),
+							(int) (boss.getAppearance().getWidth()), (int) (boss.getAppearance().getHeight()),
+							mob.getX(), mob.getY(),(int) (mob.getAppearance().getWidth()),(int) (2)))
+						{
+						colisiona = true;
+						}
+					
+					//mob.getEstadoNieve().arrastrarBros(bros);
+					}
+				}
+			}
+		
+		return colisiona;
+		}
+
+	
+	public Mob esferaColisionadaConBoss(Boss boss)
+	{
+		Mob unMob = null;
+		List<GameComponent<?>> esferas = this.getComponents();
+		for(GameComponent<?> each : esferas)
+			{
+			if(esUnMob(each))
+				{
+				Mob mob = (Mob) each;
+				
+				if(mob.getEstadoNieve().puedeRebotar())
+					{
+					if(CollisionDetector.INSTANCE.collidesRectAgainstRect(boss.getX(),
+							boss.getY(),
+							(int) (boss.getAppearance().getWidth()), (int) (boss.getAppearance().getHeight()),
+							mob.getX(), mob.getY(),(int) (mob.getAppearance().getWidth()),(int) (2)))
+						{
+						
+						unMob = mob;
+							
+						}
+					
+					//mob.getEstadoNieve().arrastrarBros(bros);
+					}
+				}
+			}
+		return unMob;
+		
+	}
 	
 }
+
+	
+
+
+
+	
+	
+	

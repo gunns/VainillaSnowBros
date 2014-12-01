@@ -8,12 +8,14 @@ import mobs.DisparoFuego;
 import mobs.TrollRojoEnojado;
 import mobs.TrollVerde;
 import agresividad.EstadoAgresividad;
+import boss.Boss;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
+
 
 
 
@@ -197,7 +199,20 @@ public class Izquierda extends Direccion {
 		// TODO Auto-generated method stub
 		return !mob.noLlegoAlComienzo();
 	}
-		
+
+	public void moverBoss(Boss boss) 
+	{
+		if(boss.getX() <= 0)
+			{
+			boss.setDireccion(new Derecha());
+			}
+		else
+			{
+			boss.moverIzquierda();
+			}
+	}	
+	
+	
 }
 
 
