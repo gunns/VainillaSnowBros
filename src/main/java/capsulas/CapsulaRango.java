@@ -27,5 +27,7 @@ public class CapsulaRango extends Capsula{
 			//sonido capsula
 			Sound sonidoCapsula = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("capsula.wav"));
 			sonidoCapsula.play();
+			
+			bros.sumarPuntaje(500);
 		}
 }

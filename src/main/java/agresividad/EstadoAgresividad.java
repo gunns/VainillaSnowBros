@@ -114,7 +114,10 @@ public class EstadoAgresividad {
 	
 	public void saltar(DeltaState deltaState)
 	{
+		if(this.getMob().getScene().hayColisionConUnPiso(this.getMob()))
+		{
 		this.getMob().getEstado().saltar();
+		}
 	}
 	
 	public void bajar(DeltaState deltaState)

@@ -38,11 +38,13 @@ public class Enemigos{
 				this.añadirTrollsVerdes(1, dim, playState, velocity);
 				this.añadirTrollsAmarillos(1, dim, playState, velocity);
 			}else
-			if(this.sbs.getNumeroNivel()<=15){
+			if(this.sbs.getNumeroNivel()<15){
 				this.añadirTrollsAmarillos(1, dim, playState, velocity);
 				this.añadirTrollsVerdes(1, dim, playState, velocity);
 				this.añadirTrollsRojosEnojados(1, dim, playState, velocity);
 			}else
+				if(this.sbs.getNumeroNivel()==15){}
+				else
 			if(this.sbs.getNumeroNivel()<=19){
 				this.añadirTrollsAmarillos(1, dim, playState, velocity);
 				this.añadirTrollsRojosEnojados(1, dim, playState, velocity);

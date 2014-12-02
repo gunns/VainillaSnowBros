@@ -43,6 +43,7 @@ public class Musica extends GameComponent<SnowBrosScene>{
 	public void reproducir(){
 		sonido.loop();
 		sonido.play();
+		sonido.loop();
 	}
 	public void parar(){
 		this.sonido.stop();
@@ -50,7 +51,7 @@ public class Musica extends GameComponent<SnowBrosScene>{
 	
 	public void actualizar(Integer numeroNivel)
 	{
-		/*
+		
 		if(this.getScene().nivelBoss)
 			{
 			this.parar();
@@ -74,7 +75,7 @@ public class Musica extends GameComponent<SnowBrosScene>{
 				sonido = Applet.newAudioClip(url);
 				this.reproducir();
 				}
-				*/
+				
 	}
 	
 }

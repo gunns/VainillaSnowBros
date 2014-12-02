@@ -35,8 +35,8 @@ public class InicioJuego extends GameComponent<SnowBrosScene>{
 	
 	public InicioJuego(Dimension dim) throws Exception
 	{
-		//imagenFondo = Sprite.fromImage("inicioSnowBros.png");
-		//musica = new MusicaInicio();
+		imagenFondo = Sprite.fromImage("inicioSnowBros.png");
+		musica = new MusicaInicio();
 		
 		boton = new CartelPresioneStart(dim);
 		boolean agregueCartel = false;
@@ -44,10 +44,10 @@ public class InicioJuego extends GameComponent<SnowBrosScene>{
 	}
 	
 	public void reproducir(){
-	//	musica.reproducir();
+		musica.reproducir();
 	}
 	public void parar(){
-		//musica.parar();
+		musica.parar();
 	}
 	
 	public void update(DeltaState deltaState)

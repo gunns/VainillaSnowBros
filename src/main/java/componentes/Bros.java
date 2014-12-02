@@ -24,6 +24,7 @@ import com.uqbar.vainilla.sound.SoundBuilder;
 public class Bros extends GameComponent<SnowBrosScene>{
 
 	//MOVIMIENTO
+	private Integer puntajeParaVida;
 	public boolean invencible = true;
 	public int tiempoInvencible = 500;
 	public EstadoBros estado;
@@ -83,6 +84,7 @@ public class Bros extends GameComponent<SnowBrosScene>{
 		this.muriendo=false;
 		this.tiempoMuriendo=180;
 		this.muriendoYSubiendo=150;
+		this.puntajeParaVida = 15000;
 		
 		this.sonidoSalto= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("jump.wav"));
 		invisible = false;
@@ -492,6 +494,13 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	public void sumarPuntaje(Integer puntos) {
 		
 		this.getPuntaje().sumarPuntaje(puntos);
+		if(this.getPuntaje().puntos >= this.puntajeParaVida)
+			{
+			this.getVidas().setCantidadVidas(this.getVidas().getCantidadVidas() + 1);
+			Sound vidaExtra = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("extraLife.wav"));
+			vidaExtra.play();
+			this.puntajeParaVida = this.puntajeParaVida + 15000;
+			}
 		
 	}
 

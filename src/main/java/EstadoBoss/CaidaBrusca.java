@@ -1,6 +1,8 @@
 package EstadoBoss;
 
 import com.uqbar.vainilla.DeltaState;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import estadoBros.CayendoBros;
 import boss.Boss;
@@ -17,6 +19,7 @@ public class CaidaBrusca extends EstadoBoss{
 	@Override
 	public void cambiarMovimiento(Boss boss) {
 		// TODO Auto-generated method stub
+		this.getBoss().getVoice().play();
 		boss.setEstado(new CayendoBoss(boss.getY(), boss));
 		
 	}

@@ -3,6 +3,8 @@ package mobConNieve;
 //import java.awt.Color;
 
 //import com.uqbar.vainilla.appearances.Circle;
+import agresividad.Pasivo;
+
 import com.uqbar.vainilla.appearances.Sprite;
 
 import componentes.Mob;
@@ -16,6 +18,7 @@ public class NieveFase1 extends EstadoNieve {
 		Sprite sprite = Sprite.fromImage("MobSnow1.png");
 		this.getMob().setAppearance(sprite);
 		mob.setEstado(new CayendoMob(mob.getY(), mob));
+		mob.setEstadoAgresividad(new Pasivo(mob));
 	}
 
 	@Override

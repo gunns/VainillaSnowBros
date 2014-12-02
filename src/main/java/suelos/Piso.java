@@ -31,12 +31,31 @@ public class Piso extends GameComponent<SnowBrosScene>{
 
 public void asignarPiso(SnowBrosScene s) {
 		// TODO Auto-generated method stub
-	if(s.getNumeroNivel()>=5)
+if(s.nivelBoss)
+	{
+	Sprite sprite = Sprite.fromImage("SueloIce.png");
+	this.setAppearance(sprite);
+	}
+else
+	if(s.getNumeroNivel()>=15)
+		{
+		Sprite sprite = Sprite.fromImage("SueloIce2.png");
+		this.setAppearance(sprite);
+		}
+else
+if(s.getNumeroNivel()>=10)
 	{
 	Sprite sprite = Sprite.fromImage("Suelo2.png");
 	this.setAppearance(sprite);
 	}
+else
+	if(s.getNumeroNivel()>=5)
+	{
+	Sprite sprite = Sprite.fromImage("Suelo3.png");
+	this.setAppearance(sprite);
 	}
+}
+	
 
 
 
@@ -76,5 +95,6 @@ public void update(DeltaState deltaState)
 	
 	
 }
+
 
 

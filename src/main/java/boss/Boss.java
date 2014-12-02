@@ -25,6 +25,9 @@ import estadoMob.EstadoMob;
 
 public class Boss extends GameComponent<SnowBrosScene>{
 	
+	Sound voice;
+	
+	
 	
 	/*primer (y seguramente unico) boss del juego
 	 el boss permanecerá en un solo lugar (en X) y saltará.
@@ -64,10 +67,12 @@ public class Boss extends GameComponent<SnowBrosScene>{
 		this.setX(gameDimension.getWidth()/2-1);
 		tiempoInactividad = 700;
 		intervaloDeAccion = 300;
-		cantidadDeVidas = 15;
+		cantidadDeVidas = 12;
 		this.setEstado(new CaidaBrusca(this));
 		//saltando = true;
 	//this.setX(gameDimension.getWidth() - );	
+		
+		voice = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("startBoss.wav"));
 	
 	}
 	public void update(DeltaState deltaState){
@@ -80,7 +85,7 @@ public class Boss extends GameComponent<SnowBrosScene>{
 		else
 		{
 			
-		if(this.cantidadDeVidas < 10)
+		if(this.cantidadDeVidas < 7)
 			{
 			intervaloDeAccion = 80;
 			}
@@ -253,6 +258,12 @@ public class Boss extends GameComponent<SnowBrosScene>{
 		//if(this)
 		
 		
+	}
+	public Sound getVoice() {
+		return voice;
+	}
+	public void setVoice(Sound voice) {
+		this.voice = voice;
 	} 
 	
 	

@@ -165,8 +165,8 @@ public class SnowBrosScene extends GameScene{
 		
 		//this.initSound();
 		
-		//musica = new Musica();
-		//this.addComponent(musica);
+		musica = new Musica();
+		this.addComponent(musica);
 		musica.reproducir();
 		
 		this.suelo= new Suelo(this.gameDimension);
@@ -788,7 +788,7 @@ public class SnowBrosScene extends GameScene{
 		//																												"levelComplete2.wav"
 	      sonidoNivelCompleto.play();
 	      this.numeroNivel = numeroNivel +1;
-	      //this.musica.actualizar(this.numeroNivel);
+	      this.musica.actualizar(this.numeroNivel);
 	      
 		//this.stop();
 		
@@ -836,7 +836,7 @@ public class SnowBrosScene extends GameScene{
 		
 				//TODO mucho que hacer
 				//Reposicionar el bros al inicio de la pantalla
-		if(this.numeroNivel == 20)
+		if(this.numeroNivel == 15)
 		{
 		
 			this.nivelBoss = true;
@@ -847,6 +847,7 @@ public class SnowBrosScene extends GameScene{
 			this.removeComponent(backGround);
 			this.backGround = new GameComponent<GameScene>(nivelBoss.getImagenFondo().scale(0.9, 1.2), 0, 0);
 			this.addComponent(backGround);
+			this.musica.actualizar(this.numeroNivel);
 		}
 		else
 		{

@@ -21,6 +21,7 @@ public class MusicaInicio {
 	public void reproducir(){
 		sonido.loop();
 		sonido.play();
+		sonido.loop();
 	}
 	public void parar(){
 		this.sonido.stop();
