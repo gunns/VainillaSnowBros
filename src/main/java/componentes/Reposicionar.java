@@ -34,7 +34,6 @@ Sprite[] sprites;
 public Reposicionar(Bros bros, SnowBrosScene sns, Integer tiempo){
 	this.bros = bros;
 	this.sns = sns;
-	//tiempoReanimacion = 400;
 	
 	this.setX(bros.getAparicionEnX() - 17);
 	this.setY(sns.getGameDimension().getHeight() - 25);
@@ -74,7 +73,6 @@ public Reposicionar(Bros bros, SnowBrosScene sns, Integer tiempo){
 	sprites[14] = sprite9;
 	sprites[15] = sprite10;
 	
-	 //sonido aparicion
     Sound sonidoAparicion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("appear.wav"));
     sonidoAparicion.play();
 	
@@ -102,7 +100,6 @@ public void update(DeltaState deltaState)
 else
 	{
 this.setAppearance(sprites[current]);
-//this.setY(this.getY() - (sprites[current]));
 if(this.tiempoAnimacionAux < 1)
 		{
 		current = current + 1;
@@ -115,24 +112,6 @@ if(this.tiempoAnimacionAux < 1)
 		}	
 	}
 	
-	/*
-	if(this.tiempoReanimacion < 1)
-		{
-		//reposicionarBros
-		Sprite spriteVive = Sprite.fromImage("BrosDrc.png");
-		bros.setAppearance(spriteVive);
-		bros.setX(sns.getGameDimension().getWidth()/2-bros.getAppearance().getWidth()/2);
-		bros.setY(sns.getGameDimension().getHeight()-(bros.getAppearance().getHeight())-25);
-		bros.setZ(1);
-		sns.addComponent(bros);
-		this.destroy();
-		}
-		else
-			{
-			tiempoReanimacion = tiempoReanimacion -1;
-			}
-			
-			*/
 	}
 }
 
@@ -144,11 +123,9 @@ public void reposicionar(Integer current) {
 			this.setY(this.getY() - (sprites[current].getHeight() - sprites[current - 1].getHeight()));
 			}
 		else
-			//if(sprites[current].getHeight() > sprites[current - 1].getHeight())
-			//{
+
 			if(sprites[current -1].getHeight() > sprites[current].getHeight())
 			this.setY(this.getY() + (sprites[current - 1].getHeight() - sprites[current].getHeight()));
-			//}
 		}
 		
 	

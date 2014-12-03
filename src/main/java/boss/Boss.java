@@ -1,34 +1,25 @@
    package boss;
 
 import java.awt.Dimension;
-import java.util.Random;
-
 import others.Derecha;
 import others.Direccion;
 import others.Izquierda;
-import mobConNieve.EstadoNieve;
 import EstadoBoss.CaidaBrusca;
 import EstadoBoss.EstadoBoss;
 import EstadoBoss.SubiendoBoss;
-import agresividad.EstadoAgresividad;
-
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
-
 import componentes.Explosion;
 import componentes.Mob;
-import estadoMob.EstadoMob;
 
 public class Boss extends GameComponent<SnowBrosScene>{
 	
 	Sound voice;
-	
-	
-	
+
 	/*primer (y seguramente unico) boss del juego
 	 el boss permanecerá en un solo lugar (en X) y saltará.
 	 este permanecera a la derecha
@@ -36,8 +27,8 @@ public class Boss extends GameComponent<SnowBrosScene>{
 	 cada cierto tiempo el boss escupirá una orda de mobs hacia la izquierda, los cuales no tendrán inteligencia y se moveran
 	 de izquierda a derecha sin dudar(SubClase de mob) y luego
 	 de un cierto tiempo estos desaparecerán.
-	 
 	 */
+	
 	public Integer intervaloDeAccion;
 	public boolean apareciendo;
 	public Integer cantidadDeVidas;
@@ -45,14 +36,11 @@ public class Boss extends GameComponent<SnowBrosScene>{
 	public boolean saltando;
 	public Dimension dim;
 	public EstadoBoss estado;
-	//public EstadoMovimientoBoss estadoMovimiento;
 	public Direccion direccion;
 	boolean acabaDeTocarElPiso;
 	private Sound golpe;
 	
 	public Boss(Dimension gameDimension){
-	//Boss snowMan
-	
 	golpe =  new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("crash.wav"));
 	apareciendo = true;
 		saltando = false;
@@ -61,17 +49,13 @@ public class Boss extends GameComponent<SnowBrosScene>{
 		this.setAppearance(sprite);
 		this.setY(0);
 		this.direccion = new Izquierda();
-		//setear estado boss
-		//this.setEstadoBoss(new CaidaBrusca(this));
 		
 		this.setX(gameDimension.getWidth()/2-1);
 		tiempoInactividad = 700;
 		intervaloDeAccion = 300;
 		cantidadDeVidas = 12;
 		this.setEstado(new CaidaBrusca(this));
-		//saltando = true;
-	//this.setX(gameDimension.getWidth() - );	
-		
+
 		voice = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("startBoss.wav"));
 	
 	}
@@ -97,8 +81,6 @@ public class Boss extends GameComponent<SnowBrosScene>{
 			Mob mob = this.getScene().esferaColisionadaConBoss(this);
 			
 			mob.getScene().esferaExploto(mob);
-			//AnimacionBreak animacion = new AnimacionBreak(mob.getX(), mob.getY(), mob);
-			//mob.getScene().addComponent(animacion);
 			
 			//sonido explosion
 			Sound sonidoExplosion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("snowBallExplode.wav"));
@@ -106,10 +88,7 @@ public class Boss extends GameComponent<SnowBrosScene>{
 			Explosion explosion = new Explosion(mob.getX() -15, mob.getY() - 20);
 			mob.getScene().addComponent(explosion);
 			
-			//mob.getScene().soltarBrosAdherido(mob);
 			mob.destroy();
-			
-					//alarido
 			}
 		
 		if(apareciendo)
@@ -155,7 +134,6 @@ public class Boss extends GameComponent<SnowBrosScene>{
 		if(this.getScene().brosEstaALaDerecha(this))
 			{
 			this.direccion = new Derecha();
-			//this.setEstado(new SubiendoBoss(this.getY(), this));
 			this.estado.cambiarMovimiento(this);
 			}
 		else
@@ -164,18 +142,14 @@ public class Boss extends GameComponent<SnowBrosScene>{
 			this.setEstado(new SubiendoBoss(this.getY(), this));
 			}
 		
-		//al tocar el suelo se escuchará un fuerte golpe y enemigos caeran del cielo
 		}
 	
 	public void moverIzquierda() {
-		
-		// TODO Auto-generated method stub
 		this.setX(this.getX() - 0.6);
 		
 	}
 
 	public void moverDerecha() {
-		// TODO Auto-generated method stub
 		this.setX(this.getX() + 0.6);
 		
 	}
@@ -183,7 +157,6 @@ public class Boss extends GameComponent<SnowBrosScene>{
 	
 	public void invocarEnemigos()
 	{
-	//Generar enemigos tontos ñpara este boss
 		this.getScene().invocarEnemigos();
 	}
 
@@ -253,24 +226,12 @@ public class Boss extends GameComponent<SnowBrosScene>{
 			{
 			this.invocarEnemigos();
 			}
-		//suena ruido
-		
-		//if(this)
-		
-		
 	}
+	
 	public Sound getVoice() {
 		return voice;
 	}
 	public void setVoice(Sound voice) {
 		this.voice = voice;
 	} 
-	
-	
-	
-	
-	
-	
-	
-
 }

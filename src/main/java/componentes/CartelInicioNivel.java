@@ -20,15 +20,8 @@ public class CartelInicioNivel extends GameComponent<SnowBrosScene>{
 	
 	public CartelInicioNivel(Dimension dim){
 		this.gameDimension = dim;
-		
-		
-		//Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-		//Label label =new Label(font ,Color.green ,"      GANASTE!\n Presione P para Juego Nuevo");
-		//this.setAppearance(label);
-		
 		this.setX(dim.getHeight()/2);
 		this.setY(dim.getWidth()/2);
-		//voz inicio de nivel
 		Sound vozMotivacion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("ready.wav"));
 		vozMotivacion.play();
 		
@@ -55,7 +48,6 @@ public class CartelInicioNivel extends GameComponent<SnowBrosScene>{
 	public void update(DeltaState deltaState) {
 		if(tiempoDeCartel == 400)
 			{
-			//voz inicio de nivel
 			Sound vozMotivacion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("ready2.wav"));
 			vozMotivacion.play();
 			tiempoDeCartel = tiempoDeCartel - 1;
@@ -71,7 +63,3 @@ public class CartelInicioNivel extends GameComponent<SnowBrosScene>{
 			}
 	}
 }
-
-	
-
-

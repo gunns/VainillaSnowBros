@@ -119,22 +119,4 @@ public class Snow extends GameComponent<SnowBrosScene> {
 		this.bros = bros;
 	}
 	
-	
-	
-
-	//RECORRIDO HACIA LA DERECHA -- MODIFICAR -- HARDCODE
-	//public boolean puedeRecorrerDerecha(){
-		//return ((this.gameDimension.getWidth() > this.getX()) || (this.gameDimension.getHeight() > this.getY()))
-		
-	
-	//Agregar caso en el que choca con el piso.. y no con el limite 
-	//inferior de la pantalla.
-	//seria un !this.getEscene.hayColisionConAlgo()
-	//colision con muro, suelo o mob
-	
-	//RECORRIDO HACIA LA IZQUIERDA -- MODIFICAR -- HARDCODE
-	//public boolean puedeRecorrerIzquierda(){
-		//return ((this.getX() > 0) || (this.gameDimension.getHeight() > this.getY()))
-	
-	
 }

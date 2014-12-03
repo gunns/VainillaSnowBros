@@ -10,7 +10,6 @@ public class Capsula extends Tesoro{
 		super(valor);
 		Sprite sprite = Sprite.fromImage("Capsula.png");
 		this.setAppearance(sprite);
-		// TODO Auto-generated constructor stub
 	}
 
 }

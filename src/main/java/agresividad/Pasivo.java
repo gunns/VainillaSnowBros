@@ -1,12 +1,6 @@
 package agresividad;
 
-import java.util.Random;
-
-import tesoros.Tesoro;
-
 import com.uqbar.vainilla.DeltaState;
-
-import componentes.Bros;
 import componentes.Mob;
 
 public class Pasivo extends EstadoAgresividad {
@@ -14,22 +8,12 @@ public class Pasivo extends EstadoAgresividad {
 	
 	public Pasivo(Mob mob){
 		super(mob);
-		//this.derecha=true;
-		//this.setNumeroDeMovimiento(3);
 		this.setearNumeroDeMovimiento();
 	}
 	
-
-	
-	
-	
-	//Codigo FIN DE PISO : this.getMob().getScene().terminaElPiso(this.getMob().getX()+1, this.getMob().getY()+this.getMob().getAppearance().getHeight()+1)
 	
 	public void mobSeMueve(DeltaState deltaState)
 	{
-		//Mover por mover
-		//Mover para saltar
-		//Mover para bajar
 		if(this.numeroDeMovimiento <=5)
 			{
 			this.saltara = true;
@@ -66,10 +50,8 @@ public class Pasivo extends EstadoAgresividad {
 		if(this.getMob().getScene().hayColisionTotalConUnPiso(this.getMob()) && this.getMob().getScene().tieneUnPisoJustoArriba(this.getMob().getX(),this.getMob().getY()-100 , 100, this.getMob().getAncho()) )
 				{
 			    this.saltar(deltaState);
-			    //preparar siguiente movimiento
 			    this.setearNumeroDeMovimiento();
 			    this.saltara = false;
-			    //actualizarTiempo
 			    this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
 				}
 				else
@@ -81,7 +63,6 @@ public class Pasivo extends EstadoAgresividad {
 	{																												
 		if(this.mobEstaEnElFondo()&&!this.mobEstaTocandoUnPiso())
 			{
-			//setear el movimiento normal
 			this.setNumeroDeMovimiento(11);
 			this.bajara = false;
 			}
@@ -94,7 +75,6 @@ public class Pasivo extends EstadoAgresividad {
 				this.acabaDeTocarElLimite = false;
 				this.setearNumeroDeMovimiento();
 				this.bajara = false;
-				//actualizar tiempo
 				this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccion());
 				}
 			}
@@ -111,13 +91,7 @@ public class Pasivo extends EstadoAgresividad {
 		{
 		if(this.getMob().esPeligroso())
 			{
-			//this.getMob().getDir().moverMob(this, deltaState);
 			this.mobSeMueve(deltaState);
-			//codigo correcto:saltar
-			//if(this.getMob().getScene().hayColisionConUnPiso(this.getMob())&&this.getMob().getScene().tieneUnPisoJustoArriba(this.getMob().getX(),this.getMob().getY()-100 , 100, this.getMob().getAncho()))
-				//	{
-					//this.saltar(deltaState);
-					//}
 			}
 		}
 	}
@@ -130,7 +104,6 @@ public class Pasivo extends EstadoAgresividad {
 		else
 		if(this.getMob().getTiempoDeReaccionActual() > 1)
 			{
-			//TODO actualiza tiempo de reaccion
 			this.getMob().setTiempoDeReaccionActual(this.getMob().getTiempoDeReaccionActual() - 1);
 			}
 		else
@@ -138,11 +111,6 @@ public class Pasivo extends EstadoAgresividad {
 		this.mover(deltaState);
 		}
 	}
-	
-	
-
-
-
 
 
 	public void moverEnX(DeltaState deltaState ){
@@ -150,6 +118,4 @@ public class Pasivo extends EstadoAgresividad {
 		this.bajara = false;	
 		this.getMob().getDir().moverMob(this, deltaState);
 	}
-	
-	
 }

@@ -44,8 +44,8 @@ public class Suelo {
 
 	private void Fill(){
 		
-		this.density = floorGen.randomFloor();
-//		this.density = floorGen.lvl1_7();
+//		this.density = floorGen.randomFloor();
+		this.density = floorGen.lvl1_1();
 ////	imprimirMatrix();
 	}
 	

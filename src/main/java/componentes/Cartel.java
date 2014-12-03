@@ -21,10 +21,6 @@ public class Cartel extends GameComponent<SnowBrosScene>{
 		
 		this.gameDimension = dim;
 		
-		//Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-		//Label label =new Label(font ,Color.green ,"      GANASTE!\n Presione P para Juego Nuevo");
-		//this.setAppearance(label);
-		
 		this.setX(dim.getHeight()/2);
 		this.setY(dim.getWidth()/2);
 		

@@ -25,8 +25,6 @@ public class Vidas extends GameComponent<SnowBrosScene>{
   
   this.setX(20);
   this.setY(40);
-    //Font.ITALIC, Color.red, ((Integer)this.puntos).toString()));
-
  }
  
  @Override

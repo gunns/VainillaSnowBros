@@ -23,7 +23,7 @@ public class DisparoFuego extends GameComponent<SnowBrosScene>{
 		{
 		this.setAppearance(new Rectangle(Color.red, 20, 20));
 		direccion = dir;
-		distancia = 200;
+		distancia = 100;
 		this.fuegoDerecha = Sprite.fromImage("DisparoDrc.png");
 		this.fuegoIzquierda = Sprite.fromImage("DisparoIzq.png");
 		

@@ -36,11 +36,7 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public Integer tiempoDeReaccionActual;
 	
 	public AparienciaMob apariencia;
-	// = new AparienciaMob("MobDrc.png", "MobIzq.png", "MobSaltaDrc.png", "MobSaltaIzq.png", "MobCae.png", "MobMuerto.png");
 
-
-	
-	
 	
 	public EstadoAgresividad getEstadoAgresividad() {
 		return estadoAgresividad;
@@ -54,7 +50,6 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	public Direccion dir;
 	
 	public Mob(Dimension dim, boolean playState, double velocity, AparienciaMob apariencia){
-		//Sprite sprite = Sprite.fromImage("MobIzq.png");
 		Sprite sprite = apariencia.getMobIzquierda();
 		this.setAppearance(sprite);
 		this.dir =  new Derecha();
@@ -100,8 +95,6 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			this.volversePasivo();
 		}
 		
-		 //A veces el bros se cae solo(vaya a saber quien el por que), para que esto no pase, se posicionara siempre en la parte superior
-		  //del suelo mas bajo
 		  if(this.getY() > this.gameDimension.getHeight() + 10)
 			  {
 			  this.setY(this.gameDimension.getHeight() - 45);
@@ -114,13 +107,6 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		return false;
 	}
 
-	//public void empujar(Direccion dir, DeltaState deltaState) {
-		// TODO Auto-generated method stub
-		//mover esfera hacia esa direccion
-		//dir.empujar(this, deltaState);
-		
-	//}
-	
 	
 	public boolean noLlegoAlFinal() {return this.getX()+this.getAppearance().getWidth()<= gameDimension.getWidth();}
 	
@@ -148,7 +134,6 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	}
 
 	public void arrolla(Mob mob) {
-		// TODO Auto-generated method stub
 		this.getEstadoNieve().arrolla(mob);
 	}
 
@@ -161,12 +146,10 @@ public class Mob extends GameComponent<SnowBrosScene> {
 		this.setX(this.getX()+((this.getScene().getVelocity()*1.5 + (this.getScene().getVelocity()/4)) - 15));
 		
 	}
-	//TODO RECORDAR: COLOCAR SPRITE DEL BROS MOVIENDO LA ESFERA
 	public void moverEsferaALaDerecha(Bros bros, DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
 			this.dir = new Derecha();
 				if (this.noLlegoAlFinal()){
-					//Bros se mueve a la derecha, por lo que hay que asegurarse que el bros está a la izquierda
 					if(bros.getX()< this.getX())
 					{
 					this.setX(this.getX()+ (bros.getVelocity() + (bros.getVelocity()/4))* deltaState.getDelta());
@@ -175,13 +158,11 @@ public class Mob extends GameComponent<SnowBrosScene> {
 			}
 		}
 	
-	//TODO RECORDAR COLOCAR SPRITE DEL BROS MOVIENDO LA ESFERA
 	public void moverEsferaALaIzquierda(Bros bros, DeltaState deltaState) {
 		if(!this.getScene().getSystemPause()){
 			this.dir = new Izquierda();
 				if (this.noLlegoAlComienzo())
 					{
-					//Bros se mueve a la izquierda, por lo que hay que aseurarse que el bros está a la derecha
 					if(bros.getX() > this.getX())
 						{
 						this.setX(this.getX()- (bros.getVelocity() + (bros.getVelocity()/4))* deltaState.getDelta());
@@ -220,7 +201,6 @@ public class Mob extends GameComponent<SnowBrosScene> {
 	}
 
 	public boolean brosCercanoEstaVivo() {
-			// TODO Auto-generated method stub
 			return (this.getScene().brosCercanoEstaVivo(this));
 		}
 

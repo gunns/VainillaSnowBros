@@ -2,24 +2,7 @@ package com.uqbar.snowBros;
 
 import java.awt.Color;
 import java.awt.Dimension;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import java.util.ArrayList;
 import java.util.List;
-
-//import javax.swing.Timer;
-
-
-
-
-
-
-
-
-
-
-
-
 
 import others.Derecha;
 import others.Direccion;
@@ -27,7 +10,6 @@ import others.Izquierda;
 import sonidoContinuo.Musica;
 import suelos.Piso;
 import suelos.Suelo;
-//import sonidoContinuo.MusicaFondo;
 import tesoros.Tesoro;
 import mobConNieve.Empujado;
 import mobs.DisparoFuego;
@@ -39,21 +21,17 @@ import Cartel.CartelLevelComplete;
 import Cartel.CartelWin;
 import boss.Boss;
 import boss.NivelBoss;
-//import boss.Boss;
 import capsulas.Capsula;
 import capsulas.CapsulaPotencia;
 import capsulas.CapsulaPrisa;
 import capsulas.CapsulaRango;
-//import componentes.AnimacionRegeneracion;
 import componentes.Bros;
 import componentes.CartelInicioNivel;
 import componentes.CartelSiguienteNivel;
 import componentes.Enemigos;
-import componentes.Explosion;
 import componentes.Fondo;
 import componentes.Fondos;
 import componentes.InicioJuego;
-//import componentes.InicioJuego;
 import componentes.Mob;
 import componentes.Cartel;
 import componentes.Puntaje;
@@ -61,6 +39,9 @@ import componentes.Reanimacion;
 import componentes.Reposicionar;
 import componentes.Snow;
 import componentes.Vidas;
+import dulces.Caramelo;
+import dulces.Paleta;
+import dulces.Pastel;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
@@ -70,25 +51,6 @@ import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
-//import com.uqbar.vainilla.sound.SoundPlay;
-//import com.uqbar.vainilla.sound.SoundPlayer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-import dulces.Caramelo;
-import dulces.Paleta;
-import dulces.Pastel;
-//import estadoBros.CayendoBros;
 
 
 public class SnowBrosScene extends GameScene{
@@ -106,16 +68,11 @@ public class SnowBrosScene extends GameScene{
 	private Enemigos enemigos;
 	private Suelo suelo;
 	
-	//sonido
 	private Sound gameSound;
-	//musica fondo
-	
+
 	
 	private Musica musica;
 	public boolean nivelBoss; 
-	
-	
-	//private MusicaFondo music;
 	
 	public SnowBrosScene(Dimension dim, double velocity) throws Exception{
 		super();
@@ -127,18 +84,10 @@ public class SnowBrosScene extends GameScene{
 		inicio.reproducir();
 		
 		Sprite sprite = Sprite.fromImage("inicioSnowBros.png");
-		//Sprite sprite = Sprite.fromImage("bossStageImage.png");
-		
-		//this.backGround = new GameComponent<GameScene> sprite.scale
-		//this.backGround = new GameComponent<GameScene>(sprite.scale(name.getEscala1(),name.getEscala2()),0, 0);
+
 		if (backGround != null) {this.removeComponent(this.backGround);}
-		//Fondos fondo = new Fondos();
-//		Fondo name = fondo.getFondos().get(4);
-		//Fondo name = fondo.randomFondo();
 		
 		this.backGround = new GameComponent<GameScene>(sprite.scale(0.46, 0.57), 0, 0);
-		//this.backGround = new GameComponent<GameScene>(sprite.scale(0.9, 1.2), 0, 0);
-		//SCALE TITLE 0.46, 0.57
 		this.backGround.setZ(-1);
 		this.addComponent(this.backGround);
 		
@@ -161,9 +110,6 @@ public class SnowBrosScene extends GameScene{
 		this.buildBackground(Color.blue);
 		
 		this.addComponent(cartelInicio);
-	
-		
-		//this.initSound();
 		
 		musica = new Musica();
 		this.addComponent(musica);
@@ -171,20 +117,11 @@ public class SnowBrosScene extends GameScene{
 		
 		this.suelo= new Suelo(this.gameDimension);
 		this.addComponents(suelo.getSuelos());
-		
-		
-	
-	}
-	
-
-	protected void initSound() {
-		//this.gameSound= new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("stage1.wav"));
 	}
 	
 	private void buildBackground(Color color) {
 		if (backGround != null) {this.removeComponent(this.backGround);}
 		Fondos fondo = new Fondos();
-//		Fondo name = fondo.getFondos().get(4);
 		Fondo name = fondo.randomFondo();
 		Sprite sprite = Sprite.fromImage(name.getFile());;
 		this.backGround = new GameComponent<GameScene>(sprite.scale(name.getEscala1(),name.getEscala2()),0, 0);
@@ -207,10 +144,7 @@ public class SnowBrosScene extends GameScene{
 	
 	public boolean hayColisionConUnPiso(GameComponent<SnowBrosScene> componenteRectangular){
 		boolean hayColision = false;
-		//Piso piso;
-		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
 		for(GameComponent<?> each : this.getComponents())
-			//piso = this.suelo.getSuelos().get(n);
 			if(each.getClass() == Piso.class)
 			{
 				Piso unPiso  = (Piso) each;
@@ -226,10 +160,7 @@ public class SnowBrosScene extends GameScene{
 	
 	public boolean hayColisionTotalConUnPiso(GameComponent<SnowBrosScene> componenteRectangular){
 		boolean hayColision = false;
-		//Piso piso;
-		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
 		for(GameComponent<?> each : this.getComponents())
-			//piso = this.suelo.getSuelos().get(n);
 			if(each.getClass() == Piso.class)
 			{
 				Piso unPiso  = (Piso) each;
@@ -266,7 +197,6 @@ public class SnowBrosScene extends GameScene{
 	}
 	
 	public void cartelLose(){
-		//this.buildBackground(Color.black);
 		
 		this.musica.parar();
 		this.addComponent(new Cartel(this.gameDimension,0));
@@ -288,7 +218,6 @@ public class SnowBrosScene extends GameScene{
 	}	
 
 	public Mob EsferaFQueColisionaConBros(Bros bros)
-	//Se asegura que haya un Mob que colisiona con el bros
 	{
 		Mob mob = null;
 		for(GameComponent<?> each : this.getComponents())
@@ -335,7 +264,6 @@ public class SnowBrosScene extends GameScene{
 				if(this.colisionBolaNieveConBros(each, bros) && mob.getEstadoNieve().PuedoEmpujar())
 						{
 					puedeEmpujar = true;
-					//bros.empujar(each, deltaState);
 					}
 				}
 			}
@@ -379,32 +307,6 @@ public class SnowBrosScene extends GameScene{
 				mob.getX(), mob.getY(),(int) (mob.getAppearance().getWidth()),(int) (mob.getAppearance().getHeight())));
 		}
 	
-	/*
-	public boolean colisionInternaBolaNieveFConBros(Bros bros){
-		boolean hayColision = false;
-		for(GameComponent<?> each : this.getComponents())
-			{
-			if(esUnMob(each))
-				{
-				Mob mob = (Mob) each;
-				if(mob.getEstadoNieve().PuedoEmpujar())
-					{
-					if(CollisionDetector.INSTANCE.collidesCircleAgainstRect(mob.getX(), mob.getY(),
-							mob.getAppearance().getWidth()/2,bros.getX(), bros.getY(),
-							bros.getAppearance().getWidth(), bros.getAppearance().getHeight()))
-								{
-						
-								if(
-								  (mob.getX()< (bros.getX()+bros.getAppearance().getWidth()) && (mob.getX()+ mob.getAppearance().getWidth()) > )
-								  
-								hayColision = true;
-								}
-					}
-				}
-			}
-		return hayColision;
-	}
-	*/
 	
 	public boolean colisionBolaRodanteConBros(GameComponent<?> each, Bros bros){
 		boolean hayColision = false;
@@ -441,7 +343,6 @@ public class SnowBrosScene extends GameScene{
 		boolean hayColision = false;
 		Mob mob;
 		List<GameComponent<?>> c = this.getComponents();
-		//for(int n = 0; n < this.suelo.getSuelos().size(); n++){
 		for(GameComponent<?> each : c ){
 			if(esUnMob(each))
 			{
@@ -469,7 +370,6 @@ public class SnowBrosScene extends GameScene{
 			if(this.colisionBolaRodanteConBros(each, bros) && mob.getEstadoNieve().puedeRebotar())
 				{
 				colisiona = true;
-				//mob.getEstadoNieve().arrastrarBros(bros);
 				}
 			}
 		}
@@ -477,8 +377,7 @@ public class SnowBrosScene extends GameScene{
 	return colisiona;
 	}
 	
-	public Mob esferaQueColisionaConBros(Bros bros)
-	{//Este metodo retorna mob con estado Empujado si o si
+	public Mob esferaQueColisionaConBros(Bros bros){
 		Mob esfera = null;
 		for(GameComponent<?> each : this.getComponents())
 		{
@@ -489,15 +388,13 @@ public class SnowBrosScene extends GameScene{
 			if(this.colisionBolaRodanteConBros(each, bros) && mob.getEstadoNieve().puedeRebotar())
 				{
 				esfera = mob; 
-				//mob.getEstadoNieve().arrastrarBros(bros);
 				}
 			}
 		}
 		return esfera;
 	} 
 	
-	public Mob esferaFQueColisionaConBros(Bros bros)
-	{//Este metodo retorna mob con estado Empujado si o si
+	public Mob esferaFQueColisionaConBros(Bros bros){
 		Mob mob = null;
 		for(GameComponent<?> each : this.getComponents())
 		{
@@ -512,7 +409,6 @@ public class SnowBrosScene extends GameScene{
 						bros.getX(), bros.getY(),(int) bros.getAppearance().getWidth(), (int) bros.getAppearance().getHeight()))	
 					{
 					mob = esfera; 
-				//mob.getEstadoNieve().arrastrarBros(bros);
 					}
 				}
 			}
@@ -530,7 +426,6 @@ public class SnowBrosScene extends GameScene{
 				Bros bros = (Bros) c;
 				if(bros.getEstado().siendoArrastrado())
 				bros.getEstado().cambiarMovimiento(bros);
-				//bros.saltar();
 				bros.setTiempoInvencible(500);
 				}
 			}
@@ -690,13 +585,6 @@ public class SnowBrosScene extends GameScene{
 	public void setGameSound(Sound gameSound) {
 		this.gameSound = gameSound;
 	}
-	
-
-	
-	/*private void playContinue() {
-		this.gameSound.play();
-		
-	}*/
 
 
 	public void comenzarNivel(Dimension dim, double velocity) {
@@ -708,11 +596,6 @@ public class SnowBrosScene extends GameScene{
 		this.addComponent(r);
 		this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(), this);
 		this.addComponents(this.enemigos.getEnemigos());
-		
-		//CapsulaPrisa c1 = new CapsulaPrisa(200);
-		//c1.setX(100);
-		//c1.setY(300);
-		//this.addComponent(c1);
 		
 		Puntaje puntaje = new Puntaje(bros, 20, 20);
 		bros.setPuntaje(puntaje);
@@ -742,7 +625,6 @@ public class SnowBrosScene extends GameScene{
 		this.removeComponent(musica);
 		Sound sonidoGameOver = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("gameOver.wav"));
 	    sonidoGameOver.play();
-//	    SoundPlayer.INSTANCE.parar(this.music.getGameSound());
 		
 	}
 
@@ -783,15 +665,10 @@ public class SnowBrosScene extends GameScene{
 		this.nivelCompleto = true;
 		CartelLevelComplete cartel = new CartelLevelComplete(gameDimension, this.numeroNivel);
 		this.addComponent(cartel);
-		//this.musica.parar();
 		Sound sonidoNivelCompleto = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("nextLevel.wav"));
-		//																												"levelComplete2.wav"
 	      sonidoNivelCompleto.play();
 	      this.numeroNivel = numeroNivel +1;
 	      this.musica.actualizar(this.numeroNivel);
-	      
-		//this.stop();
-		
 	}
 	
 	public void reposicionarBros(Bros bros) 
@@ -832,10 +709,6 @@ public class SnowBrosScene extends GameScene{
 
 
 	public void siguienteNivel() {
-		//nivel+1
-		
-				//TODO mucho que hacer
-				//Reposicionar el bros al inicio de la pantalla
 		if(this.numeroNivel == 15)
 		{
 		
@@ -857,43 +730,24 @@ public class SnowBrosScene extends GameScene{
 				
 			this.reposicionar();
 			
-			//agregar Enemigos
-			//por inv.rep. no debería haber ninguno
-			
 			this.enemigos=new Enemigos(this.gameDimension,this.playState, this.getVelocity(),this);
 			this.addComponents(this.enemigos.getEnemigos());
-			//agrega pisos nuevos y  quita los anteriores
 			this.nuevosPisos();
-			
-			
-			
-			//cartel
 			
 			CartelSiguienteNivel cartel = new CartelSiguienteNivel(gameDimension, this.numeroNivel);
 			this.addComponent(cartel);
 
-			
-		
-		
-	 	 //unBros.invencible = true;
-	 	 //unBros.tiempoInvencible = 300;
-	 	 //correccion de error de reposicionamiento del bros al morir
-	 	 //unBros.setEstado(new CayendoBros((this.gameDimension.getHeight()-(unBros.getAppearance().getHeight())-25),unBros));
-		//this.reanimarBros(unBros);
-		
 			musica.actualizar(numeroNivel);
 	}
 
 
 	private void nuevosPisos() {
-		// TODO Auto-generated method stub
 		for(GameComponent<?> each : this.getComponents())
 			{
 			if(each.getClass() == Piso.class)
 				{
 				Piso unPiso = (Piso) each;
 				unPiso.setSiguienteNivel(true);
-				//this.removeComponent(each);
 				}
 			}
 		
@@ -917,7 +771,6 @@ public class SnowBrosScene extends GameScene{
 				{
 				Bros bros = (Bros) each;
 				estaAbajo= (mob.getY()- mob.getAppearance().getHeight()) < (bros.getY() - bros.getAppearance().getHeight());
-				//estaAbajo = (bros.getY() - bros.getAppearance().getHeight()) -(mob.getY()- mob.getAppearance().getHeight()) <= 70;
 				}
 			}
 		return estaAbajo;
@@ -936,7 +789,6 @@ public class SnowBrosScene extends GameScene{
 						 &&
 						 (bros.getY()-20) < mob.getY()
 						 );
-				//estaArriba = (mob.getY()- mob.getAppearance().getHeight()) - (bros.getY() - bros.getAppearance().getHeight()) <= 70 ;
 				}
 			}
 		return estaIgual;
@@ -951,7 +803,6 @@ public class SnowBrosScene extends GameScene{
 				{
 				Bros bros = (Bros) each;
 				estaArriba = (mob.getY()- mob.getAppearance().getHeight()) > (bros.getY() - bros.getAppearance().getHeight());
-				//estaArriba = (mob.getY()- mob.getAppearance().getHeight()) - (bros.getY() - bros.getAppearance().getHeight()) <= 70 ;
 				}
 			}
 		return estaArriba;
@@ -961,18 +812,12 @@ public class SnowBrosScene extends GameScene{
 
 	private void reposicionar() {
 		
-		
-	
-//			}
+
 		for(GameComponent<?> each : this.getComponents())
 			{
 			if(each.getClass() == Bros.class)
 				{
 				Bros unBros = (Bros) each;
-				//unBros.setNivelCompleto(false);
-				//this.removeComponent(unBros);
-				//bros.nuevoNivel(this);
-				//this.reanimarBros(unBros);
 				unBros.setReposicionando(true);
 				}
 			}
@@ -994,24 +839,19 @@ public class SnowBrosScene extends GameScene{
 
 
 	public boolean brosEstaALaDerechaDeMob(Mob mob) {
-		//TODO modificar para 2 jugadores
 		return this.getBros().getX()>mob.getX();
 	}
 
 
 
 	public boolean brosEstaALaIzquierdaDeMob(Mob mob) {
-		//TODO modificar para 2 jugadores
 		return mob.getX()>this.getBros().getX();
 	}
 
 
 
 	public boolean hayUnBrosCerca(Mob mob) {
-		// tanto en X como en Y
 		boolean estaCerca = false;
-		//boolean encontre = false;
-		//TODO modificar para 2 jugadores 
 		
 		for(GameComponent<?> each : this.getComponents())
 			{
@@ -1057,7 +897,6 @@ public class SnowBrosScene extends GameScene{
 		distanciaY = bros.getY() - mob.getY();
 		}
 	
-	//cercano = (distanciaX <= (this.gameDimension.getWidth()/5)) && (distanciaY <= (this.gameDimension.getHeight()/3));
 	cercano = (distanciaX <= 100) && (distanciaY <= 300);
 	return cercano;
 	}
@@ -1066,10 +905,6 @@ public class SnowBrosScene extends GameScene{
 	
 	
 	public boolean brosCercanoEstaVivo(Mob mob){
-		
-
-
-		//TODO modificar para 2 jugadores
 		boolean cercanoYVivo = false;
 		for(GameComponent<?> each : this.getComponents())
 			{
@@ -1078,7 +913,6 @@ public class SnowBrosScene extends GameScene{
 				Bros bros = (Bros)each;
 				if(!bros.isMuriendo() && brosCercanoAMob(bros, mob))
 					{
-					//encontre
 					cercanoYVivo = true;
 					}
 				}
@@ -1091,8 +925,6 @@ public class SnowBrosScene extends GameScene{
 
 
 	public Direccion ubicacionDelBros(Mob mob) {
-		//boolean encontre = false;
-		//TODO modificar para 2 jugadores 
 		Direccion ubicacionBros =  new Izquierda();
 		for(GameComponent<?> each : this.getComponents())
 			{
@@ -1137,9 +969,6 @@ public class SnowBrosScene extends GameScene{
 		}
 
 	}
-			
-	
-	//cercano = (distanciaX <= (this.gameDimension.getWidth()/5)) && (distanciaY <= (this.gameDimension.getHeight()/3));
 	
 	}
 		cercano = (distanciaX <= 300) && (distanciaY <= 300);
@@ -1189,7 +1018,6 @@ public class SnowBrosScene extends GameScene{
 	}
 
 	public boolean tocoFondo(Boss boss) {
-		// TODO Auto-generated method stub
 		return ((boss.getY() + boss.getAppearance().getHeight())  > (this.getGameDimension().getHeight())-10);
 	}
 
@@ -1209,7 +1037,6 @@ public class SnowBrosScene extends GameScene{
 	public void invocarEnemigos()
 	{
 		this.enemigos= this.enemigos.enemigosParaBoss(gameDimension, playState, velocity);
-				//new Enemigos(this.gameDimension,this.playState, this.getVelocity());
 		this.addComponents(this.enemigos.getEnemigos());
 	}
 
@@ -1232,8 +1059,6 @@ public class SnowBrosScene extends GameScene{
 						{
 						colisiona = true;
 						}
-					
-					//mob.getEstadoNieve().arrastrarBros(bros);
 					}
 				}
 			}
@@ -1263,8 +1088,6 @@ public class SnowBrosScene extends GameScene{
 						unMob = mob;
 							
 						}
-					
-					//mob.getEstadoNieve().arrastrarBros(bros);
 					}
 				}
 			}
@@ -1305,11 +1128,3 @@ public class SnowBrosScene extends GameScene{
 	}
 	
 }
-
-	
-
-
-
-	
-	
-	

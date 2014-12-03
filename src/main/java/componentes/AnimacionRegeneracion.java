@@ -3,14 +3,12 @@ package componentes;
 import com.uqbar.snowBros.SnowBrosScene;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-//import com.uqbar.vainilla.appearances.Animation;
 import com.uqbar.vainilla.appearances.Sprite;
 
 public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{
 	
 	
 	
-	//OLVIDALO: MEJOR SIN ANIMACION
 	Integer tiempoAnimacion;
 	Integer tiempoAnimacionAux;
 	Integer current;
@@ -74,17 +72,6 @@ public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{
 		sprites[17] = sprite9;
 		sprites[18] = sprite10;
 		
-		
-	//asignar sprites
-		
-	//crear array
-		
-	//asignar sprites al array
-		
-	//crear animacion	tiempo 25 y el array
-		//
-		
-	
 	}
 	
 	public void update(DeltaState deltaState)
@@ -97,7 +84,6 @@ public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{
 		else
 			{
 		this.setAppearance(sprites[current]);
-		//this.setY(this.getY() - (sprites[current]));
 		if(this.tiempoAnimacionAux < 1)
 				{
 				current = current + 1;
@@ -119,16 +105,9 @@ public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{
 				this.setY(this.getY() - (sprites[current].getHeight() - sprites[current - 1].getHeight()));
 				}
 			else
-				//if(sprites[current].getHeight() > sprites[current - 1].getHeight())
-				//{
 				if(sprites[current -1].getHeight() > sprites[current].getHeight())
 				this.setY(this.getY() + (sprites[current - 1].getHeight() - sprites[current].getHeight()));
-				//}
-			}
-			
-		
+			}		
 	}
-	
-	
 
 }

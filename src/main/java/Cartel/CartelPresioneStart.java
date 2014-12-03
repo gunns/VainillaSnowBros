@@ -19,7 +19,6 @@ public class CartelPresioneStart extends GameComponent<SnowBrosScene>
 	
 	public CartelPresioneStart(Dimension dim){
 		this.gameDimension = dim;
-		//this.velocity = velocity;
 
 		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 25);
 		
@@ -33,9 +32,6 @@ public class CartelPresioneStart extends GameComponent<SnowBrosScene>
 		
 		tiempoDeCartel = 200;
 		cartelVisible = true;
-		
-		
-		
 	}
 	
 	public void update(DeltaState deltaState) {
@@ -51,7 +47,6 @@ public class CartelPresioneStart extends GameComponent<SnowBrosScene>
 	}
 
 	private void cambiarImagen() {
-		// TODO Auto-generated method stub
 		if(!this.cartelVisible)
 			{
 			Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
@@ -75,7 +70,3 @@ public class CartelPresioneStart extends GameComponent<SnowBrosScene>
 		
 	}
 }
-
-	
-
-
