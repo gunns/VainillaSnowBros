@@ -3,41 +3,33 @@ package mobs;
 import java.awt.Dimension;
 
 import others.Direccion;
+import apariencias.AparienciaMob;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Sprite;
-
-import agresividad.Pasivo;
-import apariencias.AparienciaMob;
 import componentes.Mob;
 
-public class TrollVerde extends Mob{
+public class TrollVerde extends Mob {
 	public Integer tiempoPreparandoDisparo;
 	public Integer descansandoDeDisparo;
 	public Sprite disparoDerecha;
 	public Sprite disparoIzquierda;
-	
-	
 
 	public TrollVerde(Dimension dim, boolean playState, double velocity) {
-		//AparienciaMob apariencia = new AparienciaMob("mob2Drc.png", "mob2Izq.png", "mob2SaltoDrc.png", "mob2SaltoIzq.png", "mob2Baja.png", "mob2Muere.png");
-		super(dim, playState, velocity, new AparienciaMob("mob2Drc.png", "mob2Izq.png", "mob2SaltoDrc.png", "mob2SaltoIzq.png", "mob2Baja.png", "mob2Muere.png"));
-		// TODO Auto-generated constructor stub
-		
+		super(dim, playState, velocity, new AparienciaMob("mob2Drc.png",
+				"mob2Izq.png", "mob2SaltoDrc.png", "mob2SaltoIzq.png",
+				"mob2Baja.png", "mob2Muere.png"));
+
 		this.tiempoPreparandoDisparo = 120;
 		this.descansandoDeDisparo = 0;
-		//this.setEstadoAgresividad(new PasivoTrollVerde(this));
-		
+
 		this.disparoIzquierda = Sprite.fromImage("mob2DisparaIzq.png");
 		this.disparoDerecha = Sprite.fromImage("mob2DisparaDrc.png");
 	}
 
-	public void update(DeltaState deltaState)
-	{
+	public void update(DeltaState deltaState) {
 		super.update(deltaState);
 	}
-	
-	
 
 	public Integer getTiempoPreparandoDisparo() {
 		return tiempoPreparandoDisparo;
@@ -58,24 +50,19 @@ public class TrollVerde extends Mob{
 	public void disparar(Direccion direccionDeDisparo) {
 		DisparoFuego disparo = new DisparoFuego(direccionDeDisparo, this);
 		this.getScene().addComponent(disparo);
-		
+
 	}
 
 	public boolean brosCercanoATroll() {
-		// TODO Auto-generated method stub
 		return this.getScene().brosCercanoATroll(this);
 	}
-	
-	public void volversePasivo()
-	{
+
+	public void volversePasivo() {
 		this.setEstadoAgresividad(new PasivoTrollVerde(this));
 	}
 
-	public void volverseAgresivo()
-	{	
-	
-			this.setEstadoAgresividad(new AgresivoTrollVerde(this));
+	public void volverseAgresivo() {
+
+		this.setEstadoAgresividad(new AgresivoTrollVerde(this));
 	}
 }
-
-

@@ -11,55 +11,53 @@ import com.uqbar.vainilla.appearances.Label;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
-public class CartelInicioNivel extends GameComponent<SnowBrosScene>{
-	
+public class CartelInicioNivel extends GameComponent<SnowBrosScene> {
+
 	Integer tiempoDeCartel;
 	Dimension gameDimension;
 	Integer numeroNivel;
 	double velocity;
-	
-	public CartelInicioNivel(Dimension dim){
+
+	public CartelInicioNivel(Dimension dim) {
 		this.gameDimension = dim;
-		this.setX(dim.getHeight()/2);
-		this.setY(dim.getWidth()/2);
-		Sound vozMotivacion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("ready.wav"));
+		this.setX(dim.getHeight() / 2);
+		this.setY(dim.getWidth() / 2);
+		Sound vozMotivacion = new SoundBuilder().buildSound(this.getClass()
+				.getClassLoader().getResourceAsStream("ready.wav"));
 		vozMotivacion.play();
-		
+
 	}
-	
-	public CartelInicioNivel(Dimension dim, Integer numeroNivel, double velocity){
+
+	public CartelInicioNivel(Dimension dim, Integer numeroNivel, double velocity) {
 		this.gameDimension = dim;
 		this.velocity = velocity;
 
 		Font font = new Font("Verdana", Font.BOLD + Font.ITALIC, 20);
-		String cadena = new String("           Floor " + numeroNivel.toString() + "\n         Prepárate" );
-		Label label =new Label(font ,Color.blue ,cadena); 
+		String cadena = new String("           Floor " + numeroNivel.toString()
+				+ "\n         Prepárate");
+		Label label = new Label(font, Color.blue, cadena);
 
 		this.setAppearance(label);
-		
-		this.setX(dim.getWidth()/3);
-		this.setY(dim.getHeight()/3);
-		
+
+		this.setX(dim.getWidth() / 3);
+		this.setY(dim.getHeight() / 3);
+
 		tiempoDeCartel = 700;
-		
-		
+
 	}
-	
+
 	public void update(DeltaState deltaState) {
-		if(tiempoDeCartel == 400)
-			{
-			Sound vozMotivacion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("ready2.wav"));
+		if (tiempoDeCartel == 400) {
+			Sound vozMotivacion = new SoundBuilder().buildSound(this.getClass()
+					.getClassLoader().getResourceAsStream("ready2.wav"));
 			vozMotivacion.play();
 			tiempoDeCartel = tiempoDeCartel - 1;
-			}
-		if(tiempoDeCartel > 1)
-		{
-		tiempoDeCartel = tiempoDeCartel - 1;
 		}
-		else
-			{
+		if (tiempoDeCartel > 1) {
+			tiempoDeCartel = tiempoDeCartel - 1;
+		} else {
 			this.destroy();
 			this.getScene().comenzarNivel(gameDimension, velocity);
-			}
+		}
 	}
 }

@@ -9,9 +9,10 @@ public class AparienciaMob {
 	public Sprite mobSaltaIzquierda;
 	public Sprite mobBaja;
 	public Sprite mobMuere;
-	
-	public AparienciaMob(String mobDerecha, String mobIzquierda, String mobSaltaDerecha, String mobSaltaIzquierda, String mobBaja, String mobMuere )
-	{
+
+	public AparienciaMob(String mobDerecha, String mobIzquierda,
+			String mobSaltaDerecha, String mobSaltaIzquierda, String mobBaja,
+			String mobMuere) {
 		this.mobDerecha = Sprite.fromImage(mobDerecha);
 		this.mobIzquierda = Sprite.fromImage(mobIzquierda);
 		this.mobSaltaDerecha = Sprite.fromImage(mobSaltaDerecha);
@@ -68,5 +69,4 @@ public class AparienciaMob {
 		this.mobMuere = mobMuere;
 	}
 
-	
 }

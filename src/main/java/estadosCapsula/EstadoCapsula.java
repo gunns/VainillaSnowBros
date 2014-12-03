@@ -1,12 +1,12 @@
 package estadosCapsula;
 
 public class EstadoCapsula {
-	
+
 	boolean prisa;
 	boolean potencia;
 	boolean rango;
-	
-	public EstadoCapsula(){
+
+	public EstadoCapsula() {
 		prisa = false;
 		potencia = false;
 		rango = false;
@@ -36,6 +36,4 @@ public class EstadoCapsula {
 		this.rango = rango;
 	}
 
-	
-	
 }

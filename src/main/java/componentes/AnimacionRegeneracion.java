@@ -5,14 +5,12 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
 
-public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{
-	
-	
-	
+public class AnimacionRegeneracion extends GameComponent<SnowBrosScene> {
+
 	Integer tiempoAnimacion;
 	Integer tiempoAnimacionAux;
 	Integer current;
-	
+
 	Sprite sprite1;
 	Sprite sprite2;
 	Sprite sprite3;
@@ -23,20 +21,19 @@ public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{
 	Sprite sprite8;
 	Sprite sprite9;
 	Sprite sprite10;
-	
+
 	Sprite[] sprites;
 	Bros bros;
-	
-	public AnimacionRegeneracion(Integer tiempo, Bros bros)
-	{
+
+	public AnimacionRegeneracion(Integer tiempo, Bros bros) {
 		this.bros = bros;
-		
-		this.setX(bros.getAparicionEnX()- 20);
+
+		this.setX(bros.getAparicionEnX() - 20);
 		this.setY(bros.getScene().getGameDimension().getHeight() - 25);
 		this.current = 0;
 		this.tiempoAnimacion = tiempo;
 		this.tiempoAnimacionAux = tiempo;
-		
+
 		sprite1 = Sprite.fromImage("appear1.png");
 		sprite2 = Sprite.fromImage("appear2.png");
 		sprite3 = Sprite.fromImage("appear3.png");
@@ -46,11 +43,8 @@ public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{
 		sprite7 = Sprite.fromImage("appear7.png");
 		sprite8 = Sprite.fromImage("appear8.png");
 		sprite9 = Sprite.fromImage("appear9.png");
-		sprite10 = Sprite.fromImage("appear10.png");		
-				
-		
-		
-		
+		sprite10 = Sprite.fromImage("appear10.png");
+
 		sprites = new Sprite[19];
 		sprites[0] = sprite1;
 		sprites[1] = sprite2;
@@ -71,43 +65,37 @@ public class AnimacionRegeneracion extends GameComponent<SnowBrosScene>{
 		sprites[16] = sprite8;
 		sprites[17] = sprite9;
 		sprites[18] = sprite10;
-		
+
 	}
-	
-	public void update(DeltaState deltaState)
-	{
-		
-		if(this.current > 18)
-			{
+
+	public void update(DeltaState deltaState) {
+
+		if (this.current > 18) {
 			this.destroy();
-			}
-		else
-			{
-		this.setAppearance(sprites[current]);
-		if(this.tiempoAnimacionAux < 1)
-				{
+		} else {
+			this.setAppearance(sprites[current]);
+			if (this.tiempoAnimacionAux < 1) {
 				current = current + 1;
 				this.reposicionar(current);
 				tiempoAnimacionAux = tiempoAnimacion;
-				}
-			else
-				{
-				tiempoAnimacionAux = tiempoAnimacionAux - 1;	
-				}	
+			} else {
+				tiempoAnimacionAux = tiempoAnimacionAux - 1;
 			}
+		}
 	}
 
 	private void reposicionar(Integer current) {
-		if(current < 18)
-			{
-			if(sprites[current -1].getHeight() < sprites[current].getHeight())
-				{
-				this.setY(this.getY() - (sprites[current].getHeight() - sprites[current - 1].getHeight()));
-				}
-			else
-				if(sprites[current -1].getHeight() > sprites[current].getHeight())
-				this.setY(this.getY() + (sprites[current - 1].getHeight() - sprites[current].getHeight()));
-			}		
+		if (current < 18) {
+			if (sprites[current - 1].getHeight() < sprites[current].getHeight()) {
+				this.setY(this.getY()
+						- (sprites[current].getHeight() - sprites[current - 1]
+								.getHeight()));
+			} else if (sprites[current - 1].getHeight() > sprites[current]
+					.getHeight())
+				this.setY(this.getY()
+						+ (sprites[current - 1].getHeight() - sprites[current]
+								.getHeight()));
+		}
 	}
 
 }
