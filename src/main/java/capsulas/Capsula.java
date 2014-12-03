@@ -4,7 +4,7 @@ import com.uqbar.vainilla.appearances.Sprite;
 
 import tesoros.Tesoro;
 
-public class Capsula extends Tesoro{
+public class Capsula extends Tesoro {
 
 	public Capsula(int valor) {
 		super(valor);

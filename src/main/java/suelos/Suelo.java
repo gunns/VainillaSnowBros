@@ -12,65 +12,38 @@ public class Suelo {
 	private Dimension gameDimension;
 	private int density[][] = new int[anchura][altura];
 	ArrayList<Piso> suelos;
-	
+
 	private FloorGen floorGen;
-	
-	
-	
-	//Pasar por parametro los tamaños de la grilla (anchura y altura)
-	public Suelo(Dimension dim){
-			
+
+	public Suelo(Dimension dim) {
+
 		this.suelos = new ArrayList<Piso>();
-		this.gameDimension= dim;
-		this.proporcionAlto = (int)(dim.height/this.altura);
-		this.proporcionAncho = (int)(dim.width/this.anchura);
+		this.gameDimension = dim;
+		this.proporcionAlto = (int) (dim.height / this.altura);
+		this.proporcionAncho = (int) (dim.width / this.anchura);
 		this.floorGen = new FloorGen(anchura, altura);
 		Fill();
 		Pintar();
 	}
-	
-	private void Pintar() {
-		int i,j;
-		  for (i=0;i<anchura;i++){
-			  for (j=0;j<altura;j++){
-				  if(density[i][j]==1){
-					  Piso piso = new Piso(gameDimension.getHeight()-j*proporcionAlto,
-						   i*proporcionAncho, Color.black, proporcionAncho, proporcionAlto);
-					  this.suelos.add(piso);
-				  }
-			  }
-		  }
-	}
 
-	private void Fill(){
-		
-//		this.density = floorGen.randomFloor();
-		this.density = floorGen.lvl1_1();
-////	imprimirMatrix();
-	}
-	
-	private void imprimirMatrix() {
-		System.out.print("[");
-		for (int j=0;j<altura;j++){
-			System.out.print("[");
-			for(int i=0;i<anchura;i++){
-				System.out.print(density[i][j]);
-				if(i!=anchura-1){
-					System.out.print(",");
+	private void Pintar() {
+		int i, j;
+		for (i = 0; i < anchura; i++) {
+			for (j = 0; j < altura; j++) {
+				if (density[i][j] == 1) {
+					Piso piso = new Piso(gameDimension.getHeight() - j
+							* proporcionAlto, i * proporcionAncho, Color.black,
+							proporcionAncho, proporcionAlto);
+					this.suelos.add(piso);
 				}
 			}
-			if(j!=altura-1){
-				System.out.print("],");
-				System.out.println("");
-			}else{
-				System.out.print("]");
-			}
-			
 		}
-		System.out.println("]");
 	}
 
-	
+	private void Fill() {
+		this.density = floorGen.lvl1_1();
+	}
+
 	public ArrayList<Piso> getSuelos() {
 		return suelos;
 	}

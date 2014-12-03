@@ -11,45 +11,40 @@ import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.events.constants.Key;
 
-public class InicioJuego extends GameComponent<SnowBrosScene>{
+public class InicioJuego extends GameComponent<SnowBrosScene> {
 
-	
 	public Sprite imagenFondo;
 	public MusicaInicio musica;
 	public CartelPresioneStart boton;
 	boolean agregueCartel;
-	
-	
-	public InicioJuego(Dimension dim) throws Exception
-	{
+
+	public InicioJuego(Dimension dim) throws Exception {
 		imagenFondo = Sprite.fromImage("inicioSnowBros.png");
 		musica = new MusicaInicio();
-		
+
 		boton = new CartelPresioneStart(dim);
 		agregueCartel = false;
-	
+
 	}
-	
-	public void reproducir(){
+
+	public void reproducir() {
 		musica.reproducir();
 	}
-	public void parar(){
+
+	public void parar() {
 		musica.parar();
 	}
-	
-	public void update(DeltaState deltaState)
-	{
-		if(!this.agregueCartel)
-			{
+
+	public void update(DeltaState deltaState) {
+		if (!this.agregueCartel) {
 			this.getScene().addComponent(boton);
 			this.agregueCartel = true;
-			}
-		if (deltaState.isKeyPressed(Key.P))
-		{
-		this.getScene().comenzarJuego();
-		this.parar();
-		this.destroy();
-		boton.destroy();
+		}
+		if (deltaState.isKeyPressed(Key.P)) {
+			this.getScene().comenzarJuego();
+			this.parar();
+			this.destroy();
+			boton.destroy();
 		}
 	}
 
@@ -68,10 +63,5 @@ public class InicioJuego extends GameComponent<SnowBrosScene>{
 	public void setMusica(MusicaInicio musica) {
 		this.musica = musica;
 	}
-	
-	
-	
+
 }
-
-
-

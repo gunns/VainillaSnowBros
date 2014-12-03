@@ -1,4 +1,4 @@
-   package boss;
+package boss;
 
 import java.awt.Dimension;
 import others.Derecha;
@@ -16,19 +16,19 @@ import com.uqbar.vainilla.sound.SoundBuilder;
 import componentes.Explosion;
 import componentes.Mob;
 
-public class Boss extends GameComponent<SnowBrosScene>{
-	
+public class Boss extends GameComponent<SnowBrosScene> {
+
 	Sound voice;
 
-	/*primer (y seguramente unico) boss del juego
-	 el boss permanecerá en un solo lugar (en X) y saltará.
-	 este permanecera a la derecha
-	 A veces este saltará y se irá hacia abajo. 
-	 cada cierto tiempo el boss escupirá una orda de mobs hacia la izquierda, los cuales no tendrán inteligencia y se moveran
-	 de izquierda a derecha sin dudar(SubClase de mob) y luego
-	 de un cierto tiempo estos desaparecerán.
+	/*
+	 * primer (y seguramente unico) boss del juego el boss permanecerá en un
+	 * solo lugar (en X) y saltará. este permanecera a la derecha A veces este
+	 * saltará y se irá hacia abajo. cada cierto tiempo el boss escupirá una
+	 * orda de mobs hacia la izquierda, los cuales no tendrán inteligencia y se
+	 * moveran de izquierda a derecha sin dudar(SubClase de mob) y luego de un
+	 * cierto tiempo estos desaparecerán.
 	 */
-	
+
 	public Integer intervaloDeAccion;
 	public boolean apareciendo;
 	public Integer cantidadDeVidas;
@@ -39,124 +39,109 @@ public class Boss extends GameComponent<SnowBrosScene>{
 	public Direccion direccion;
 	boolean acabaDeTocarElPiso;
 	private Sound golpe;
-	
-	public Boss(Dimension gameDimension){
-	golpe =  new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("crash.wav"));
-	apareciendo = true;
+
+	public Boss(Dimension gameDimension) {
+		golpe = new SoundBuilder().buildSound(this.getClass().getClassLoader()
+				.getResourceAsStream("crash.wav"));
+		apareciendo = true;
 		saltando = false;
 		dim = gameDimension;
 		Sprite sprite = Sprite.fromImage("snowMan.png");
 		this.setAppearance(sprite);
 		this.setY(0);
 		this.direccion = new Izquierda();
-		
-		this.setX(gameDimension.getWidth()/2-1);
+
+		this.setX(gameDimension.getWidth() / 2 - 1);
 		tiempoInactividad = 700;
 		intervaloDeAccion = 300;
 		cantidadDeVidas = 12;
 		this.setEstado(new CaidaBrusca(this));
 
-		voice = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("startBoss.wav"));
-	
+		voice = new SoundBuilder().buildSound(this.getClass().getClassLoader()
+				.getResourceAsStream("startBoss.wav"));
+
 	}
-	public void update(DeltaState deltaState){
-		if(!this.getScene().getSystemPause() && this.getScene().getPlayState())
-			{
-		if(this.cantidadDeVidas <= 0)
-			{
-			this.morir();
-			}
-		else
-		{
-			
-		if(this.cantidadDeVidas < 7)
-			{
-			intervaloDeAccion = 80;
-			}
-		this.getScene().bossMataBrosEnElCamino(this);
-		
-		if(this.getScene().bossGolpeadoPorEsferaRodante(this))
-			{
-			this.cantidadDeVidas = cantidadDeVidas - 1;
-			Mob mob = this.getScene().esferaColisionadaConBoss(this);
-			
-			mob.getScene().esferaExploto(mob);
-			
-			//sonido explosion
-			Sound sonidoExplosion = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream("snowBallExplode.wav"));
-			sonidoExplosion.play();
-			Explosion explosion = new Explosion(mob.getX() -15, mob.getY() - 20);
-			mob.getScene().addComponent(explosion);
-			
-			mob.destroy();
-			}
-		
-		if(apareciendo)
-			{
-			this.estado.update(deltaState);
-			if(this.getScene().tocoFondo(this))
-				{
-				
-				this.setY(this.getDim().getHeight() - this.getAppearance().getHeight());
-				this.getEstado().cambiarMovimiento(this);
-				apareciendo = false;
+
+	public void update(DeltaState deltaState) {
+		if (!this.getScene().getSystemPause() && this.getScene().getPlayState()) {
+			if (this.cantidadDeVidas <= 0) {
+				this.morir();
+			} else {
+
+				if (this.cantidadDeVidas < 7) {
+					intervaloDeAccion = 80;
 				}
+				this.getScene().bossMataBrosEnElCamino(this);
+
+				if (this.getScene().bossGolpeadoPorEsferaRodante(this)) {
+					this.cantidadDeVidas = cantidadDeVidas - 1;
+					Mob mob = this.getScene().esferaColisionadaConBoss(this);
+
+					mob.getScene().esferaExploto(mob);
+
+					// sonido explosion
+					Sound sonidoExplosion = new SoundBuilder().buildSound(this
+							.getClass().getClassLoader()
+							.getResourceAsStream("snowBallExplode.wav"));
+					sonidoExplosion.play();
+					Explosion explosion = new Explosion(mob.getX() - 15,
+							mob.getY() - 20);
+					mob.getScene().addComponent(explosion);
+
+					mob.destroy();
+				}
+
+				if (apareciendo) {
+					this.estado.update(deltaState);
+					if (this.getScene().tocoFondo(this)) {
+
+						this.setY(this.getDim().getHeight()
+								- this.getAppearance().getHeight());
+						this.getEstado().cambiarMovimiento(this);
+						apareciendo = false;
+					}
+				} else if (saltando) {
+					this.estado.update(deltaState);
+					this.direccion.moverBoss(this);
+				} else if (tiempoInactividad > 0) {
+					tiempoInactividad--;
+				} else {
+					this.comenzarAMoverse();
+					this.saltando = true;
+				}
+
 			}
-		else
-		if(saltando)
-			{
-			this.estado.update(deltaState);
-			this.direccion.moverBoss(this);
-			}
-			else
-		if(tiempoInactividad > 0)
-			{
-			tiempoInactividad --;
-			}
-		else
-			{
-			this.comenzarAMoverse();
-			this.saltando = true;
-			}
-		
-	}
-	}
+		}
 	}
 
 	private void morir() {
 		this.destroy();
 		this.getScene().bossDerrotado();
-		
+
 	}
 
-	private void comenzarAMoverse()
-	{
-		if(this.getScene().brosEstaALaDerecha(this))
-			{
+	private void comenzarAMoverse() {
+		if (this.getScene().brosEstaALaDerecha(this)) {
 			this.direccion = new Derecha();
 			this.estado.cambiarMovimiento(this);
-			}
-		else
-			{
+		} else {
 			this.direccion = new Izquierda();
 			this.setEstado(new SubiendoBoss(this.getY(), this));
-			}
-		
 		}
-	
+
+	}
+
 	public void moverIzquierda() {
 		this.setX(this.getX() - 0.6);
-		
+
 	}
 
 	public void moverDerecha() {
 		this.setX(this.getX() + 0.6);
-		
+
 	}
-	
-	
-	public void invocarEnemigos()
-	{
+
+	public void invocarEnemigos() {
 		this.getScene().invocarEnemigos();
 	}
 
@@ -176,7 +161,6 @@ public class Boss extends GameComponent<SnowBrosScene>{
 		this.acabaDeTocarElPiso = acabaDeTocarElPiso;
 	}
 
-	
 	public Integer getCantidadDeVidas() {
 		return cantidadDeVidas;
 	}
@@ -217,21 +201,20 @@ public class Boss extends GameComponent<SnowBrosScene>{
 		this.direccion = direccion;
 	}
 
-	public void golpeoElPiso()
-	{
+	public void golpeoElPiso() {
 		golpe.play();
 		this.saltando = false;
 		this.tiempoInactividad = intervaloDeAccion;
-		if(!this.getScene().hayEnemigos())
-			{
+		if (!this.getScene().hayEnemigos()) {
 			this.invocarEnemigos();
-			}
+		}
 	}
-	
+
 	public Sound getVoice() {
 		return voice;
 	}
+
 	public void setVoice(Sound voice) {
 		this.voice = voice;
-	} 
+	}
 }
