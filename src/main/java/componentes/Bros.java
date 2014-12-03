@@ -112,10 +112,18 @@ public class Bros extends GameComponent<SnowBrosScene>{
 	
 	public void update(DeltaState deltaState) {
 		
+		if(!this.getScene().getPlayState()){
+			if(deltaState.isKeyReleased(Key.O)){
+				this.getScene().setPlayState(true);
+			}
+		}
 		
 		
-		  if(this.getScene().getPlayState())
+		if(this.getScene().getPlayState())
 		  {
+			  if(deltaState.isKeyReleased(Key.U)){
+				  this.getScene().setPlayState(false);
+			  }
 			  if(this.reposicionando)
 			  	{
 				  
